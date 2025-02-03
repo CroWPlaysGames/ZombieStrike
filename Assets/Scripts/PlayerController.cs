@@ -17,10 +17,11 @@ public class PlayerController : MonoBehaviour
 
     public HUD hud;
 
-    public GameObject weaponSlot1;
-    public GameObject weaponSlot2;
-    private GameObject equippedWeapon;
+    public Weapon weaponSlot1;
+    public Weapon weaponSlot2;
+    private Weapon equippedWeapon;
     public SpriteRenderer weaponPosition;
+    public Transform bulletSource;
 
 
     void Start()
@@ -32,6 +33,12 @@ public class PlayerController : MonoBehaviour
 
         current_health = health;
         healthbar.start_health(health);
+
+        weaponSlot1.magSize = weaponSlot1.maxMagCapacity;
+        weaponSlot1.ammoSize = weaponSlot1.maxAmmoCapacity;
+
+        weaponSlot2.magSize = weaponSlot2.maxMagCapacity;
+        weaponSlot2.ammoSize = weaponSlot2.maxMagCapacity;
     }
 
     void Update()
@@ -39,11 +46,24 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         mouseposition = camera.ScreenToWorldPoint(Input.mousePosition);
+        
+        if (Input.GetButton("Fire1") && Time.time >= equippedWeapon.fireInterval && equippedWeapon.magSize > 0
+            && !hud.pause_menu.activeSelf)  // && game_over.activeSelf == false
+        {
+            equippedWeapon.Shoot(bulletSource);
+        }
+
+        if (Input.GetKeyDown("r") && equippedWeapon.magSize != equippedWeapon.maxMagCapacity && !equippedWeapon.reloading)
+        {
+            equippedWeapon.Reload();
+        }
 
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             SwitchWeapons();
         }
+
+        UpdateHUD();
     }
 
     void FixedUpdate()
@@ -66,32 +86,29 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchWeapons()
     {
+        equippedWeapon.reloading = false;
+        
         if (equippedWeapon.Equals(weaponSlot1))
         {
-            weaponPosition.sprite = weaponSlot2.GetComponent<Weapon>().weaponVisual;
-            //weaponPosition.transform.position = weaponSlot2.GetComponent<Weapon>().weaponPosition;
-
-            hud.weaponName.text = weaponSlot2.name;
-            hud.primaryWeaponIcon.sprite = weaponSlot2.GetComponent<Weapon>().weaponIcon;
-            hud.secondaryWeaponIcon.sprite = weaponSlot1.GetComponent<Weapon>().weaponIcon;
-            hud.magCapacity.text = weaponSlot2.GetComponent<Weapon>().maxMagCapacity.ToString();
-            hud.maxAmmo.text = weaponSlot2.GetComponent<Weapon>().maxAmmoCapacity.ToString();
-
+            weaponPosition.sprite = weaponSlot2.weaponVisual;
+            weaponPosition.transform.localPosition = weaponSlot2.weaponPosition;
             equippedWeapon = weaponSlot2;
         }
 
         else
         {
-            weaponPosition.sprite = weaponSlot1.GetComponent<Weapon>().weaponVisual;
-            //weaponPosition.transform.position = weaponSlot1.GetComponent<Weapon>().weaponPosition;
-
-            hud.weaponName.text = weaponSlot1.name;
-            hud.primaryWeaponIcon.sprite = weaponSlot1.GetComponent<Weapon>().weaponIcon;
-            hud.secondaryWeaponIcon.sprite = weaponSlot2.GetComponent<Weapon>().weaponIcon;
-            hud.magCapacity.text = weaponSlot1.GetComponent<Weapon>().maxMagCapacity.ToString();
-            hud.maxAmmo.text = weaponSlot1.GetComponent<Weapon>().maxAmmoCapacity.ToString();
-
+            weaponPosition.sprite = weaponSlot1.weaponVisual;
+            weaponPosition.transform.localPosition = weaponSlot1.weaponPosition;
             equippedWeapon = weaponSlot1;
         }
+    }
+
+    private void UpdateHUD()
+    {
+        hud.weaponName.text = equippedWeapon.name;
+        hud.primaryWeaponIcon.sprite = equippedWeapon.weaponIcon;
+        hud.secondaryWeaponIcon.sprite = equippedWeapon.weaponIcon;
+        hud.magCapacity.text = equippedWeapon.magSize.ToString();
+        hud.maxAmmo.text = equippedWeapon.ammoSize.ToString();
     }
 }
