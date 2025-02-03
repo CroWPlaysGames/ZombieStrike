@@ -4,18 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
-    // Link GameObjects to equip weapon and change colour based on which one is equipped
-    public GameObject Assault_Rifle_Panel;
-    public GameObject Assault_Rifle_Image;
-
-    public GameObject Shotgun_Panel;
-    public GameObject Shotgun_Image;
-
-    public GameObject Sniper_Rifle_Panel;
-    public GameObject Sniper_Rifle_Image;
-
-    public GameObject Grenade_Launcher_Panel;
-    public GameObject Grenade_Launcher_Image;
+    public Text weaponName;
+    public Image primaryWeaponIcon;
+    public Image secondaryWeaponIcon;
+    public Text magCapacity;
+    public Text maxAmmo;
 
     public int score;
     public int high_score;
@@ -109,68 +102,6 @@ public class HUD : MonoBehaviour
             {
                 Pause();
             }
-        }
-
-        if (Input.GetKeyDown("1"))
-        {
-            // By default, the Assault Rifle is eqipped, so it is set to white by default           
-
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.white;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.white;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.gray;
-            Shotgun_Image.GetComponent<Image>().color = Color.gray;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.gray;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.gray;
-        }
-
-        if (Input.GetKeyDown("2"))
-        {
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.white;
-            Shotgun_Image.GetComponent<Image>().color = Color.white;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.gray;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.gray;
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.gray;
-            Shotgun_Image.GetComponent<Image>().color = Color.gray;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.white;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.white;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.gray;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.gray;
-        }
-
-        if (Input.GetKeyDown("4"))
-        {
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.gray;
-            Shotgun_Image.GetComponent<Image>().color = Color.gray;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.white;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.white;
         }
     }
 }

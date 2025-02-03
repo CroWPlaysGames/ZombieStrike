@@ -15,13 +15,19 @@ public class PlayerController : MonoBehaviour
     Vector2 mouseposition;
     Vector2 direction;
 
-    public GameObject Assault_Rifle;
-    public GameObject Shotgun;
-    public GameObject Sniper_Rifle;
-    public GameObject Grenade_Launcher;
+    public HUD hud;
+
+    public GameObject weaponSlot1;
+    public GameObject weaponSlot2;
+    private GameObject equippedWeapon;
+    public SpriteRenderer weaponPosition;
+
 
     void Start()
     {
+        equippedWeapon = weaponSlot2;
+        SwitchWeapons();
+
         camera.transform.position = new Vector3(body.position.x, body.position.y, -10f);
 
         current_health = health;
@@ -32,39 +38,11 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
         mouseposition = camera.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetKeyDown("1"))
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            Assault_Rifle.SetActive(true);
-            Shotgun.SetActive(false);
-            Sniper_Rifle.SetActive(false);
-            Grenade_Launcher.SetActive(false);
-        }
-
-        if (Input.GetKeyDown("2"))
-        {
-            Assault_Rifle.SetActive(false);
-            Shotgun.SetActive(true);
-            Sniper_Rifle.SetActive(false);
-            Grenade_Launcher.SetActive(false);
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            Assault_Rifle.SetActive(false);
-            Shotgun.SetActive(false);
-            Sniper_Rifle.SetActive(true);
-            Grenade_Launcher.SetActive(false);
-        }
-
-        if (Input.GetKeyDown("4"))
-        {
-            Assault_Rifle.SetActive(false);
-            Shotgun.SetActive(false);
-            Sniper_Rifle.SetActive(false);
-            Grenade_Launcher.SetActive(true);
+            SwitchWeapons();
         }
     }
 
@@ -84,5 +62,36 @@ public class PlayerController : MonoBehaviour
         current_health -= damage;
 
         healthbar.set_health(current_health);
+    }
+
+    private void SwitchWeapons()
+    {
+        if (equippedWeapon.Equals(weaponSlot1))
+        {
+            weaponPosition.sprite = weaponSlot2.GetComponent<Weapon>().weaponVisual;
+            //weaponPosition.transform.position = weaponSlot2.GetComponent<Weapon>().weaponPosition;
+
+            hud.weaponName.text = weaponSlot2.name;
+            hud.primaryWeaponIcon.sprite = weaponSlot2.GetComponent<Weapon>().weaponIcon;
+            hud.secondaryWeaponIcon.sprite = weaponSlot1.GetComponent<Weapon>().weaponIcon;
+            hud.magCapacity.text = weaponSlot2.GetComponent<Weapon>().maxMagCapacity.ToString();
+            hud.maxAmmo.text = weaponSlot2.GetComponent<Weapon>().maxAmmoCapacity.ToString();
+
+            equippedWeapon = weaponSlot2;
+        }
+
+        else
+        {
+            weaponPosition.sprite = weaponSlot1.GetComponent<Weapon>().weaponVisual;
+            //weaponPosition.transform.position = weaponSlot1.GetComponent<Weapon>().weaponPosition;
+
+            hud.weaponName.text = weaponSlot1.name;
+            hud.primaryWeaponIcon.sprite = weaponSlot1.GetComponent<Weapon>().weaponIcon;
+            hud.secondaryWeaponIcon.sprite = weaponSlot2.GetComponent<Weapon>().weaponIcon;
+            hud.magCapacity.text = weaponSlot1.GetComponent<Weapon>().maxMagCapacity.ToString();
+            hud.maxAmmo.text = weaponSlot1.GetComponent<Weapon>().maxAmmoCapacity.ToString();
+
+            equippedWeapon = weaponSlot1;
+        }
     }
 }

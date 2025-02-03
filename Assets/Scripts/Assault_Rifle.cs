@@ -21,10 +21,7 @@ public class Assault_Rifle : MonoBehaviour
 
     public GameObject pause_menu;
     public GameObject game_over;
-
-    public AudioSource bang;
-    public AudioSource reloading;
-
+    
     void Start()
     {
         AmmoClip.text = ammo.ToString();
@@ -65,7 +62,8 @@ public class Assault_Rifle : MonoBehaviour
 
     void Shoot()
     {
-        bang.Play();
+        Object.FindAnyObjectByType<AudioManager>().Play("AR15 Shoot");
+        //bang.Play();
 
         mag_size--;
         AmmoClip.text = (mag_size).ToString();
@@ -79,17 +77,13 @@ public class Assault_Rifle : MonoBehaviour
 
     IEnumerator Reload()
     {
-        reloading.Play();
-
         is_reloading = true;
+        Object.FindAnyObjectByType<AudioManager>().Play("AR15 Reload");
 
         yield return new WaitForSeconds(reload_time);
 
         mag_size = ammo;
-
-
-        is_reloading = false;
-
         AmmoClip.text = mag_size.ToString();
+        is_reloading = false;
     }    
 }
