@@ -104,4 +104,13 @@ public class HUD : MonoBehaviour
             }
         }
     }
+
+    public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon)
+    {
+        weaponName.text = equippedWeapon.name;
+        primaryWeaponIcon.sprite = equippedWeapon.weaponIcon;
+        secondaryWeaponIcon.sprite = spareWeapon.weaponIcon;
+        magCapacity.text = equippedWeapon.magSize.ToString();
+        maxAmmo.text = equippedWeapon.ammoSize.ToString();
+    }
 }

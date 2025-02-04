@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Weapon weaponSlot1;
     public Weapon weaponSlot2;
     private Weapon equippedWeapon;
+    private Weapon spareWeapon;
     public SpriteRenderer weaponPosition;
     public Transform bulletSource;
 
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         equippedWeapon = weaponSlot2;
+        spareWeapon = weaponSlot1;
         SwitchWeapons();
 
         camera.transform.position = new Vector3(body.position.x, body.position.y, -10f);
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
         weaponSlot1.ammoSize = weaponSlot1.maxAmmoCapacity;
 
         weaponSlot2.magSize = weaponSlot2.maxMagCapacity;
-        weaponSlot2.ammoSize = weaponSlot2.maxMagCapacity;
+        weaponSlot2.ammoSize = weaponSlot2.maxAmmoCapacity;
     }
 
     void Update()
@@ -47,13 +49,12 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         mouseposition = camera.ScreenToWorldPoint(Input.mousePosition);
         
-        if (Input.GetButton("Fire1") && Time.time >= equippedWeapon.fireInterval && equippedWeapon.magSize > 0
-            && !hud.pause_menu.activeSelf)  // && game_over.activeSelf == false
+        if (Input.GetButton("Fire1") && !hud.pause_menu.activeSelf)  // && game_over.activeSelf == false
         {
             equippedWeapon.Shoot(bulletSource);
         }
 
-        if (Input.GetKeyDown("r") && equippedWeapon.magSize != equippedWeapon.maxMagCapacity && !equippedWeapon.reloading)
+        if (Input.GetKeyDown(KeyCode.R))
         {
             equippedWeapon.Reload();
         }
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
             SwitchWeapons();
         }
 
-        UpdateHUD();
+        hud.UpdateHUD(equippedWeapon, spareWeapon);
     }
 
     void FixedUpdate()
@@ -87,12 +88,15 @@ public class PlayerController : MonoBehaviour
     private void SwitchWeapons()
     {
         equippedWeapon.reloading = false;
-        
+        Destroy(GameObject.Find("Reload Handler"));
+        print("Stopped Reloading");
+
         if (equippedWeapon.Equals(weaponSlot1))
         {
             weaponPosition.sprite = weaponSlot2.weaponVisual;
             weaponPosition.transform.localPosition = weaponSlot2.weaponPosition;
             equippedWeapon = weaponSlot2;
+            spareWeapon = weaponSlot1;
         }
 
         else
@@ -100,15 +104,7 @@ public class PlayerController : MonoBehaviour
             weaponPosition.sprite = weaponSlot1.weaponVisual;
             weaponPosition.transform.localPosition = weaponSlot1.weaponPosition;
             equippedWeapon = weaponSlot1;
+            spareWeapon = weaponSlot2;
         }
-    }
-
-    private void UpdateHUD()
-    {
-        hud.weaponName.text = equippedWeapon.name;
-        hud.primaryWeaponIcon.sprite = equippedWeapon.weaponIcon;
-        hud.secondaryWeaponIcon.sprite = equippedWeapon.weaponIcon;
-        hud.magCapacity.text = equippedWeapon.magSize.ToString();
-        hud.maxAmmo.text = equippedWeapon.ammoSize.ToString();
     }
 }
