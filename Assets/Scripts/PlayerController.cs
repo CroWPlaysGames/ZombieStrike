@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             equippedWeapon.Reload();
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if (Input.GetAxis("Mouse ScrollWheel") != 0 || Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwitchWeapons();
         }
