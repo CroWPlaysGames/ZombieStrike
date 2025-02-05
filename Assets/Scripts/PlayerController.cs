@@ -27,9 +27,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        equippedWeapon = weaponSlot2;
-        spareWeapon = weaponSlot1;
-        SwitchWeapons();
+        equippedWeapon = weaponSlot1;
+        spareWeapon = weaponSlot2;
+        weaponPosition.sprite = equippedWeapon.weaponVisual;
+        weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
+        FindAnyObjectByType<HUD>().UpdateHUD(equippedWeapon, spareWeapon);
 
         camera.transform.position = new Vector3(body.position.x, body.position.y, -10f);
 
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         equippedWeapon.reloading = false;
         Destroy(GameObject.Find("Reload Handler"));
-        print("Stopped Reloading");
+        FindAnyObjectByType<HUD>().CloseReload();
 
         if (equippedWeapon.Equals(weaponSlot1))
         {

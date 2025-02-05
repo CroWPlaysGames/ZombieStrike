@@ -74,6 +74,8 @@ public class Weapon : MonoBehaviour
                     Rigidbody2D projectile = bullet.GetComponent<Rigidbody2D>();
                     projectile.AddForce(bulletSource.up * bulletSpeed, ForceMode2D.Impulse);
                 }
+
+                FindAnyObjectByType<HUD>().CloseReload();
             }        
         }        
     }
@@ -93,6 +95,7 @@ public class Weapon : MonoBehaviour
         if (usesMagazine)
         {
             FindAnyObjectByType<AudioManager>().Play($"{name} Reload");
+            FindAnyObjectByType<HUD>().StartReload(reloadTime);
             yield return new WaitForSeconds(reloadTime);
 
             if (ammoSize <= maxMagCapacity)
@@ -113,6 +116,7 @@ public class Weapon : MonoBehaviour
             while ((maxMagCapacity - magSize) > 0 && ammoSize > 0)
             {
                 FindAnyObjectByType<AudioManager>().Play($"{name} Reload");
+                FindAnyObjectByType<HUD>().StartReload(reloadTime / maxMagCapacity);
                 yield return new WaitForSeconds(reloadTime / maxMagCapacity);
 
                 magSize++;

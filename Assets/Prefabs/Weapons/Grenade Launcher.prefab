@@ -52,9 +52,9 @@ MonoBehaviour:
   maxMagCapacity: 1
   bulletSpeed: 10
   fireRate: 1
-  reloadTime: 4
+  reloadTime: 3
   reloading: 0
-  magSize: 0
-  ammoSize: 0
+  magSize: 1
+  ammoSize: 4
   pellets: 1
   usesMagazine: 0

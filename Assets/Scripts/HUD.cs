@@ -1,33 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class HUD : MonoBehaviour
 {
-    public Text weaponName;
-    public Image primaryWeaponIcon;
-    public Image secondaryWeaponIcon;
-    public Text magCapacity;
-    public Text maxAmmo;
-
+    [HideInInspector]
     public int score;
-    public int high_score;
-
-    public Text current_score;
-    public Text highest_score;
-
+    private int high_score;
     public GameObject pause_menu;
     private bool paused = false;
+    private Text currentScoreValue;
+    private Text highScoreValue;
+    private Image reload;
+    private IEnumerator reloadAction;
 
-    public Health_Player health_restore;
-    public PlayerController health;
 
     private void OnEnable()
     {
         score = 0;
+        currentScoreValue = GameObject.Find("Current Score Value").GetComponent<Text>();
+        highScoreValue = GameObject.Find("High Score Value").GetComponent<Text>();
+        reload = GameObject.Find("Reload").GetComponent<Image>();
 
-        current_score.text = score.ToString();
-        highest_score.text = high_score.ToString();
+        currentScoreValue.text = score.ToString();
+        highScoreValue.text = high_score.ToString();
     }
 
     public void AddScore(int reward)
@@ -55,7 +52,7 @@ public class HUD : MonoBehaviour
 
     public void Restart_Game()
     {
-        health_restore.slider.value = health.health;
+        FindAnyObjectByType<Health_Player>().slider.value = FindAnyObjectByType<PlayerController>().health;
 
         Time.timeScale = 1f;
 
@@ -81,14 +78,14 @@ public class HUD : MonoBehaviour
 
     void Update()
     {
-        highest_score.text = PlayerPrefs.GetInt("high_score").ToString();
+        highScoreValue.text = PlayerPrefs.GetInt("high_score").ToString();
 
-        current_score.text = score.ToString();
+        currentScoreValue.text = score.ToString();
         if (score > high_score)
         {
             high_score = score;
 
-            highest_score.text = high_score.ToString();
+            highScoreValue.text = high_score.ToString();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -107,10 +104,43 @@ public class HUD : MonoBehaviour
 
     public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon)
     {
-        weaponName.text = equippedWeapon.name;
-        primaryWeaponIcon.sprite = equippedWeapon.weaponIcon;
-        secondaryWeaponIcon.sprite = spareWeapon.weaponIcon;
-        magCapacity.text = equippedWeapon.magSize.ToString();
-        maxAmmo.text = equippedWeapon.ammoSize.ToString();
+        GameObject.Find("Weapon Name").GetComponent<Text>().text = equippedWeapon.name;
+        GameObject.Find("Primary Icon").GetComponent<Image>().sprite = equippedWeapon.weaponIcon;
+        GameObject.Find("Secondary Icon").GetComponent<Image>().sprite = spareWeapon.weaponIcon;
+        GameObject.Find("Mag Capacity").GetComponent<Text>().text = equippedWeapon.magSize.ToString();
+        GameObject.Find("Max Ammo").GetComponent<Text>().text = equippedWeapon.ammoSize.ToString();
+    }
+
+    public void StartReload(float duration)
+    {
+        reload.enabled = true;
+        GameObject.Find("Reload Background").GetComponent<Image>().enabled = true;
+        reloadAction = ReloadProgress(reload, duration);
+        StartCoroutine(reloadAction);
+    }
+
+    public void CloseReload()
+    {
+        if (reload.enabled)
+        {
+            reload.fillAmount = 0;
+            reload.enabled = false;
+            GameObject.Find("Reload Background").GetComponent<Image>().enabled = false;
+
+            StopCoroutine(reloadAction);
+        }        
+    }
+
+    private IEnumerator ReloadProgress(Image reload, float duration)
+    {
+        float time = 0.0f;
+        while (time < duration)
+        {
+            reload.fillAmount = time / Mathf.Max(duration, 0.01f);
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        CloseReload();
     }
 }

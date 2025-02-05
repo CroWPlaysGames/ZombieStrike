@@ -3,41 +3,23 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 100;
-    public int current_health;
+    public int health;
+    private int current_health;
     public int score;
-
     public Health_Zombie healthbar;
     public Slider slider;
-    public GameObject scoring;
-
-    public float interval = 0f;
-    public float attack_rate = 0.01f;
-    public int damage;
-
-    public GameObject player;
-
+    private float interval = 0f;
+    public float attack_rate;
+    public int meleeDamage;
+    [HideInInspector]
     public int spawn_location;
-
-    public GameObject spawner1;
-    public GameObject spawner2;
-    public GameObject spawner3;
-    public GameObject spawner4;
-
     public AudioSource hit;
 
+    
     void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        scoring = GameObject.FindGameObjectWithTag("HUD");
-
+    {        
         current_health = health;
         healthbar.start_health(health);
-
-        spawner1 = GameObject.Find("Spawner 1");
-        spawner2 = GameObject.Find("Spawner 2");
-        spawner3 = GameObject.Find("Spawner 3");
-        spawner4 = GameObject.Find("Spawner 4");
     }
 
     public void TakeDamage(int damage)
@@ -51,36 +33,16 @@ public class Enemy : MonoBehaviour
 
     public void Update()
     {
-        if (slider.value == 0 || current_health <= 0)
+        if (current_health <= 0)
         {
-            scoring.GetComponent<HUD>().AddScore(score);
-
-            if (spawn_location == 1)
-            {
-                spawner1.GetComponent<Spawner>().enemy_count += 1;
-            }
-
-            if (spawn_location == 2)
-            {
-                spawner2.GetComponent<Spawner>().enemy_count += 1;
-            }
-
-            if (spawn_location == 3)
-            {
-                spawner3.GetComponent<Spawner>().enemy_count += 1;
-            }
-
-            if (spawn_location == 4)
-            {
-                spawner4.GetComponent<Spawner>().enemy_count += 1;
-            }
-
+            FindAnyObjectByType<HUD>().AddScore(score);
+            GameObject.Find($"Spawner {spawn_location}").GetComponent<Spawner>().enemy_count += 1;
             Destroy(gameObject);
         }
 
         if (Time.time >= interval)
         {
-            Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>(), false);
+            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>(), false);
         }
     }
 
@@ -88,10 +50,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.GetComponent<PlayerController>().TakeDamage(damage);
-
-            Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>());
-
+            GameObject.Find("Player").GetComponent<PlayerController>().TakeDamage(meleeDamage);
+            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>());
             interval = Time.time + 10f / attack_rate;
         }
 
