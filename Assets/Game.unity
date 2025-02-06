@@ -576,7 +576,7 @@ Transform:
   m_GameObject: {fileID: 63877545}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5981822}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -598,7 +598,7 @@ MonoBehaviour:
   enemy_heavy: {fileID: 5613946924072756768, guid: fb8001b9544c45e4a857dd7f264b4b88, type: 3}
   enemy_range: {fileID: 3633616617436234781, guid: e0dcd59044be3de4585f37c6b2e44ac7, type: 3}
   random: 0
-  enemy_count: 25
+  enemy_count: 5
   centre: {x: 0, y: 28}
   size: {x: 50, y: 3}
   interval: 10
@@ -2342,7 +2342,7 @@ MonoBehaviour:
   enemy_heavy: {fileID: 5613946924072756768, guid: fb8001b9544c45e4a857dd7f264b4b88, type: 3}
   enemy_range: {fileID: 3633616617436234781, guid: e0dcd59044be3de4585f37c6b2e44ac7, type: 3}
   random: 0
-  enemy_count: 25
+  enemy_count: 5
   centre: {x: -28, y: 0}
   size: {x: 3, y: 50}
   interval: 10
@@ -2356,7 +2356,7 @@ Transform:
   m_GameObject: {fileID: 332321972}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5981822}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4712,7 +4712,7 @@ Transform:
   m_GameObject: {fileID: 633551810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9226267, y: 8.141766, z: -8.447582}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7298,7 +7298,7 @@ Transform:
   m_GameObject: {fileID: 921749416}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5981822}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7320,7 +7320,7 @@ MonoBehaviour:
   enemy_heavy: {fileID: 5613946924072756768, guid: fb8001b9544c45e4a857dd7f264b4b88, type: 3}
   enemy_range: {fileID: 3633616617436234781, guid: e0dcd59044be3de4585f37c6b2e44ac7, type: 3}
   random: 0
-  enemy_count: 25
+  enemy_count: 5
   centre: {x: 0, y: -28}
   size: {x: 50, y: 3}
   interval: 10
@@ -8721,7 +8721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  pause_menu: {fileID: 1257247126}
+  pauseMenu: {fileID: 1257247126}
+  gameOverMenu: {fileID: 1274775993}
 --- !u!1 &1159577943
 GameObject:
   m_ObjectHideFlags: 0
@@ -9817,7 +9818,7 @@ Transform:
   m_GameObject: {fileID: 1266440903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5981822}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9839,7 +9840,7 @@ MonoBehaviour:
   enemy_heavy: {fileID: 5613946924072756768, guid: fb8001b9544c45e4a857dd7f264b4b88, type: 3}
   enemy_range: {fileID: 3633616617436234781, guid: e0dcd59044be3de4585f37c6b2e44ac7, type: 3}
   random: 0
-  enemy_count: 25
+  enemy_count: 5
   centre: {x: 28, y: 0}
   size: {x: 3, y: 50}
   interval: 10
@@ -11966,13 +11967,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecabcb8fb54713547863f68c440f5d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_speed: 3
   health: 100
-  current_health: 0
-  healthbar: {fileID: 569942406}
+  moveSpeed: 3
   camera: {fileID: 519420031}
-  body: {fileID: 1539474780}
-  hud: {fileID: 1149550206}
   weaponSlot1: {fileID: 7627685542799453063, guid: 7ac33b5433f640d438d9907986631576, type: 3}
   weaponSlot2: {fileID: 3286958486656266316, guid: 34d1d82dc0279124985d19a00bcd78f6, type: 3}
   weaponPosition: {fileID: 1327394165}

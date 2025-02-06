@@ -3,24 +3,10 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
-    /*
-    public enum WeaponType
-    {
-        fullAuto,
-        burst,
-        semiAuto,
-        shotgun,
-        projectile
-    }
-
-    public WeaponType weaponType = new();
-    */
     public Sprite weaponVisual;
     public Sprite weaponIcon;
     public Vector3 weaponPosition;
-
     public GameObject bulletPrefab;
-
     public int maxAmmoCapacity;
     public float maxMagCapacity;
     public int bulletSpeed;

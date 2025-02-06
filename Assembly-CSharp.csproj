@@ -66,13 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Weapon.cs" />
-    <Compile Include="Assets\Scripts\Sniper_Rifle.cs" />
     <Compile Include="Assets\Scripts\Health_Player.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Sniper_Bullet.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\Spit.cs" />
-    <Compile Include="Assets\Scripts\Shotgun.cs" />
     <Compile Include="Assets\CoroutineHandler.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -82,8 +80,6 @@
     <Compile Include="Assets\Scripts\Health_Zombie.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\WeaponManager.cs" />
-    <Compile Include="Assets\Scripts\Assault_Rifle.cs" />
-    <Compile Include="Assets\Scripts\Grenade_Launcher.cs" />
     <Compile Include="Assets\Sound.cs" />
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />

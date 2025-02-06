@@ -8,7 +8,8 @@ public class HUD : MonoBehaviour
     [HideInInspector]
     public int score;
     private int high_score;
-    public GameObject pause_menu;
+    public GameObject pauseMenu;
+    public GameObject gameOverMenu;
     private bool paused = false;
     private Text currentScoreValue;
     private Text highScoreValue;
@@ -34,7 +35,7 @@ public class HUD : MonoBehaviour
 
     public void Resume()
     {
-        pause_menu.SetActive(false);
+        pauseMenu.SetActive(false);
 
         Time.timeScale = 1f;
 
@@ -43,7 +44,7 @@ public class HUD : MonoBehaviour
 
     public void Pause()
     {
-        pause_menu.SetActive(true);
+        pauseMenu.SetActive(true);
 
         Time.timeScale = 0f;
 

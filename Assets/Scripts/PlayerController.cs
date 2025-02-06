@@ -2,21 +2,14 @@
 
 public class PlayerController : MonoBehaviour
 {
-    public float move_speed = 3f;
-
-    public int health = 100;
-    public int current_health;
-    public Health_Player healthbar;
-
+    public int health;
+    public float moveSpeed;
+    private int current_health;
     public new Camera camera;
-    public Rigidbody2D body;
-
-    Vector2 movement;
-    Vector2 mouseposition;
-    Vector2 direction;
-
-    public HUD hud;
-
+    private Vector2 movement;
+    private Vector2 mouseposition;
+    private Vector2 direction;
+    private HUD hud;
     public Weapon weaponSlot1;
     public Weapon weaponSlot2;
     private Weapon equippedWeapon;
@@ -31,12 +24,13 @@ public class PlayerController : MonoBehaviour
         spareWeapon = weaponSlot2;
         weaponPosition.sprite = equippedWeapon.weaponVisual;
         weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
-        FindAnyObjectByType<HUD>().UpdateHUD(equippedWeapon, spareWeapon);
+        hud = FindAnyObjectByType<HUD>();
+        hud.UpdateHUD(equippedWeapon, spareWeapon);
 
-        camera.transform.position = new Vector3(body.position.x, body.position.y, -10f);
+        camera.transform.position = new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -10f);
 
         current_health = health;
-        healthbar.start_health(health);
+        FindAnyObjectByType<Health_Player>().start_health(health);
 
         weaponSlot1.magSize = weaponSlot1.maxMagCapacity;
         weaponSlot1.ammoSize = weaponSlot1.maxAmmoCapacity;
@@ -51,7 +45,7 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         mouseposition = camera.ScreenToWorldPoint(Input.mousePosition);
         
-        if (Input.GetButton("Fire1") && !hud.pause_menu.activeSelf)  // && game_over.activeSelf == false
+        if (Input.GetButton("Fire1") && !hud.pauseMenu.activeSelf && !hud.gameOverMenu.activeSelf)
         {
             equippedWeapon.Shoot(bulletSource);
         }
@@ -71,27 +65,26 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        body.MovePosition(body.position + movement * move_speed * Time.fixedDeltaTime);
+        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + movement * moveSpeed * Time.fixedDeltaTime);
 
-        direction = mouseposition - body.position;
+        direction = mouseposition - GetComponent<Rigidbody2D>().position;
 
-        body.rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        camera.transform.position = new Vector3(body.position.x, body.position.y, -10f);
+        camera.transform.position = new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -10f);
     }
 
     public void TakeDamage(int damage)
     {
         current_health -= damage;
-
-        healthbar.set_health(current_health);
+        FindAnyObjectByType<Health_Player>().set_health(current_health);
     }
 
     private void SwitchWeapons()
     {
         equippedWeapon.reloading = false;
         Destroy(GameObject.Find("Reload Handler"));
-        FindAnyObjectByType<HUD>().CloseReload();
+        hud.CloseReload();
 
         if (equippedWeapon.Equals(weaponSlot1))
         {
