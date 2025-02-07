@@ -1,40 +1,31 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class HUD : MonoBehaviour
 {
-    // Link GameObjects to equip weapon and change colour based on which one is equipped
-    public GameObject Assault_Rifle_Panel;
-    public GameObject Assault_Rifle_Image;
-
-    public GameObject Shotgun_Panel;
-    public GameObject Shotgun_Image;
-
-    public GameObject Sniper_Rifle_Panel;
-    public GameObject Sniper_Rifle_Image;
-
-    public GameObject Grenade_Launcher_Panel;
-    public GameObject Grenade_Launcher_Image;
-
+    [HideInInspector]
     public int score;
-    public int high_score;
-
-    public Text current_score;
-    public Text highest_score;
-
-    public GameObject pause_menu;
+    private int high_score;
+    public GameObject pauseMenu;
+    public GameObject gameOverMenu;
     private bool paused = false;
+    private Text currentScoreValue;
+    private Text highScoreValue;
+    private Image reload;
+    private IEnumerator reloadAction;
 
-    public Health_Player health_restore;
-    public PlayerController health;
 
     private void OnEnable()
     {
         score = 0;
+        currentScoreValue = GameObject.Find("Current Score Value").GetComponent<Text>();
+        highScoreValue = GameObject.Find("High Score Value").GetComponent<Text>();
+        reload = GameObject.Find("Reload").GetComponent<Image>();
 
-        current_score.text = score.ToString();
-        highest_score.text = high_score.ToString();
+        currentScoreValue.text = score.ToString();
+        highScoreValue.text = high_score.ToString();
     }
 
     public void AddScore(int reward)
@@ -44,7 +35,7 @@ public class HUD : MonoBehaviour
 
     public void Resume()
     {
-        pause_menu.SetActive(false);
+        pauseMenu.SetActive(false);
 
         Time.timeScale = 1f;
 
@@ -53,7 +44,7 @@ public class HUD : MonoBehaviour
 
     public void Pause()
     {
-        pause_menu.SetActive(true);
+        pauseMenu.SetActive(true);
 
         Time.timeScale = 0f;
 
@@ -62,7 +53,7 @@ public class HUD : MonoBehaviour
 
     public void Restart_Game()
     {
-        health_restore.slider.value = health.health;
+        FindAnyObjectByType<Health_Player>().slider.value = FindAnyObjectByType<PlayerController>().health;
 
         Time.timeScale = 1f;
 
@@ -88,14 +79,14 @@ public class HUD : MonoBehaviour
 
     void Update()
     {
-        highest_score.text = PlayerPrefs.GetInt("high_score").ToString();
+        highScoreValue.text = PlayerPrefs.GetInt("high_score").ToString();
 
-        current_score.text = score.ToString();
+        currentScoreValue.text = score.ToString();
         if (score > high_score)
         {
             high_score = score;
 
-            highest_score.text = high_score.ToString();
+            highScoreValue.text = high_score.ToString();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -110,67 +101,47 @@ public class HUD : MonoBehaviour
                 Pause();
             }
         }
+    }
 
-        if (Input.GetKeyDown("1"))
+    public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon)
+    {
+        GameObject.Find("Weapon Name").GetComponent<Text>().text = equippedWeapon.name;
+        GameObject.Find("Primary Icon").GetComponent<Image>().sprite = equippedWeapon.weaponIcon;
+        GameObject.Find("Secondary Icon").GetComponent<Image>().sprite = spareWeapon.weaponIcon;
+        GameObject.Find("Mag Capacity").GetComponent<Text>().text = equippedWeapon.magSize.ToString();
+        GameObject.Find("Max Ammo").GetComponent<Text>().text = equippedWeapon.ammoSize.ToString();
+    }
+
+    public void StartReload(float duration)
+    {
+        reload.enabled = true;
+        GameObject.Find("Reload Background").GetComponent<Image>().enabled = true;
+        reloadAction = ReloadProgress(reload, duration);
+        StartCoroutine(reloadAction);
+    }
+
+    public void CloseReload()
+    {
+        if (reload.enabled)
         {
-            // By default, the Assault Rifle is eqipped, so it is set to white by default           
+            reload.fillAmount = 0;
+            reload.enabled = false;
+            GameObject.Find("Reload Background").GetComponent<Image>().enabled = false;
 
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.white;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.white;
+            StopCoroutine(reloadAction);
+        }        
+    }
 
-            Shotgun_Panel.GetComponent<Image>().color = Color.gray;
-            Shotgun_Image.GetComponent<Image>().color = Color.gray;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.gray;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.gray;
+    private IEnumerator ReloadProgress(Image reload, float duration)
+    {
+        float time = 0.0f;
+        while (time < duration)
+        {
+            reload.fillAmount = time / Mathf.Max(duration, 0.01f);
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
 
-        if (Input.GetKeyDown("2"))
-        {
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.white;
-            Shotgun_Image.GetComponent<Image>().color = Color.white;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.gray;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.gray;
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.gray;
-            Shotgun_Image.GetComponent<Image>().color = Color.gray;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.white;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.white;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.gray;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.gray;
-        }
-
-        if (Input.GetKeyDown("4"))
-        {
-            Assault_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Assault_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Shotgun_Panel.GetComponent<Image>().color = Color.gray;
-            Shotgun_Image.GetComponent<Image>().color = Color.gray;
-
-            Sniper_Rifle_Panel.GetComponent<Image>().color = Color.gray;
-            Sniper_Rifle_Image.GetComponent<Image>().color = Color.gray;
-
-            Grenade_Launcher_Panel.GetComponent<Image>().color = Color.white;
-            Grenade_Launcher_Image.GetComponent<Image>().color = Color.white;
-        }
+        CloseReload();
     }
 }

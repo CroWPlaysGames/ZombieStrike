@@ -5,24 +5,46 @@ public class Spawner : MonoBehaviour
     public GameObject enemy_normal;
     public GameObject enemy_heavy;
     public GameObject enemy_range;
-
     public int random;
-    public int enemy_count = 25;
-
+    public int enemy_count;
     public Vector2 centre;
     public Vector2 size;
-
-    public float interval = 4;
-
+    public float interval;
     public int spawn_number;
 
-    void OnDrawGizmosSelected()
+
+    void Start()
+    {
+        Spawn(Random.Range(1, 21));
+        enemy_count -= 1;
+    }
+
+    void Update()
+    {
+        if (enemy_count > 0)
+        {
+            if (interval > 0)
+            {
+                interval -= Time.deltaTime;
+            }
+
+            else
+            {
+                Spawn(Random.Range(1, 21));
+
+                interval = 4;
+                enemy_count -= 1;
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
         Gizmos.DrawCube(centre, size);
     }
 
-    public void Spawn(int number)
+    private void Spawn(int number)
     {
         Vector2 position = centre + new Vector2(Random.Range(-size.x / 2, size.x / 2),
             Random.Range(-size.y / 2, size.y / 2));
@@ -47,30 +69,5 @@ public class Spawner : MonoBehaviour
 
             Instantiate(enemy_range, position, Quaternion.identity);
         }
-    }
-
-    void Start()
-    {
-        Spawn(Random.Range(1, 21));
-        enemy_count -= 1;
-    }
-
-    void Update()
-    { 
-        if (enemy_count > 0)
-        {
-            if (interval > 0)
-            {
-                interval -= Time.deltaTime;
-            }
-
-            else
-            {
-                Spawn(Random.Range(1, 21));
-
-                interval = 4;
-                enemy_count -= 1;
-            }
-        }        
-    }
+    }    
 }
