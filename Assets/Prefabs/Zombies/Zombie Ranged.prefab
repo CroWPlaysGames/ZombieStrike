@@ -522,10 +522,11 @@ MonoBehaviour:
   reload_time: 1
   attack_rate: 3
   spit: {fileID: 1162071204929165405, guid: 656bd59c0cf72ac41905e517113491bc, type: 3}
+  spitRange: 4
   spit_speed: 4
   gunsource: {fileID: 7002242061085576981}
   meleeDamage: 10
-  spawn_location: 2
+  spawn_location: 4
   hit: {fileID: 7002242061126937945}
 --- !u!82 &7002242061126937945
 AudioSource:

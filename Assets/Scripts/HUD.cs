@@ -15,6 +15,8 @@ public class HUD : MonoBehaviour
     private Text highScoreValue;
     private Image reload;
     private IEnumerator reloadAction;
+    [SerializeField] private Image[] equipmentSlots;
+    [SerializeField] private Image[] grenadeSlots;
 
 
     private void OnEnable()
@@ -103,19 +105,24 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon)
+    public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon, int equipment, int grenades)
     {
         GameObject.Find("Weapon Name").GetComponent<Text>().text = equippedWeapon.name;
         GameObject.Find("Primary Icon").GetComponent<Image>().sprite = equippedWeapon.weaponIcon;
         GameObject.Find("Secondary Icon").GetComponent<Image>().sprite = spareWeapon.weaponIcon;
         GameObject.Find("Mag Capacity").GetComponent<Text>().text = equippedWeapon.magSize.ToString();
         GameObject.Find("Max Ammo").GetComponent<Text>().text = equippedWeapon.ammoSize.ToString();
+
+        UpdateAmount(equipmentSlots, equipment);
+        UpdateAmount(grenadeSlots, grenades);
     }
 
     public void StartReload(float duration)
     {
         reload.enabled = true;
-        GameObject.Find("Reload Background").GetComponent<Image>().enabled = true;
+        Color greyed = GameObject.Find("Primary Icon").GetComponent<Image>().color;
+        greyed.a = 0.5f;
+        GameObject.Find("Primary Icon").GetComponent<Image>().color = greyed;
         reloadAction = ReloadProgress(reload, duration);
         StartCoroutine(reloadAction);
     }
@@ -124,9 +131,12 @@ public class HUD : MonoBehaviour
     {
         if (reload.enabled)
         {
+            Color greyed = GameObject.Find("Primary Icon").GetComponent<Image>().color;
+            greyed.a = 1f;
+            GameObject.Find("Primary Icon").GetComponent<Image>().color = greyed;
+
             reload.fillAmount = 0;
             reload.enabled = false;
-            GameObject.Find("Reload Background").GetComponent<Image>().enabled = false;
 
             StopCoroutine(reloadAction);
         }        
@@ -143,5 +153,31 @@ public class HUD : MonoBehaviour
         }
 
         CloseReload();
+    }
+
+    private void UpdateAmount(Image[] slots, int amount)
+    {
+        foreach (Image slot in slots)
+        {
+            slot.enabled = false;
+        }
+
+        switch (amount)
+        {
+            case 1:
+                slots[2].enabled = true;
+                break;
+            case 2:
+                slots[1].enabled = true;
+                slots[3].enabled = true;
+                break;
+            case 3:
+                slots[0].enabled = true;
+                slots[2].enabled = true;
+                slots[4].enabled = true;
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ZombieStrike.sln"
+    "dotnet.defaultSolution": "ZombieStrike.sln",
+    "git.ignoreLimitWarning": true
 }

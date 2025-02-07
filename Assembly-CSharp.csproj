@@ -74,6 +74,7 @@
     <Compile Include="Assets\CoroutineHandler.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Equipment.cs" />
     <Compile Include="Assets\Scripts\Main_Menu.cs" />
     <Compile Include="Assets\Scripts\Enemy_Ranged.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
@@ -81,21 +82,10 @@
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\WeaponManager.cs" />
     <Compile Include="Assets\MainCamera.cs" />
+    <Compile Include="Assets\Grenade.cs" />
     <Compile Include="Assets\Sound.cs" />
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Platform.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Shoot em Up.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Fighting.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Real Time Stategy (RTS) Medieval.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\First Person Shooter (FPS).txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Puzzle.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Physics.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\8bit and Retro.txt" />
-    <None Include="Assets\Universal Sound FX\#Game Genre References\Real Time Stategy (RTS) Sci-Fi.txt" />
-    <None Include="Assets\Universal Sound FX\version_history.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

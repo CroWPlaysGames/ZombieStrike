@@ -14,6 +14,7 @@ public class Enemy_Ranged : MonoBehaviour
     private float interval = 0f;
     public float attack_rate;
     public GameObject spit;
+    [SerializeField] private float spitRange;
     public float spit_speed;
     private int mag_size = 1;
     public Transform gunsource;
@@ -46,7 +47,7 @@ public class Enemy_Ranged : MonoBehaviour
 
         if (!reloading)
         {
-            if (Vector2.Distance(transform.position, GameObject.Find("Player").transform.position) < 5f)
+            if (Vector2.Distance(transform.position, GameObject.Find("Player").transform.position) < spitRange)
             {
                 Shoot();
             }

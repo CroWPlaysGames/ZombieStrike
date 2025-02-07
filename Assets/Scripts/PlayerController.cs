@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Random = UnityEngine.Random;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class PlayerController : MonoBehaviour
     private HUD hud;
     [SerializeField] private Weapon equippedWeapon;
     [SerializeField] private Weapon spareWeapon;
+    //public GameObject equipment;
+    public GameObject grenade;
+    public int equipmentAmount;
+    public int grenadesAmount;
     private SpriteRenderer weaponPosition;
 
 
@@ -31,9 +37,9 @@ public class PlayerController : MonoBehaviour
         spareWeapon.magSize = spareWeapon.maxMagCapacity;
         spareWeapon.ammoSize = spareWeapon.maxAmmoCapacity;
 
-        // Setup HUD Weapons
+        // Setup HUD
         hud = FindAnyObjectByType<HUD>();
-        hud.UpdateHUD(equippedWeapon, spareWeapon);
+        hud.UpdateHUD(equippedWeapon, spareWeapon, equipmentAmount, grenadesAmount);
     }
 
     void Update()
@@ -49,6 +55,18 @@ public class PlayerController : MonoBehaviour
             equippedWeapon.Shoot(GameObject.Find("Gun Source").GetComponent<Transform>());
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            CancelReload();
+            UseEquipment();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            CancelReload();
+            ThrowGrenade();
+        }
+
         // Reload Equipped Weapon
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -61,7 +79,7 @@ public class PlayerController : MonoBehaviour
             SwitchWeapons(equippedWeapon, spareWeapon);
         }
 
-        hud.UpdateHUD(equippedWeapon, spareWeapon);
+        hud.UpdateHUD(equippedWeapon, spareWeapon, equipmentAmount, grenadesAmount);
     }
 
     void FixedUpdate()
@@ -79,15 +97,45 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchWeapons(Weapon weapon1, Weapon weapon2)
     {
-        // Cancel Reload of Equipped Weapon
-        equippedWeapon.reloading = false;
-        Destroy(GameObject.Find("Reload Handler"));
-        hud.CloseReload();
+        CancelReload();
 
         // Update Weapon Visuals
         weaponPosition.sprite = weapon2.weaponVisual;
         weaponPosition.transform.localPosition = weapon2.weaponPosition;
         equippedWeapon = weapon2;
         spareWeapon = weapon1;
+    }
+
+    private void UseEquipment()
+    {
+        if (equipmentAmount > 0 && currentHealth < 100)
+        {
+            currentHealth += 40;
+            FindAnyObjectByType<Health_Player>().set_health(currentHealth);
+            equipmentAmount--;
+        }
+
+    }
+
+    private void ThrowGrenade()
+    {
+        if (grenadesAmount > 0)
+        {
+            FindAnyObjectByType<AudioManager>().Play($"Grenade Launcher Shoot");
+
+            GameObject liveGrenade = Instantiate(grenade, GameObject.Find("Gun Source").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Rigidbody2D projectile = liveGrenade.GetComponent<Rigidbody2D>();
+            projectile.AddForce(GameObject.Find("Gun Source").GetComponent<Transform>().up * 5, ForceMode2D.Impulse);
+
+            grenadesAmount--;
+        }
+    }
+
+    private void CancelReload()
+    {
+        // Cancel Reload of Equipped Weapon
+        equippedWeapon.reloading = false;
+        Destroy(GameObject.Find("Reload Handler"));
+        hud.CloseReload();
     }
 }
