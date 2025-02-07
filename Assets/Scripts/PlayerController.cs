@@ -3,61 +3,62 @@
 public class PlayerController : MonoBehaviour
 {
     public int health;
-    public float moveSpeed;
-    private int current_health;
-    public new Camera camera;
+    private int currentHealth;
+    [SerializeField] private int moveSpeed;
     private Vector2 movement;
-    private Vector2 mouseposition;
     private Vector2 direction;
+    private Vector2 mousePosition;
     private HUD hud;
-    public Weapon weaponSlot1;
-    public Weapon weaponSlot2;
-    private Weapon equippedWeapon;
-    private Weapon spareWeapon;
-    public SpriteRenderer weaponPosition;
-    public Transform bulletSource;
+    [SerializeField] private Weapon equippedWeapon;
+    [SerializeField] private Weapon spareWeapon;
+    private SpriteRenderer weaponPosition;
 
 
     void Start()
     {
-        equippedWeapon = weaponSlot1;
-        spareWeapon = weaponSlot2;
-        weaponPosition.sprite = equippedWeapon.weaponVisual;
-        weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
-        hud = FindAnyObjectByType<HUD>();
-        hud.UpdateHUD(equippedWeapon, spareWeapon);
-
-        camera.transform.position = new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -10f);
-
-        current_health = health;
+        // Setup Health
+        currentHealth = health;
         FindAnyObjectByType<Health_Player>().start_health(health);
 
-        weaponSlot1.magSize = weaponSlot1.maxMagCapacity;
-        weaponSlot1.ammoSize = weaponSlot1.maxAmmoCapacity;
+        // Setup Weapon Visuals
+        weaponPosition = GameObject.Find("Equipped Weapon").GetComponent<SpriteRenderer>();
+        weaponPosition.sprite = equippedWeapon.weaponVisual;
+        weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
 
-        weaponSlot2.magSize = weaponSlot2.maxMagCapacity;
-        weaponSlot2.ammoSize = weaponSlot2.maxAmmoCapacity;
+        // Setup Weapons
+        equippedWeapon.magSize = equippedWeapon.maxMagCapacity;
+        equippedWeapon.ammoSize = equippedWeapon.maxAmmoCapacity;
+        spareWeapon.magSize = spareWeapon.maxMagCapacity;
+        spareWeapon.ammoSize = spareWeapon.maxAmmoCapacity;
+
+        // Setup HUD Weapons
+        hud = FindAnyObjectByType<HUD>();
+        hud.UpdateHUD(equippedWeapon, spareWeapon);
     }
 
     void Update()
     {
+        // Fetch Input Variables
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        mouseposition = camera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = GameObject.Find("Main Camera").GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
         
+        // Shoot Equipped Weapon
         if (Input.GetButton("Fire1") && !hud.pauseMenu.activeSelf && !hud.gameOverMenu.activeSelf)
         {
-            equippedWeapon.Shoot(bulletSource);
+            equippedWeapon.Shoot(GameObject.Find("Gun Source").GetComponent<Transform>());
         }
 
+        // Reload Equipped Weapon
         if (Input.GetKeyDown(KeyCode.R))
         {
             equippedWeapon.Reload();
         }
 
+        // Switch Equipped Weapon with Spare Weapon
         if (Input.GetAxis("Mouse ScrollWheel") != 0 || Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SwitchWeapons();
+            SwitchWeapons(equippedWeapon, spareWeapon);
         }
 
         hud.UpdateHUD(equippedWeapon, spareWeapon);
@@ -65,41 +66,28 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        direction = mouseposition - GetComponent<Rigidbody2D>().position;
-
+        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + moveSpeed * Time.fixedDeltaTime * movement);
+        direction = mousePosition - GetComponent<Rigidbody2D>().position;
         GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-
-        camera.transform.position = new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -10f);
     }
 
     public void TakeDamage(int damage)
     {
-        current_health -= damage;
-        FindAnyObjectByType<Health_Player>().set_health(current_health);
+        currentHealth -= damage;
+        FindAnyObjectByType<Health_Player>().set_health(currentHealth);
     }
 
-    private void SwitchWeapons()
+    private void SwitchWeapons(Weapon weapon1, Weapon weapon2)
     {
+        // Cancel Reload of Equipped Weapon
         equippedWeapon.reloading = false;
         Destroy(GameObject.Find("Reload Handler"));
         hud.CloseReload();
 
-        if (equippedWeapon.Equals(weaponSlot1))
-        {
-            weaponPosition.sprite = weaponSlot2.weaponVisual;
-            weaponPosition.transform.localPosition = weaponSlot2.weaponPosition;
-            equippedWeapon = weaponSlot2;
-            spareWeapon = weaponSlot1;
-        }
-
-        else
-        {
-            weaponPosition.sprite = weaponSlot1.weaponVisual;
-            weaponPosition.transform.localPosition = weaponSlot1.weaponPosition;
-            equippedWeapon = weaponSlot1;
-            spareWeapon = weaponSlot2;
-        }
+        // Update Weapon Visuals
+        weaponPosition.sprite = weapon2.weaponVisual;
+        weaponPosition.transform.localPosition = weapon2.weaponPosition;
+        equippedWeapon = weapon2;
+        spareWeapon = weapon1;
     }
 }

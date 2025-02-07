@@ -3,12 +3,13 @@
 public class Spit : MonoBehaviour
 {
     public AudioSource sound;
+    [SerializeField] private float duration;
 
     void Start()
     {
         sound.Play();
 
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, duration);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -21,11 +22,6 @@ public class Spit : MonoBehaviour
 
             Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), entity.GetComponent<BoxCollider2D>());
 
-            Destroy(gameObject);
-        }
-
-        else
-        {
             Destroy(gameObject);
         }
     }

@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Health_Zombie.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\WeaponManager.cs" />
+    <Compile Include="Assets\MainCamera.cs" />
     <Compile Include="Assets\Sound.cs" />
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />

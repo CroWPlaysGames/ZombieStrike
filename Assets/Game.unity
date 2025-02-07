@@ -3367,6 +3367,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3448,6 +3449,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159b3acf9fd3c0440b4d6a6411f2f8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraHeight: -10
+  lerpSpeed: 3
 --- !u!1 &522792393
 GameObject:
   m_ObjectHideFlags: 0
@@ -11900,8 +11915,8 @@ GameObject:
   - component: {fileID: 1539474782}
   - component: {fileID: 1539474781}
   - component: {fileID: 1539474780}
-  - component: {fileID: 1539474779}
   - component: {fileID: 1539474778}
+  - component: {fileID: 1539474779}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11969,11 +11984,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   moveSpeed: 3
-  camera: {fileID: 519420031}
-  weaponSlot1: {fileID: 7627685542799453063, guid: 7ac33b5433f640d438d9907986631576, type: 3}
-  weaponSlot2: {fileID: 3286958486656266316, guid: 34d1d82dc0279124985d19a00bcd78f6, type: 3}
-  weaponPosition: {fileID: 1327394165}
-  bulletSource: {fileID: 1159577944}
+  equippedWeapon: {fileID: 3286958486656266316, guid: 34d1d82dc0279124985d19a00bcd78f6, type: 3}
+  spareWeapon: {fileID: 7627685542799453063, guid: 7ac33b5433f640d438d9907986631576, type: 3}
 --- !u!50 &1539474780
 Rigidbody2D:
   serializedVersion: 5
