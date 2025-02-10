@@ -1,15 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Magazine : MonoBehaviour
 {
-    public GameObject explosion;
-    [SerializeField] private float fuse;
-
     void Start()
     {
         StartCoroutine(Stop());
-        StartCoroutine(Delay());
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -24,17 +20,10 @@ public class Grenade : MonoBehaviour
 
     IEnumerator Stop()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(Random.Range(0.075f, 0.125f));
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
         GetComponent<BoxCollider2D>().enabled = false;
-    }
-
-    IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(fuse);
-
-        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
-
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

@@ -101,7 +101,7 @@ public class Enemy_Ranged : MonoBehaviour
 
             Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), boom.GetComponent<CircleCollider2D>());
 
-            TakeDamage(60);
+            TakeDamage(120);
         }
     }
 }

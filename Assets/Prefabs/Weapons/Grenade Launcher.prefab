@@ -48,6 +48,8 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: 048ca53378f4c2f42bc3556c93eb6346, type: 3}
   weaponPosition: {x: 0.82, y: 0.24, z: 0}
   bulletPrefab: {fileID: 6846201073306315752, guid: a7ca92ec3152c214a9aa3f559fab6d48, type: 3}
+  casingPrefab: {fileID: 0}
+  magazinePrefab: {fileID: 0}
   maxAmmoCapacity: 4
   maxMagCapacity: 1
   bulletSpeed: 70
@@ -58,3 +60,19 @@ MonoBehaviour:
   ammoSize: 4
   pellets: 1
   usesMagazine: 0
+  reloadAction:
+  - name: Unlock
+    startTime: 0
+    clip: {fileID: 0}
+    volume: 1
+    source: {fileID: 0}
+  - name: Insert Shell
+    startTime: 0
+    clip: {fileID: 0}
+    volume: 1
+    source: {fileID: 0}
+  - name: Close
+    startTime: 0
+    clip: {fileID: 0}
+    volume: 1
+    source: {fileID: 0}

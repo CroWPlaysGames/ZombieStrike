@@ -48,13 +48,33 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: 93c3d35bc1c64e84dad5d4465a96b694, type: 3}
   weaponPosition: {x: 0.87, y: 0.6, z: -1}
   bulletPrefab: {fileID: 2036779694923274743, guid: 1af8a1c73a8a6e94ea5a1045efdbb93c, type: 3}
-  maxAmmoCapacity: 120
+  casingPrefab: {fileID: 4805989127891143481, guid: ce30c9b4cb887fd42bf95a87af47ae02, type: 3}
+  magazinePrefab: {fileID: 2348774298736839881, guid: 5ffcbf5989485d942a252ec7722ff778, type: 3}
+  maxAmmoCapacity: 240
   maxMagCapacity: 30
-  bulletSpeed: 70
-  fireRate: 8
+  bulletSpeed: 30
+  fireRate: 11
   reloadTime: 2.5
   reloading: 0
-  magSize: 26
-  ammoSize: 29
+  magSize: 22
+  ammoSize: 240
   pellets: 1
   usesMagazine: 1
+  shoot: {fileID: 8300000, guid: b5d947fa36446994c905750a678cfbd8, type: 3}
+  shootVolume: 0.5
+  reloadAction:
+  - name: Eject Magazine
+    startTime: 0.2
+    clip: {fileID: 8300000, guid: e68cd1a403b1dbf4e98052caba2f2a50, type: 3}
+    volume: 0.7
+    source: {fileID: 0}
+  - name: Insert Magazine
+    startTime: 0.3
+    clip: {fileID: 8300000, guid: 7c329e9015a7d7d438701ab546d8d19a, type: 3}
+    volume: 0.7
+    source: {fileID: 0}
+  - name: Cock Chamber
+    startTime: 1
+    clip: {fileID: 8300000, guid: d853e3ec1bf6e6b40973b173c21d8ab5, type: 3}
+    volume: 0.8
+    source: {fileID: 0}

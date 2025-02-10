@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
         GameObject entity = collision.gameObject;
 
         GameObject bullet = GameObject.FindGameObjectWithTag("Bullet");
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (entity.tag == "Enemy")
         {
@@ -23,7 +22,7 @@ public class Bullet : MonoBehaviour
 
         else if (entity.tag == "Player")
         {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());
+            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), GameObject.Find("Player").GetComponent<BoxCollider2D>());
         }
 
         else if (entity.tag == "Enemy Ranged")

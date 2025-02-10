@@ -7,20 +7,23 @@ public class Weapon : MonoBehaviour
     public Sprite weaponIcon;
     public Vector3 weaponPosition;
     public GameObject bulletPrefab;
+    public GameObject casingPrefab;
+    public GameObject magazinePrefab;
     public int maxAmmoCapacity;
     public float maxMagCapacity;
     public int bulletSpeed;
     public float fireRate;
     private decimal fireInterval = 0;
     public float reloadTime;
-    [HideInInspector]
-    public bool reloading = false;
-    [HideInInspector]
-    public float magSize;
-    [HideInInspector]
-    public float ammoSize;
+    [HideInInspector] public bool reloading = false;
+    [HideInInspector] public float magSize;
+    [HideInInspector] public float ammoSize;
     public float pellets;
     public bool usesMagazine;
+    [Header("Sound Management")]
+    [SerializeField] private AudioClip shoot;
+    [SerializeField][Range (0f, 1f)] private float shootVolume;
+    public ReloadAction[] reloadAction;
 
 
     public void Shoot(Transform bulletSource)
@@ -31,7 +34,7 @@ public class Weapon : MonoBehaviour
             {
                 fireInterval = (decimal)(Time.time + 1f / fireRate);
 
-                FindAnyObjectByType<AudioManager>().Play($"{name} Shoot");
+                FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
 
                 magSize--;
 
@@ -40,6 +43,13 @@ public class Weapon : MonoBehaviour
                     GameObject bullet = Instantiate(bulletPrefab, bulletSource.position, bulletSource.rotation);
                     Rigidbody2D projectile = bullet.GetComponent<Rigidbody2D>();
                     projectile.AddForce(bulletSource.up * bulletSpeed, ForceMode2D.Impulse);
+                }
+
+                if (casingPrefab != null)
+                {
+                    GameObject bulletCasing = Instantiate(casingPrefab, GameObject.Find("Eject").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+                    Rigidbody2D casing = bulletCasing.GetComponent<Rigidbody2D>();
+                    casing.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * 7, ForceMode2D.Impulse);
                 }
             }
 
@@ -50,7 +60,7 @@ public class Weapon : MonoBehaviour
 
                 fireInterval = (decimal)(Time.time + 1f / fireRate);
 
-                FindAnyObjectByType<AudioManager>().Play($"{name} Shoot");
+                FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
 
                 magSize--;
 
@@ -71,6 +81,8 @@ public class Weapon : MonoBehaviour
         if (ammoSize != 0 &&  magSize != maxMagCapacity && !reloading)
         {
             CoroutineHandler.Instance.StartCoroutine(ReloadWeapon());
+
+            CoroutineHandler.Instance.StartCoroutine(EjectMagazine());
         }
     }
 
@@ -80,7 +92,6 @@ public class Weapon : MonoBehaviour
 
         if (usesMagazine)
         {
-            FindAnyObjectByType<AudioManager>().Play($"{name} Reload");
             FindAnyObjectByType<HUD>().StartReload(reloadTime);
             yield return new WaitForSeconds(reloadTime);
 
@@ -101,7 +112,7 @@ public class Weapon : MonoBehaviour
         {
             while ((maxMagCapacity - magSize) > 0 && ammoSize > 0)
             {
-                FindAnyObjectByType<AudioManager>().Play($"{name} Reload");
+                FindAnyObjectByType<AudioManager>().Play(reloadAction);
                 FindAnyObjectByType<HUD>().StartReload(reloadTime / maxMagCapacity);
                 yield return new WaitForSeconds(reloadTime / maxMagCapacity);
 
@@ -112,5 +123,19 @@ public class Weapon : MonoBehaviour
         }
         
         reloading = false;
+    }
+
+    private IEnumerator EjectMagazine()
+    {
+        FindAnyObjectByType<AudioManager>().Play(reloadAction);
+        yield return new WaitForSeconds(0.25f);
+
+        if (magazinePrefab != null)
+        {
+
+            GameObject emptyMagazine = Instantiate(magazinePrefab, GameObject.Find("Eject").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            Rigidbody2D magazine = emptyMagazine.GetComponent<Rigidbody2D>();
+            magazine.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * 3, ForceMode2D.Impulse);
+        }
     }
 }

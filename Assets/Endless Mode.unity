@@ -4348,47 +4348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a1191bac4c5c14da9d52913ce1fd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: Harper Shoot
-    clip: {fileID: 8300000, guid: b5d947fa36446994c905750a678cfbd8, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Harper Reload
-    clip: {fileID: 8300000, guid: ecd94c0ce3a49724cad3a61a64d410bb, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Punisher Shoot
-    clip: {fileID: 8300000, guid: ffb3d39b485e56345b73728805ba511e, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Punisher Reload
-    clip: {fileID: 8300000, guid: c54dd4d6f2d19b0488ea60e6aa4b64c8, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Malice Shoot
-    clip: {fileID: 8300000, guid: 66d92893444a9564da15e5bf19a42c7c, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Maclie Reload
-    clip: {fileID: 8300000, guid: e466d0ef44f70794988184ee798b0f9e, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Grenade Launcher Shoot
-    clip: {fileID: 8300000, guid: d1675c28d6f05aa47ab50c7bb538b0c3, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Grenade Launcher Reload
-    clip: {fileID: 8300000, guid: bf9981d88fd08824eb506640b5e99382, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
+  sounds: []
 --- !u!4 &545391489
 Transform:
   m_ObjectHideFlags: 0
@@ -9872,7 +9832,7 @@ Transform:
   m_GameObject: {fileID: 1159577943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0.8, y: 1.7, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12590,6 +12550,37 @@ Transform:
   - {fileID: 704764351}
   m_Father: {fileID: 33645153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1424739718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424739719}
+  m_Layer: 0
+  m_Name: Eject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1424739719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424739718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.9396926, w: 0.34202018}
+  m_LocalPosition: {x: 1.17, y: 0.45, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1539474782}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -140}
 --- !u!1 &1427915099
 GameObject:
   m_ObjectHideFlags: 0
@@ -13478,6 +13469,7 @@ Transform:
   - {fileID: 1159577944}
   - {fileID: 1049398829}
   - {fileID: 1327394164}
+  - {fileID: 1424739719}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1539474783
@@ -13498,7 +13490,7 @@ MonoBehaviour:
   spareWeapon: {fileID: 3286958486656266316, guid: 34d1d82dc0279124985d19a00bcd78f6, type: 3}
   grenade: {fileID: 6846201073306315752, guid: 15c68827210550f48bef84b87edc1270, type: 3}
   equipmentAmount: 3
-  grenadesAmount: 100
+  grenadesAmount: 3
 --- !u!1 &1541530357
 GameObject:
   m_ObjectHideFlags: 0
