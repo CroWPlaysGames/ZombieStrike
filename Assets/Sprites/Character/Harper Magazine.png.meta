@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Harper Magazine_0: -2268832464067203683
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -62,6 +62,8 @@ MonoBehaviour:
   usesMagazine: 0
   shoot: {fileID: 8300000, guid: ffb3d39b485e56345b73728805ba511e, type: 3}
   shootVolume: 0.6
+  empty: {fileID: 8300000, guid: 7c0edd6e3d91dc74ba301387e725d71d, type: 3}
+  emptyVolume: 0.5
   reloadAction:
   - name: Insert Shell
     startTime: 0.1

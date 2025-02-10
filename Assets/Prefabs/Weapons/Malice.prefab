@@ -61,7 +61,9 @@ MonoBehaviour:
   pellets: 1
   usesMagazine: 1
   shoot: {fileID: 8300000, guid: 66d92893444a9564da15e5bf19a42c7c, type: 3}
-  shootVolume: 1
+  shootVolume: 0.5
+  empty: {fileID: 8300000, guid: 7c0edd6e3d91dc74ba301387e725d71d, type: 3}
+  emptyVolume: 0.5
   reloadAction:
   - name: Empty Magazine
     startTime: 0.1

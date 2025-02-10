@@ -73,7 +73,7 @@ public class Weapon : MonoBehaviour
 
                 FindAnyObjectByType<HUD>().CloseReload();
             }        
-        }        
+        }
     }
 
     public void Reload()

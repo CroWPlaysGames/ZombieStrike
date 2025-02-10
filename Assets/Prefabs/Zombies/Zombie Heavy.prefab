@@ -239,7 +239,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
   slider: {fileID: 41209393231245417}
   attack_rate: 5
   meleeDamage: 25
-  spawn_location: 3
+  spawn_location: 1
   hit: {fileID: 1730454859587696182}
 --- !u!61 &2990998654348189885
 BoxCollider2D:
