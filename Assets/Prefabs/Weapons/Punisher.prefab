@@ -50,20 +50,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2036779694923274743, guid: 1af8a1c73a8a6e94ea5a1045efdbb93c, type: 3}
   casingPrefab: {fileID: 1803485114355085253, guid: fb17467f2c1b54a4b8ea8ec87b867a3a, type: 3}
   magazinePrefab: {fileID: 0}
-  maxAmmoCapacity: 24
+  maxAmmoCapacity: 60
   maxMagCapacity: 6
   bulletSpeed: 25
   fireRate: 1
   reloadTime: 4
   reloading: 0
   magSize: 6
-  ammoSize: 17
+  ammoSize: 19
   pellets: 6
   usesMagazine: 0
   shoot: {fileID: 8300000, guid: ffb3d39b485e56345b73728805ba511e, type: 3}
   shootVolume: 0.6
-  empty: {fileID: 8300000, guid: 7c0edd6e3d91dc74ba301387e725d71d, type: 3}
-  emptyVolume: 0.5
   reloadAction:
   - name: Insert Shell
     startTime: 0.1

@@ -1,6 +1,7 @@
 ﻿using System;
 using Random = UnityEngine.Random;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public int equipmentAmount;
     public int grenadesAmount;
     private SpriteRenderer weaponPosition;
+    private Light2D flashlight;
 
 
     void Start()
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
         weaponPosition = GameObject.Find("Equipped Weapon").GetComponent<SpriteRenderer>();
         weaponPosition.sprite = equippedWeapon.weaponVisual;
         weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
+        flashlight = GameObject.Find("Flashlight").GetComponent<Light2D>();
 
         // Setup Weapons
         equippedWeapon.magSize = equippedWeapon.maxMagCapacity;
@@ -53,6 +56,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Fire1") && !hud.pauseMenu.activeSelf && !hud.gameOverMenu.activeSelf)
         {
             equippedWeapon.Shoot(GameObject.Find("Gun Source").GetComponent<Transform>());
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (flashlight.enabled)
+            {
+                flashlight.enabled = false;
+            }
+
+            else
+            {
+                flashlight.enabled = true;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.X))

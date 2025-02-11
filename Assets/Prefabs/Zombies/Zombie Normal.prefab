@@ -576,7 +576,7 @@ MonoBehaviour:
   slider: {fileID: 7406859102799800037}
   attack_rate: 5
   meleeDamage: 10
-  spawn_location: 2
+  spawn_location: 3
   hit: {fileID: 6739769426325079456}
 --- !u!61 &7277154637697596910
 BoxCollider2D:
@@ -637,7 +637,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 314cf881c1910b049b8b4c3d8701f04b, type: 3}
   m_Resource: {fileID: 8300000, guid: 314cf881c1910b049b8b4c3d8701f04b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

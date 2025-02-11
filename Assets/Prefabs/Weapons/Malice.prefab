@@ -50,20 +50,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2539643659880587849, guid: 772ff3d0144e8a74c893645e8847e984, type: 3}
   casingPrefab: {fileID: 4805989127891143481, guid: ce30c9b4cb887fd42bf95a87af47ae02, type: 3}
   magazinePrefab: {fileID: 0}
-  maxAmmoCapacity: 25
+  maxAmmoCapacity: 50
   maxMagCapacity: 5
-  bulletSpeed: 70
-  fireRate: 0.5
+  bulletSpeed: 50
+  fireRate: 0.7
   reloadTime: 2.5
   reloading: 0
-  magSize: 5
-  ammoSize: 24
+  magSize: 4
+  ammoSize: 47
   pellets: 1
   usesMagazine: 1
   shoot: {fileID: 8300000, guid: 66d92893444a9564da15e5bf19a42c7c, type: 3}
   shootVolume: 0.5
-  empty: {fileID: 8300000, guid: 7c0edd6e3d91dc74ba301387e725d71d, type: 3}
-  emptyVolume: 0.5
   reloadAction:
   - name: Empty Magazine
     startTime: 0.1

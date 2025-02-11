@@ -148,8 +148,8 @@
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\MineBotAI.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\Modifiers.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink3.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Navmesh\NavmeshUpdates.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\StackPool.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Navmesh\NavmeshUpdates.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyRichAIEditor.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\PackageTools\VersionedMonoBehaviour.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\AstarDebugger.cs" />
