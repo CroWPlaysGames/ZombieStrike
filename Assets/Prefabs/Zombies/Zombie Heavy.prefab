@@ -33,7 +33,7 @@ RectTransform:
   m_Father: {fileID: 6877344728806865828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -361,13 +361,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0962fde5eb071d44dba25c98802ff12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 300
   score: 250
   healthbar: {fileID: 6774396233598499324}
   slider: {fileID: 41209393231245417}
   attack_rate: 5
   meleeDamage: 25
-  spawn_location: 1
+  spawn_location: 3
   hit: {fileID: 1730454859587696182}
 --- !u!61 &2990998654348189885
 BoxCollider2D:
@@ -529,7 +529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6877344728806865828
 RectTransform:
   m_ObjectHideFlags: 0

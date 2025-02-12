@@ -56,14 +56,12 @@ MonoBehaviour:
   fireRate: 11
   reloadTime: 2.5
   reloading: 0
-  magSize: 22
-  ammoSize: 240
+  magSize: 29
+  ammoSize: 223
   pellets: 1
   usesMagazine: 1
   shoot: {fileID: 8300000, guid: b5d947fa36446994c905750a678cfbd8, type: 3}
-  shootVolume: 0.5
-  empty: {fileID: 8300000, guid: 7c0edd6e3d91dc74ba301387e725d71d, type: 3}
-  emptyVolume: 0.5
+  shootVolume: 0.4
   reloadAction:
   - name: Eject Magazine
     startTime: 0.2
