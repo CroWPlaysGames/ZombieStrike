@@ -135,7 +135,7 @@ public class Weapon : MonoBehaviour
 
             GameObject emptyMagazine = Instantiate(magazinePrefab, GameObject.Find("Eject").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
             Rigidbody2D magazine = emptyMagazine.GetComponent<Rigidbody2D>();
-            magazine.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * 3, ForceMode2D.Impulse);
+            magazine.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * -5, ForceMode2D.Impulse);
         }
     }
 }

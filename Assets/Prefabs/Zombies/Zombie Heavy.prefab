@@ -363,12 +363,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 300
   score: 250
-  healthbar: {fileID: 6774396233598499324}
-  slider: {fileID: 41209393231245417}
   attack_rate: 5
   meleeDamage: 25
-  spawn_location: 3
+  spawn_location: 2
   hit: {fileID: 1730454859587696182}
+  zombieVariants:
+  - {fileID: 21300000, guid: fca8a596e852c5d43bf22d3b55036202, type: 3}
 --- !u!61 &2990998654348189885
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -428,7 +428,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 25a8fd03f8bba0644b8688caeab94be3, type: 3}
   m_Resource: {fileID: 8300000, guid: 25a8fd03f8bba0644b8688caeab94be3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

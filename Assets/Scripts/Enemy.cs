@@ -6,20 +6,19 @@ public class Enemy : MonoBehaviour
     public int health;
     private int current_health;
     public int score;
-    public Health_Zombie healthbar;
-    public Slider slider;
     private float interval = 0f;
     public float attack_rate;
     public int meleeDamage;
     [HideInInspector]
     public int spawn_location;
     public AudioSource hit;
+    [SerializeField] private Sprite[] zombieVariants;
 
     
     void Start()
     {        
         current_health = health;
-        healthbar.start_health(health);
+        GetComponent<SpriteRenderer>().sprite = zombieVariants[Random.Range(0, zombieVariants.Length)];
     }
 
     public void TakeDamage(int damage)
@@ -27,8 +26,6 @@ public class Enemy : MonoBehaviour
         hit.Play();
 
         current_health -= damage;
-
-        healthbar.set_health(current_health);
     }
 
     public void Update()
