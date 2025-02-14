@@ -67,9 +67,8 @@
   <ItemGroup>
     <Compile Include="Assets\Magazine.cs" />
     <Compile Include="Assets\Weapon.cs" />
-    <Compile Include="Assets\Scripts\Health_Player.cs" />
+    <Compile Include="Assets\Scripts\EnemyRanged.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
-    <Compile Include="Assets\Scripts\Sniper_Bullet.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\Spit.cs" />
     <Compile Include="Assets\Casing.cs" />
@@ -78,16 +77,12 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Equipment.cs" />
     <Compile Include="Assets\Scripts\Main_Menu.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Ranged.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
-    <Compile Include="Assets\Scripts\Health_Zombie.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\LightSource.cs" />
-    <Compile Include="Assets\WeaponManager.cs" />
     <Compile Include="Assets\MainCamera.cs" />
     <Compile Include="Assets\Grenade.cs" />
     <Compile Include="Assets\ReloadAction.cs" />
-    <Compile Include="Assets\Sound.cs" />
     <Compile Include="Assets\LightingManager.cs" />
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />

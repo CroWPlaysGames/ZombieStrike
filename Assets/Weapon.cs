@@ -1,55 +1,59 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class Weapon : MonoBehaviour
 {
-    public Sprite weaponVisual;
-    public Sprite weaponIcon;
-    public Vector3 weaponPosition;
-    public GameObject bulletPrefab;
-    public GameObject casingPrefab;
-    public GameObject magazinePrefab;
-    public int maxAmmoCapacity;
-    public float maxMagCapacity;
-    public int bulletSpeed;
+    [Header("General Stats")]
+    [SerializeField] private float damage;
     public float fireRate;
     private decimal fireInterval = 0;
+    public float maxMagCapacity;
+    public int maxAmmoCapacity;
+    public int bulletSpeed;
     public float reloadTime;
     [HideInInspector] public bool reloading = false;
     [HideInInspector] public float magSize;
     [HideInInspector] public float ammoSize;
     public float pellets;
     public bool usesMagazine;
+    [Header("Visual Management")]
+    public Sprite weaponVisual;
+    public Sprite weaponIcon;
+    public Vector2 weaponPosition;
+    public GameObject bulletPrefab;
+    public GameObject casingPrefab;
+    public GameObject magazinePrefab;
     [Header("Sound Management")]
     [SerializeField] private AudioClip shoot;
     [SerializeField][Range (0f, 1f)] private float shootVolume;
     public ReloadAction[] reloadAction;
 
 
-    public void Shoot(Transform bulletSource)
+    public void Shoot()
     {
+        Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
+
         if (Time.time >= (float)fireInterval && magSize > 0)
         {
             if (!reloading)
             {
                 fireInterval = (decimal)(Time.time + 1f / fireRate);
-
                 FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
-
                 magSize--;
 
                 for (int i = 0; i < pellets; i++)
                 {
-                    GameObject bullet = Instantiate(bulletPrefab, bulletSource.position, bulletSource.rotation);
-                    Rigidbody2D projectile = bullet.GetComponent<Rigidbody2D>();
-                    projectile.AddForce(bulletSource.up * bulletSpeed, ForceMode2D.Impulse);
+                    GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
+                    bullet.GetComponent<Bullet>().SetDamage(damage);
+                    bullet.GetComponent<Rigidbody2D>().AddForce(source.up * bulletSpeed, ForceMode2D.Impulse);
+                    CoroutineHandler.Instance.StartCoroutine(Flash());
                 }
 
                 if (casingPrefab != null)
                 {
                     GameObject bulletCasing = Instantiate(casingPrefab, GameObject.Find("Eject").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-                    Rigidbody2D casing = bulletCasing.GetComponent<Rigidbody2D>();
-                    casing.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * 7, ForceMode2D.Impulse);
+                    bulletCasing.GetComponent<Rigidbody2D>().AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * 7, ForceMode2D.Impulse);
                 }
             }
 
@@ -57,18 +61,15 @@ public class Weapon : MonoBehaviour
             {
                 Destroy(GameObject.Find("Reload Handler"));
                 reloading = false;
-
                 fireInterval = (decimal)(Time.time + 1f / fireRate);
-
                 FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
-
                 magSize--;
 
                 for (int i = 0; i < pellets; i++)
                 {
-                    GameObject bullet = Instantiate(bulletPrefab, bulletSource.position, bulletSource.rotation);
+                    GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
                     Rigidbody2D projectile = bullet.GetComponent<Rigidbody2D>();
-                    projectile.AddForce(bulletSource.up * bulletSpeed, ForceMode2D.Impulse);
+                    projectile.AddForce(source.up * bulletSpeed, ForceMode2D.Impulse);
                 }
 
                 FindAnyObjectByType<HUD>().CloseReload();
@@ -81,7 +82,6 @@ public class Weapon : MonoBehaviour
         if (ammoSize != 0 &&  magSize != maxMagCapacity && !reloading)
         {
             CoroutineHandler.Instance.StartCoroutine(ReloadWeapon());
-
             CoroutineHandler.Instance.StartCoroutine(EjectMagazine());
         }
     }
@@ -118,8 +118,7 @@ public class Weapon : MonoBehaviour
 
                 magSize++;
                 ammoSize--;
-            }
-            
+            }            
         }
         
         reloading = false;
@@ -137,5 +136,12 @@ public class Weapon : MonoBehaviour
             Rigidbody2D magazine = emptyMagazine.GetComponent<Rigidbody2D>();
             magazine.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * -5, ForceMode2D.Impulse);
         }
+    }
+
+    private IEnumerator Flash()
+    {
+        GameObject.Find("Flash").GetComponent<Light2D>().enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        GameObject.Find("Flash").GetComponent<Light2D>().enabled = false;
     }
 }

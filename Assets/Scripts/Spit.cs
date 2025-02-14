@@ -2,27 +2,31 @@
 
 public class Spit : MonoBehaviour
 {
-    public AudioSource sound;
-    [SerializeField] private float duration;
+    [HideInInspector] public float damage;
 
     void Start()
     {
-        sound.Play();
-
-        Destroy(gameObject, duration);
+        Destroy(gameObject, 0.75f);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject entity = collision.gameObject;
 
-        if (collision.gameObject.tag == "Player")
+        switch(entity.tag)
         {
-            entity.GetComponent<PlayerController>().TakeDamage(20);
-
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), entity.GetComponent<BoxCollider2D>());
-
-            Destroy(gameObject);
+            case "Player":
+                entity.GetComponent<PlayerController>().TakeDamage(damage);
+                break;
+            default:
+                break;
         }
+
+        Destroy(gameObject);
+    }
+
+    public void SetDamage(float value)
+    {
+        damage = value;
     }
 }

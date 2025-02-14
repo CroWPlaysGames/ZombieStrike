@@ -32,9 +32,7 @@ public class Grenade : MonoBehaviour
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(fuse);
-
         Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
-
         Destroy(gameObject);
     }
 }

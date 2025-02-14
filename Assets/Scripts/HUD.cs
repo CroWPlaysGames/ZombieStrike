@@ -5,34 +5,28 @@ using System.Collections;
 
 public class HUD : MonoBehaviour
 {
-    [HideInInspector]
-    public int score;
-    private int high_score;
     public GameObject pauseMenu;
     public GameObject gameOverMenu;
     private bool paused = false;
-    private Text currentScoreValue;
-    private Text highScoreValue;
-    private Image reload;
     private IEnumerator reloadAction;
     [SerializeField] private Image[] equipmentSlots;
     [SerializeField] private Image[] grenadeSlots;
 
 
-    private void OnEnable()
+    void Update()
     {
-        score = 0;
-        currentScoreValue = GameObject.Find("Current Score Value").GetComponent<Text>();
-        highScoreValue = GameObject.Find("High Score Value").GetComponent<Text>();
-        reload = GameObject.Find("Reload").GetComponent<Image>();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (paused)
+            {
+                Resume();
+            }
 
-        currentScoreValue.text = score.ToString();
-        highScoreValue.text = high_score.ToString();
-    }
-
-    public void AddScore(int reward)
-    {
-        score += reward;
+            else
+            {
+                Pause();
+            }
+        }
     }
 
     public void Resume()
@@ -55,14 +49,9 @@ public class HUD : MonoBehaviour
 
     public void Restart_Game()
     {
-        FindAnyObjectByType<Health_Player>().slider.value = FindAnyObjectByType<PlayerController>().health;
+        SetMaxHealth(FindAnyObjectByType<PlayerController>().health);
 
         Time.timeScale = 1f;
-
-        if(high_score > PlayerPrefs.GetInt("high_score"))
-        {
-            PlayerPrefs.SetInt("high_score", high_score);
-        }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -71,39 +60,10 @@ public class HUD : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        if (high_score > PlayerPrefs.GetInt("high_score"))
-        {
-            PlayerPrefs.SetInt("high_score", high_score);
-        }
-
         SceneManager.LoadScene("Main Menu");
     }
 
-    void Update()
-    {
-        highScoreValue.text = PlayerPrefs.GetInt("high_score").ToString();
-
-        currentScoreValue.text = score.ToString();
-        if (score > high_score)
-        {
-            high_score = score;
-
-            highScoreValue.text = high_score.ToString();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (paused == true)
-            {
-                Resume();
-            }
-
-            else
-            {
-                Pause();
-            }
-        }
-    }
+    
 
     public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon, int equipment, int grenades)
     {
@@ -115,28 +75,31 @@ public class HUD : MonoBehaviour
 
         UpdateAmount(equipmentSlots, equipment);
         UpdateAmount(grenadeSlots, grenades);
+
+        GameObject.Find("Health").GetComponent<Slider>().value = FindAnyObjectByType<PlayerController>().currentHealth;
+        GameObject.Find("Stamina").GetComponent<Slider>().value = FindAnyObjectByType<PlayerController>().currentStamina;
     }
 
     public void StartReload(float duration)
     {
-        reload.enabled = true;
+        GameObject.Find("Reload").GetComponent<Image>().enabled = true;
         Color greyed = GameObject.Find("Primary Icon").GetComponent<Image>().color;
         greyed.a = 0.5f;
         GameObject.Find("Primary Icon").GetComponent<Image>().color = greyed;
-        reloadAction = ReloadProgress(reload, duration);
+        reloadAction = ReloadProgress(GameObject.Find("Reload").GetComponent<Image>(), duration);
         StartCoroutine(reloadAction);
     }
 
     public void CloseReload()
     {
-        if (reload.enabled)
+        if (GameObject.Find("Reload").GetComponent<Image>().enabled)
         {
             Color greyed = GameObject.Find("Primary Icon").GetComponent<Image>().color;
             greyed.a = 1f;
             GameObject.Find("Primary Icon").GetComponent<Image>().color = greyed;
 
-            reload.fillAmount = 0;
-            reload.enabled = false;
+            GameObject.Find("Reload").GetComponent<Image>().fillAmount = 0;
+            GameObject.Find("Reload").GetComponent<Image>().enabled = false;
 
             StopCoroutine(reloadAction);
         }        
@@ -179,5 +142,21 @@ public class HUD : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void SetMaxHealth(float value)
+    {
+        GameObject.Find("Health").GetComponent<Slider>().maxValue = value;
+    }
+
+    public void SetMaxStamina(float value)
+    {
+        GameObject.Find("Stamina").GetComponent<Slider>().maxValue = value;
+    }
+
+    private void GameOver()
+    {
+        gameOverMenu.SetActive(true);
+        Time.timeScale = 0;
     }
 }

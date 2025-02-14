@@ -1,45 +1,14 @@
 using UnityEngine;
-using System;
 using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
     private float reloadTimer = 0;
 
-    void Awake()
-    {
-        foreach (Sound sound in sounds)
-        {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.clip = sound.clip;
-
-            sound.source.volume = sound.volume;
-            sound.source.pitch = sound.pitch;
-        }
-    }
-
-    public void Play(string name)
-    {
-        Sound sound = Array.Find(sounds, sound => sound.name == name);
-        sound.source.Play();
-    }
 
     public void Play(AudioClip sound, float volume)
     {
         StartCoroutine(PlaySound(sound, volume));
-    }
-
-    private IEnumerator PlaySound(AudioClip sound, float volume)
-    {
-        AudioSource source = gameObject.AddComponent<AudioSource>();
-        source.clip = sound;
-        source.volume = volume;
-        source.Play();
-
-        yield return new WaitForSeconds(sound.length);
-
-        Destroy(source);
     }
 
     public void Play(ReloadAction[] reloadActions)
@@ -53,17 +22,24 @@ public class AudioManager : MonoBehaviour
         reloadTimer = 0;
     }
 
+    private IEnumerator PlaySound(AudioClip sound, float volume)
+    {
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+        source.clip = sound;
+        source.volume = volume;
+        source.Play();
+        yield return new WaitForSeconds(sound.length);
+        Destroy(source);
+    }
+
     private IEnumerator PlayReloadSounds(ReloadAction action)
     {
         yield return new WaitForSeconds(reloadTimer);
-
         action.source = gameObject.AddComponent<AudioSource>();
         action.source.clip = action.clip;
         action.source.volume = action.volume;
         action.source.Play();
-
         yield return new WaitForSeconds(action.clip.length);
-
         Destroy(action.source);
     }
 }
