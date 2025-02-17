@@ -6,73 +6,46 @@ public class Weapon : MonoBehaviour
 {
     [Header("General Stats")]
     [SerializeField] private float damage;
-    public float fireRate;
+    [SerializeField] private float fireRate;
     private decimal fireInterval = 0;
     public float maxMagCapacity;
     public int maxAmmoCapacity;
-    public int bulletSpeed;
-    public float reloadTime;
+    [SerializeField] private int bulletSpeed;
+    [SerializeField] private float reloadTime;
     [HideInInspector] public bool reloading = false;
     [HideInInspector] public float magSize;
     [HideInInspector] public float ammoSize;
-    public float pellets;
-    public bool usesMagazine;
+    [SerializeField] private float pellets;
+    [SerializeField] private bool usesMagazine;
     [Header("Visual Management")]
     public Sprite weaponVisual;
     public Sprite weaponIcon;
     public Vector2 weaponPosition;
-    public GameObject bulletPrefab;
-    public GameObject casingPrefab;
-    public GameObject magazinePrefab;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject casingPrefab;
+    [SerializeField] private GameObject magazinePrefab;
     [Header("Sound Management")]
     [SerializeField] private AudioClip shoot;
     [SerializeField][Range (0f, 1f)] private float shootVolume;
-    public ReloadAction[] reloadAction;
+    [SerializeField] private ReloadAction[] reloadAction;
 
 
     public void Shoot()
     {
-        Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
-
         if (Time.time >= (float)fireInterval && magSize > 0)
         {
             if (!reloading)
             {
-                fireInterval = (decimal)(Time.time + 1f / fireRate);
-                FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
-                magSize--;
-
-                for (int i = 0; i < pellets; i++)
-                {
-                    GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
-                    bullet.GetComponent<Bullet>().SetDamage(damage);
-                    bullet.GetComponent<Rigidbody2D>().AddForce(source.up * bulletSpeed, ForceMode2D.Impulse);
-                    CoroutineHandler.Instance.StartCoroutine(Flash());
-                }
-
-                if (casingPrefab != null)
-                {
-                    GameObject bulletCasing = Instantiate(casingPrefab, GameObject.Find("Eject").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-                    bulletCasing.GetComponent<Rigidbody2D>().AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * 7, ForceMode2D.Impulse);
-                }
+                FireBullet();
             }
 
+            // Allows Shotguns and Revolvers to continue shooting while reloading
             else if (!usesMagazine)
             {
+                FindAnyObjectByType<HUD>().CloseReload();
                 Destroy(GameObject.Find("Reload Handler"));
                 reloading = false;
-                fireInterval = (decimal)(Time.time + 1f / fireRate);
-                FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
-                magSize--;
-
-                for (int i = 0; i < pellets; i++)
-                {
-                    GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
-                    Rigidbody2D projectile = bullet.GetComponent<Rigidbody2D>();
-                    projectile.AddForce(source.up * bulletSpeed, ForceMode2D.Impulse);
-                }
-
-                FindAnyObjectByType<HUD>().CloseReload();
+                FireBullet();
             }        
         }
     }
@@ -131,17 +104,40 @@ public class Weapon : MonoBehaviour
 
         if (magazinePrefab != null)
         {
-
-            GameObject emptyMagazine = Instantiate(magazinePrefab, GameObject.Find("Eject").GetComponent<Transform>().position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-            Rigidbody2D magazine = emptyMagazine.GetComponent<Rigidbody2D>();
-            magazine.AddForce(GameObject.Find("Eject").GetComponent<Transform>().up * -5, ForceMode2D.Impulse);
+            Transform eject = GameObject.Find("Eject").GetComponent<Transform>();
+            GameObject emptyMagazine = Instantiate(magazinePrefab, eject.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            emptyMagazine.GetComponent<Rigidbody2D>().AddForce(eject.up * 3, ForceMode2D.Impulse);
         }
     }
 
     private IEnumerator Flash()
     {
-        GameObject.Find("Flash").GetComponent<Light2D>().enabled = true;
+        Light2D flash = GameObject.Find("Flash").GetComponent<Light2D>();
+        flash.enabled = true;
         yield return new WaitForSeconds(0.05f);
-        GameObject.Find("Flash").GetComponent<Light2D>().enabled = false;
+        flash.enabled = false;
+    }
+
+    private void FireBullet()
+    {
+        FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
+        Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
+        fireInterval = (decimal)(Time.time + 1f / fireRate);
+        magSize--;
+
+        for (int i = 0; i < pellets; i++)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, source.position, source.rotation);
+            bullet.GetComponent<Bullet>().SetDamage(damage);
+            bullet.GetComponent<Rigidbody2D>().AddForce(source.up * bulletSpeed, ForceMode2D.Impulse);
+            CoroutineHandler.Instance.StartCoroutine(Flash());
+        }
+
+        if (casingPrefab != null)
+        {
+            Transform eject = GameObject.Find("Eject").GetComponent<Transform>();
+            GameObject casing = Instantiate(casingPrefab, eject.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            casing.GetComponent<Rigidbody2D>().AddForce(eject.up * 7, ForceMode2D.Impulse);
+        }
     }
 }

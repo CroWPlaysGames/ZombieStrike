@@ -1,68 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class HUD : MonoBehaviour
 {
-    public GameObject pauseMenu;
-    public GameObject gameOverMenu;
-    private bool paused = false;
     private IEnumerator reloadAction;
     [SerializeField] private Image[] equipmentSlots;
     [SerializeField] private Image[] grenadeSlots;
-
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (paused)
-            {
-                Resume();
-            }
-
-            else
-            {
-                Pause();
-            }
-        }
-    }
-
-    public void Resume()
-    {
-        pauseMenu.SetActive(false);
-
-        Time.timeScale = 1f;
-
-        paused = false;
-    }
-
-    public void Pause()
-    {
-        pauseMenu.SetActive(true);
-
-        Time.timeScale = 0f;
-
-        paused = true;
-    }
-
-    public void Restart_Game()
-    {
-        SetMaxHealth(FindAnyObjectByType<PlayerController>().health);
-
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void Main_Menu()
-    {
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene("Main Menu");
-    }
-
     
 
     public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon, int equipment, int grenades)
@@ -73,8 +17,8 @@ public class HUD : MonoBehaviour
         GameObject.Find("Mag Capacity").GetComponent<Text>().text = equippedWeapon.magSize.ToString();
         GameObject.Find("Max Ammo").GetComponent<Text>().text = equippedWeapon.ammoSize.ToString();
 
-        UpdateAmount(equipmentSlots, equipment);
-        UpdateAmount(grenadeSlots, grenades);
+        UpdateAmount(equipmentSlots, equipment, GameObject.Find("Equipment Icon").GetComponent<Image>());
+        UpdateAmount(grenadeSlots, grenades, GameObject.Find("Grenade Icon").GetComponent<Image>());
 
         GameObject.Find("Health").GetComponent<Slider>().value = FindAnyObjectByType<PlayerController>().currentHealth;
         GameObject.Find("Stamina").GetComponent<Slider>().value = FindAnyObjectByType<PlayerController>().currentStamina;
@@ -118,8 +62,10 @@ public class HUD : MonoBehaviour
         CloseReload();
     }
 
-    private void UpdateAmount(Image[] slots, int amount)
+    private void UpdateAmount(Image[] slots, int amount, Image icon)
     {
+        icon.enabled = true;
+
         foreach (Image slot in slots)
         {
             slot.enabled = false;
@@ -127,6 +73,9 @@ public class HUD : MonoBehaviour
 
         switch (amount)
         {
+            case 0:
+                icon.enabled = false;
+                break;
             case 1:
                 slots[2].enabled = true;
                 break;
@@ -144,19 +93,9 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void SetMaxHealth(float value)
+    public void SetMaxValues(float health, float stamina)
     {
-        GameObject.Find("Health").GetComponent<Slider>().maxValue = value;
-    }
-
-    public void SetMaxStamina(float value)
-    {
-        GameObject.Find("Stamina").GetComponent<Slider>().maxValue = value;
-    }
-
-    private void GameOver()
-    {
-        gameOverMenu.SetActive(true);
-        Time.timeScale = 0;
+        GameObject.Find("Health").GetComponent<Slider>().maxValue = health;
+        GameObject.Find("Stamina").GetComponent<Slider>().maxValue = stamina;
     }
 }

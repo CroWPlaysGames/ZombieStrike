@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     [Header("Audio Management")]
     [SerializeField] private AudioClip hit;
     [SerializeField][Range(0f,1f)] private float hitVolume;
+    private bool isHurt = false;
 
 
     void Start()
@@ -60,9 +62,17 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (currentHealth > 0)
+        if (currentHealth > 0 && !isHurt)
         {
+            StartCoroutine(HurtCooldown());
             FindAnyObjectByType<AudioManager>().Play(hit, hitVolume);
         }
+    }
+
+    private IEnumerator HurtCooldown()
+    {
+        isHurt = true;
+        yield return new WaitForSeconds(0.1f);
+        isHurt = false;
     }
 }

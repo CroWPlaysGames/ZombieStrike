@@ -215,9 +215,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 300
-  attackDamage: 35
-  attackSpeed: 3
-  spawnLocation: 1
+  spawnLocation: 2
+  attackDamage: 45
+  attackSpeed: 4
   zombieVariants:
   - {fileID: 21300000, guid: fca8a596e852c5d43bf22d3b55036202, type: 3}
   hit: {fileID: 8300000, guid: 25a8fd03f8bba0644b8688caeab94be3, type: 3}
