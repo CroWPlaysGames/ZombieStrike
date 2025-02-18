@@ -39,6 +39,7 @@ public class UI : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
         HUD.SetActive(true);
         Time.timeScale = 1f;
         paused = false;

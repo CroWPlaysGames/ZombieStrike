@@ -123,7 +123,9 @@ public class PlayerController : MonoBehaviour
 
                 if (currentStamina <= 0)
                 {
-                    StartCoroutine(Recover());
+                    exhausted = true;
+                    currentSpeed = walkSpeed;
+                    Invoke(nameof(Recover), 2);
                 }
             }
 
@@ -151,7 +153,7 @@ public class PlayerController : MonoBehaviour
         // Manage Movement and Direction of Player
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        print(movement); // Movement is causing issues with sprinting - not registering keys being let go
+        //print(movement); // Movement is causing issues with sprinting - not registering keys being let go
         mousePosition = FindAnyObjectByType<Camera>().ScreenToWorldPoint(Input.mousePosition);        
         GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + currentSpeed * Time.fixedDeltaTime * movement);
         direction = mousePosition - GetComponent<Rigidbody2D>().position;
@@ -217,11 +219,8 @@ public class PlayerController : MonoBehaviour
         hud.CloseReload();
     }
 
-    private IEnumerator Recover()
+    private void Recover()
     {
-        exhausted = true;
-        currentSpeed = walkSpeed;
-        yield return new WaitForSeconds(2);
         exhausted = false;
     }
 }

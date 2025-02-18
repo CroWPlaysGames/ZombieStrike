@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class MainCamera : MonoBehaviour
 {  
     private Transform player;
@@ -7,6 +8,7 @@ public class MainCamera : MonoBehaviour
     [SerializeField] private float lerpSpeed;
     private Vector3 offset;
     private Vector3 targetPosition;
+    [SerializeField] private Material material;
 
     void Start()
     {
@@ -20,5 +22,16 @@ public class MainCamera : MonoBehaviour
         targetPosition = player.position + offset;
         targetPosition.z = cameraHeight;
         transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
+    }
+
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    {
+        if (material == null)
+        {
+            Graphics.Blit(source, destination);
+            return;
+        }
+
+        Graphics.Blit(source, destination, material);
     }
 }
