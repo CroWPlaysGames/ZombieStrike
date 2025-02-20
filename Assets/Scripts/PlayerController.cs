@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using Random = UnityEngine.Random;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -37,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private UI ui;
     [HideInInspector] public float resistance = 0;
     [HideInInspector] public bool stimming = false;
+    [HideInInspector] public bool messaging = false; 
 
 
     void Start()
@@ -56,27 +56,39 @@ public class PlayerController : MonoBehaviour
         currentHealth = health;
         currentStamina = sprintDuration;
         currentSpeed = walkSpeed;
-        hud = FindAnyObjectByType<HUD>();
         ui = FindAnyObjectByType<UI>();
+        hud = FindAnyObjectByType<HUD>();
         hud.SetMaxValues(health, sprintDuration);
         hud.UpdateHUD(equippedWeapon, spareWeapon, equipmentAmount, grenadeAmount);
     }
 
     void Update()
     {   
-        if (!ui.paused)
+        if (!ui.paused && !messaging)
         {
-            // Shoot Equipped Weapon
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Shoot"))
             {
                 equippedWeapon.Shoot();
             }
 
-            // Toggle Flashlight
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetButtonDown("Reload"))
+            {
+                equippedWeapon.Reload();
+            }
+
+            if (Input.GetButtonDown("Use Equipment"))
+            {
+                UseEquipment();
+            }
+
+            if (Input.GetButtonDown("Throw Grenade"))
+            {
+                ThrowGrenade();
+            }
+
+            if (Input.GetButtonDown("Flashlight"))
             {
                 Light2D flashlight = GameObject.Find("Flashlight").GetComponent<Light2D>();
-
                 switch (flashlight.enabled)
                 {
                     case true:
@@ -88,32 +100,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            // Use Equipment Item
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                UseEquipment();
-            }
-
-            // Throw a Grenade
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                ThrowGrenade();
-            }
-
-            // Reload Equipped Weapon
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                equippedWeapon.Reload();
-            }
-
             // Switch Equipped Weapon with Spare Weapon
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetAxis("Mouse ScrollWheel") != 0)
             {
                 SwitchWeapons(equippedWeapon, spareWeapon);
             }
 
-            // Start Sprinting
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetButton("Sprint"))
             {
                 if (!exhausted)
                 {
@@ -129,14 +122,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            // Stop Sprinting
-            if (Input.GetKeyUp(KeyCode.LeftShift) || currentStamina < 0)
+            if (!Input.GetButton("Sprint") && currentStamina < sprintDuration && !exhausted)
             {
                 currentSpeed = walkSpeed;
-            }
-
-            if (!Input.GetKey(KeyCode.LeftShift) && currentStamina < sprintDuration && !exhausted)
-            {
                 currentStamina += Time.deltaTime * 0.5f;
             }
 

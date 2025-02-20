@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth > 0 && !isHurt)
         {
             StartCoroutine(HurtCooldown());
-            FindAnyObjectByType<AudioManager>().Play(hit, hitVolume);
+            FindAnyObjectByType<AudioManager>().Play(hit, hitVolume, "effects");
         }
     }
 

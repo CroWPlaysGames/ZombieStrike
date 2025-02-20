@@ -25,7 +25,7 @@ public class Casing : MonoBehaviour
     IEnumerator Stop()
     {
         yield return new WaitForSeconds(Random.Range(0.075f, 0.125f));
-        FindAnyObjectByType<AudioManager>().Play(landing, landingVolume);
+        FindAnyObjectByType<AudioManager>().Play(landing, landingVolume, "effects");
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
         GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(5f);

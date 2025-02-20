@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\LightSource.cs" />
     <Compile Include="Assets\Mirza Beig\Scripting\Effects\Particle Force Fields\Scripts\TurbulenceParticleForceField.cs" />
+    <Compile Include="Assets\Chat.cs" />
     <Compile Include="Assets\Mirza Beig\Scripting\Effects\Particle Plexus\Scripts\ParticlePlexus.cs" />
     <Compile Include="Assets\Mirza Beig\Particle Systems\_Common\Scripts\DestroyOnParticlesDead.cs" />
     <Compile Include="Assets\Mirza Beig\Particle Systems\_Common\Scripts\Billboard.cs" />

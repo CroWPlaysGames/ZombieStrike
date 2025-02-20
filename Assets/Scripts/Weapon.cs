@@ -120,7 +120,7 @@ public class Weapon : MonoBehaviour
 
     private void FireBullet()
     {
-        FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume);
+        FindAnyObjectByType<AudioManager>().Play(shoot, shootVolume, "effects");
         Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
         fireInterval = (decimal)(Time.time + 1f / fireRate);
         magSize--;

@@ -46,7 +46,7 @@ public class EnemyRanged : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, GameObject.Find("Player").transform.position) < spitRange)
             {
-                FindAnyObjectByType<AudioManager>().Play(spit, spitVolume);
+                FindAnyObjectByType<AudioManager>().Play(spit, spitVolume, "effects");
                 GameObject shoot = Instantiate(projectile, attackSource.position, attackSource.rotation);
                 shoot.GetComponent<Spit>().SetDamage(spitDamage);
                 shoot.GetComponent<Rigidbody2D>().AddForce(attackSource.up * spitSpeed, ForceMode2D.Impulse);
@@ -93,7 +93,7 @@ public class EnemyRanged : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth > 0)
         {
-            FindAnyObjectByType<AudioManager>().Play(hit, hitVolume);
+            FindAnyObjectByType<AudioManager>().Play(hit, hitVolume, "effects");
         }
     }
 }
