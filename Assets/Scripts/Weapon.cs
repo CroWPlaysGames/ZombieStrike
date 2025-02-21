@@ -140,4 +140,14 @@ public class Weapon : MonoBehaviour
             casing.GetComponent<Rigidbody2D>().AddForce(eject.up * 7, ForceMode2D.Impulse);
         }
     }
+
+    public void Rearm(int percentage)
+    {
+        ammoSize += maxAmmoCapacity * percentage / 100;
+        
+        if (ammoSize > maxAmmoCapacity)
+        {
+            ammoSize = maxAmmoCapacity;
+        }
+    }
 }

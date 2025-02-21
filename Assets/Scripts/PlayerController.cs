@@ -2,6 +2,7 @@
 using Random = UnityEngine.Random;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,19 +16,19 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     [HideInInspector] public bool exhausted = false;
     [Header("Equipment Management")]
-    [SerializeField] private Weapon equippedWeapon;
-    [SerializeField] private Weapon spareWeapon;
+    public Weapon equippedWeapon;
+    public Weapon spareWeapon;
     private SpriteRenderer weaponPosition;
     [SerializeField] private GameObject equipment;
     [SerializeField][Range(0,3)] private int equipmentAmount;
     [SerializeField] private GameObject grenade;
     [SerializeField][Range(0, 3)] private int grenadeAmount;
     [Header("Audio Management")]
-    [SerializeField] private AudioClip hit;
+    [SerializeField] private AudioClip hitSound;
     [SerializeField][Range(0f, 1f)] private float hitVolume;
-    [SerializeField] private AudioClip useEquipment;
+    [SerializeField] private AudioClip useEquipmentSound;
     [SerializeField][Range(0f, 1f)] private float useEquipmentVolume;
-    [SerializeField] private AudioClip throwGrenade;
+    [SerializeField] private AudioClip throwGrenadeSound;
     [SerializeField][Range(0f, 1f)] private float throwGrenadeVolume;
     private Vector2 movement;
     private Vector2 direction;
@@ -36,11 +37,24 @@ public class PlayerController : MonoBehaviour
     private UI ui;
     [HideInInspector] public float resistance = 0;
     [HideInInspector] public bool stimming = false;
-    [HideInInspector] public bool messaging = false; 
+    [HideInInspector] public bool messaging = false;
+    InputAction move;
+    InputAction sprint;
+    InputAction shoot;
+    InputAction reload;
+    InputAction flashlight;
+    InputAction throwGrenade;
+    InputAction useEquipment;
+    InputAction interact;
+    InputAction chat;
+    InputAction switchWeapons;
 
 
     void Start()
     {
+        // Setup Controls
+        ConfigureKeybinds();
+
         // Setup Weapon Visuals
         weaponPosition = GameObject.Find("Equipped Weapon").GetComponent<SpriteRenderer>();
         weaponPosition.sprite = equippedWeapon.weaponVisual;
@@ -66,27 +80,27 @@ public class PlayerController : MonoBehaviour
     {   
         if (!ui.paused && !messaging)
         {
-            if (Input.GetButton("Shoot"))
+            if (shoot.IsPressed())
             {
                 equippedWeapon.Shoot();
             }
 
-            if (Input.GetButtonDown("Reload"))
+            if (reload.IsPressed())
             {
                 equippedWeapon.Reload();
             }
 
-            if (Input.GetButtonDown("Use Equipment"))
+            if (useEquipment.IsPressed())
             {
                 UseEquipment();
             }
 
-            if (Input.GetButtonDown("Throw Grenade"))
+            if (throwGrenade.IsPressed())
             {
                 ThrowGrenade();
             }
 
-            if (Input.GetButtonDown("Flashlight"))
+            if (flashlight.IsPressed())
             {
                 Light2D flashlight = GameObject.Find("Flashlight").GetComponent<Light2D>();
                 switch (flashlight.enabled)
@@ -139,9 +153,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Manage Movement and Direction of Player
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        //print(movement); // Movement is causing issues with sprinting - not registering keys being let go
+        movement = move.ReadValue<Vector2>();
         mousePosition = FindAnyObjectByType<Camera>().ScreenToWorldPoint(Input.mousePosition);        
         GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + currentSpeed * Time.fixedDeltaTime * movement);
         direction = mousePosition - GetComponent<Rigidbody2D>().position;
@@ -210,5 +222,19 @@ public class PlayerController : MonoBehaviour
     private void Recover()
     {
         exhausted = false;
+    }
+
+    public void ConfigureKeybinds()
+    {
+        move = InputSystem.actions.FindAction("Move");
+        sprint = InputSystem.actions.FindAction("Sprint");
+        shoot = InputSystem.actions.FindAction("Shoot");
+        reload = InputSystem.actions.FindAction("Reload");
+        flashlight = InputSystem.actions.FindAction("Flashlight");
+        throwGrenade = InputSystem.actions.FindAction("Throw Grenade");
+        useEquipment = InputSystem.actions.FindAction("Use Equipment");
+        interact = InputSystem.actions.FindAction("Interact");
+        chat = InputSystem.actions.FindAction("Chat");
+        switchWeapons = InputSystem.actions.FindAction("Switch Weapons");
     }
 }
