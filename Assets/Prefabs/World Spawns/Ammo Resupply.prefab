@@ -160,7 +160,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2689529677352914417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -467,11 +467,11 @@ MonoBehaviour:
   cooldown: 60
   supplyPercentage: 50
   interactIcon: {fileID: 5393583381197137165}
-  input: {fileID: 5637855187374772843}
+  inputText: {fileID: 5637855187374772843}
   cooldownSlider: {fileID: 2490442779088461266}
   cooldownSliderBackground: {fileID: 2880956167502960941}
   resupply: {fileID: 8300000, guid: 664e14a5a0400244792b33d0cfa63842, type: 3}
-  resupplyVolume: 1
+  resupplyVolume: 0.6
 --- !u!58 &2982387561919561630
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2.5
+  m_Radius: 2
 --- !u!1 &7965858801998525528
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 3256047814393027490}
   - component: {fileID: 2490442779088461266}
   m_Layer: 5
-  m_Name: Reload
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,7 +609,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8187483716611584968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -69,6 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Main Menu",
+                    "type": "Button",
+                    "id": "409d79c6-092d-45e3-8479-a28c2b23ce35",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "7d9911ba-abec-453c-bd3b-071b14877b35",
@@ -294,6 +303,17 @@
                     "action": "Switch Weapon",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "709ec056-9ced-4b4f-9b3b-372ebfcb4e06",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Main Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

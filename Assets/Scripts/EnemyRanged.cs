@@ -56,7 +56,7 @@ public class EnemyRanged : MonoBehaviour
 
         if (Time.time >= attackInterval)
         {
-            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>(), false);
+            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<CircleCollider2D>(), GetComponent<BoxCollider2D>(), false);
         }
     }
 
@@ -75,7 +75,7 @@ public class EnemyRanged : MonoBehaviour
         {
             case "Player":
                 FindAnyObjectByType<PlayerController>().TakeDamage(attackDamage);
-                Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>());
+                Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<CircleCollider2D>(), GetComponent<BoxCollider2D>());
                 attackInterval = Time.time + 10f / attackSpeed;
                 break;
             case "Explosion":

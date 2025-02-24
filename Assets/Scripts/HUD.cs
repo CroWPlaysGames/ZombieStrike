@@ -9,13 +9,13 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image[] grenadeSlots;
     
 
-    public void UpdateHUD(Weapon equippedWeapon, Weapon spareWeapon, int equipment, int grenades)
+    public void UpdateHUD(GameObject equippedWeapon, GameObject spareWeapon, int equipment, int grenades)
     {
         GameObject.Find("Weapon Name").GetComponent<Text>().text = equippedWeapon.name;
-        GameObject.Find("Primary Icon").GetComponent<Image>().sprite = equippedWeapon.weaponIcon;
-        GameObject.Find("Secondary Icon").GetComponent<Image>().sprite = spareWeapon.weaponIcon;
-        GameObject.Find("Mag Capacity").GetComponent<Text>().text = equippedWeapon.magSize.ToString();
-        GameObject.Find("Max Ammo").GetComponent<Text>().text = equippedWeapon.ammoSize.ToString();
+        GameObject.Find("Primary Icon").GetComponent<Image>().sprite = equippedWeapon.GetComponent<Weapon>().weaponIcon;
+        GameObject.Find("Secondary Icon").GetComponent<Image>().sprite = spareWeapon.GetComponent<Weapon>().weaponIcon;
+        GameObject.Find("Mag Capacity").GetComponent<Text>().text = equippedWeapon.GetComponent<Weapon>().magSize.ToString();
+        GameObject.Find("Max Ammo").GetComponent<Text>().text = equippedWeapon.GetComponent<Weapon>().ammoSize.ToString();
 
         UpdateAmount(equipmentSlots, equipment, GameObject.Find("Equipment Icon").GetComponent<Image>());
         UpdateAmount(grenadeSlots, grenades, GameObject.Find("Grenade Icon").GetComponent<Image>());

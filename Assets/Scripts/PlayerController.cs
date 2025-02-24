@@ -1,5 +1,4 @@
 ﻿using System;
-using Random = UnityEngine.Random;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
@@ -16,12 +15,12 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     [HideInInspector] public bool exhausted = false;
     [Header("Equipment Management")]
-    public Weapon equippedWeapon;
-    public Weapon spareWeapon;
+    public GameObject equippedWeapon;
+    public GameObject spareWeapon;
     private SpriteRenderer weaponPosition;
     [SerializeField] private GameObject equipment;
-    [SerializeField][Range(0,3)] private int equipmentAmount;
     [SerializeField] private GameObject grenade;
+    [SerializeField][Range(0, 3)] private int equipmentAmount;
     [SerializeField][Range(0, 3)] private int grenadeAmount;
     [Header("Audio Management")]
     [SerializeField] private AudioClip hitSound;
@@ -35,36 +34,27 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePosition;
     private HUD hud;
     private UI ui;
+    [SerializeField] private Input input;
     [HideInInspector] public float resistance = 0;
     [HideInInspector] public bool stimming = false;
-    [HideInInspector] public bool messaging = false;
-    InputAction move;
-    InputAction sprint;
-    InputAction shoot;
-    InputAction reload;
-    InputAction flashlight;
-    InputAction throwGrenade;
-    InputAction useEquipment;
-    InputAction interact;
-    InputAction chat;
-    InputAction switchWeapons;
 
 
     void Start()
     {
         // Setup Controls
-        ConfigureKeybinds();
+        input = FindAnyObjectByType<Input>();
+        input.ConfigureKeybinds();
 
         // Setup Weapon Visuals
         weaponPosition = GameObject.Find("Equipped Weapon").GetComponent<SpriteRenderer>();
-        weaponPosition.sprite = equippedWeapon.weaponVisual;
-        weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
+        weaponPosition.sprite = equippedWeapon.GetComponent<Weapon>().weaponVisual;
+        weaponPosition.transform.localPosition = equippedWeapon.GetComponent<Weapon>().weaponPosition;
 
         // Setup Equipped Items
-        equippedWeapon.magSize = equippedWeapon.maxMagCapacity;
-        equippedWeapon.ammoSize = equippedWeapon.maxAmmoCapacity;
-        spareWeapon.magSize = spareWeapon.maxMagCapacity;
-        spareWeapon.ammoSize = spareWeapon.maxAmmoCapacity;
+        equippedWeapon.GetComponent<Weapon>().magSize = equippedWeapon.GetComponent<Weapon>().maxMagCapacity;
+        equippedWeapon.GetComponent<Weapon>().ammoSize = equippedWeapon.GetComponent<Weapon>().maxAmmoCapacity;
+        spareWeapon.GetComponent<Weapon>().magSize = spareWeapon.GetComponent<Weapon>().maxMagCapacity;
+        spareWeapon.GetComponent<Weapon>().ammoSize = spareWeapon.GetComponent<Weapon>().maxAmmoCapacity;
 
         // Setup HUD
         currentHealth = health;
@@ -78,51 +68,51 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {   
-        if (!ui.paused && !messaging)
+        if (!ui.paused && !input.isMessaging)
         {
-            if (shoot.IsPressed())
+            if (input.shoot.IsInProgress())
             {
-                equippedWeapon.Shoot();
+                equippedWeapon.GetComponent<Weapon>().Shoot();
             }
 
-            if (reload.IsPressed())
+            if (input.reload.WasPressedThisFrame())
             {
-                equippedWeapon.Reload();
+                equippedWeapon.GetComponent<Weapon>().Reload();
             }
 
-            if (useEquipment.IsPressed())
+            if (input.useEquipment.WasPressedThisFrame())
             {
                 UseEquipment();
             }
 
-            if (throwGrenade.IsPressed())
+            if (input.throwGrenade.WasPressedThisFrame())
             {
                 ThrowGrenade();
             }
 
-            if (flashlight.IsPressed())
+            if (input.flashlight.WasPressedThisFrame())
             {
                 Light2D flashlight = GameObject.Find("Flashlight").GetComponent<Light2D>();
-                switch (flashlight.enabled)
+                if (flashlight.enabled)
                 {
-                    case true:
-                        flashlight.enabled = false;
-                        break;
-                    case false:
-                        flashlight.enabled = true;
-                        break;
+                    flashlight.enabled = false;
+                }
+
+                else
+                {
+                    flashlight.enabled = true;
                 }
             }
 
             // Switch Equipped Weapon with Spare Weapon
-            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetAxis("Mouse ScrollWheel") != 0)
+            if (input.switchWeapons.WasPressedThisFrame())
             {
                 SwitchWeapons(equippedWeapon, spareWeapon);
             }
 
-            if (Input.GetButton("Sprint"))
+            if (input.sprint.IsInProgress())
             {
-                if (!exhausted)
+                if (input.sprint.enabled)
                 {
                     currentSpeed = sprintSpeed;
                     currentStamina -= Time.deltaTime;
@@ -130,13 +120,13 @@ public class PlayerController : MonoBehaviour
 
                 if (currentStamina <= 0)
                 {
-                    exhausted = true;
+                    input.sprint.Disable();
                     currentSpeed = walkSpeed;
                     Invoke(nameof(Recover), 2);
                 }
             }
 
-            if (!Input.GetButton("Sprint") && currentStamina < sprintDuration && !exhausted)
+            if (!input.sprint.IsInProgress() && input.sprint.enabled && currentStamina < sprintDuration)
             {
                 currentSpeed = walkSpeed;
                 currentStamina += Time.deltaTime * 0.5f;
@@ -144,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
             if (stimming)
             {
-                exhausted = false;
+                input.sprint.Enable();
                 currentStamina = sprintDuration;
             }
         }
@@ -153,8 +143,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Manage Movement and Direction of Player
-        movement = move.ReadValue<Vector2>();
-        mousePosition = FindAnyObjectByType<Camera>().ScreenToWorldPoint(Input.mousePosition);        
+        movement = input.move.ReadValue<Vector2>();
+        mousePosition = FindAnyObjectByType<Camera>().ScreenToWorldPoint(Mouse.current.position.ReadValue());
         GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + currentSpeed * Time.fixedDeltaTime * movement);
         direction = mousePosition - GetComponent<Rigidbody2D>().position;
         GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
@@ -171,11 +161,11 @@ public class PlayerController : MonoBehaviour
         currentHealth -= damage * (1 - resistance / 100);
     }
 
-    private void SwitchWeapons(Weapon weapon1, Weapon weapon2)
+    private void SwitchWeapons(GameObject weapon1, GameObject weapon2)
     {
         CancelReload();
-        weaponPosition.sprite = weapon2.weaponVisual;
-        weaponPosition.transform.localPosition = weapon2.weaponPosition;
+        weaponPosition.sprite = weapon2.GetComponent<Weapon>().weaponVisual;
+        weaponPosition.transform.localPosition = weapon2.GetComponent<Weapon>().weaponPosition;
         equippedWeapon = weapon2;
         spareWeapon = weapon1;
     }
@@ -206,7 +196,7 @@ public class PlayerController : MonoBehaviour
         {
             CancelReload();
             Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
-            GameObject liveGrenade = Instantiate(grenade, source.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            GameObject liveGrenade = Instantiate(grenade, source.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
             liveGrenade.GetComponent<Rigidbody2D>().AddForce(source.up * 5, ForceMode2D.Impulse);
             grenadeAmount--;
         }
@@ -214,27 +204,13 @@ public class PlayerController : MonoBehaviour
 
     private void CancelReload()
     {
-        equippedWeapon.reloading = false;
+        equippedWeapon.GetComponent<Weapon>().reloading = false;
         Destroy(GameObject.Find("Reload Handler"));
         hud.CloseReload();
     }
 
     private void Recover()
     {
-        exhausted = false;
-    }
-
-    public void ConfigureKeybinds()
-    {
-        move = InputSystem.actions.FindAction("Move");
-        sprint = InputSystem.actions.FindAction("Sprint");
-        shoot = InputSystem.actions.FindAction("Shoot");
-        reload = InputSystem.actions.FindAction("Reload");
-        flashlight = InputSystem.actions.FindAction("Flashlight");
-        throwGrenade = InputSystem.actions.FindAction("Throw Grenade");
-        useEquipment = InputSystem.actions.FindAction("Use Equipment");
-        interact = InputSystem.actions.FindAction("Interact");
-        chat = InputSystem.actions.FindAction("Chat");
-        switchWeapons = InputSystem.actions.FindAction("Switch Weapons");
+        input.sprint.Enable();
     }
 }

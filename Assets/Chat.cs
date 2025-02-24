@@ -10,15 +10,21 @@ public class Chat : MonoBehaviour
     [SerializeField] private GameObject chatPanel, textObject;
     [SerializeField] private InputField messageInput;
     [Header("Chat Colours")]
-    [SerializeField] private Color player;
+    [SerializeField] private Color player1;
     [SerializeField] private Color info;
+    [SerializeField] private Input input;
 
+
+    void Start()
+    {
+        input = FindAnyObjectByType<Input>();
+    }
 
     void Update()
     {
         if (!messageInput.text.Equals(""))
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (input.chat.WasPressedThisFrame())
             {
                 SendMessageToChat(username + ": " + messageInput.text, Message.MessageType.player);
                 messageInput.text = "";
@@ -28,20 +34,11 @@ public class Chat : MonoBehaviour
 
         else
         {
-            if (!messageInput.isFocused && Input.GetKeyDown(KeyCode.Return))
+            if (!messageInput.isFocused && input.chat.WasPressedThisFrame())
             {
                 messageInput.gameObject.SetActive(true);
                 messageInput.ActivateInputField();
-                FindAnyObjectByType<PlayerController>().messaging = true;
-            }
-        }
-
-        if (!messageInput.isFocused)
-        {
-            FindAnyObjectByType<PlayerController>().messaging = false;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SendMessageToChat("Added message", Message.MessageType.info);
+                input.isMessaging = true;
             }
         }
     }
@@ -68,7 +65,7 @@ public class Chat : MonoBehaviour
         switch(messageType)
         {
             case Message.MessageType.player:
-                colour = player;
+                colour = player1;
                 break;
         }
         return colour;

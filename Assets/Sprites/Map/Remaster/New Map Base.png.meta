@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 4988c35bd8fb9d04a9999f96471e063c
+guid: 6e2febad44ac191459b90f92a91e8556
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7317867398811146730
-    second: Ammo Supply_0
+      213: 8278378750097537532
+    second: New Map Base_0
+  - first:
+      213: 4108951008580169800
+    second: New Map Base_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +51,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ammo Supply_0
+      name: New Map Base_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 47
-        width: 244
-        height: 228
+        x: 0
+        y: 0
+        width: 900
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 616237c5f56b17a90800000000000000
-      internalID: -7317867398811146730
+      spriteID: cf9b4bbcc95b2e270800000000000000
+      internalID: 8278378750097537532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New Map Base_1
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 0
+        width: 522
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84077e11c2de50930800000000000000
+      internalID: 4108951008580169800
       vertices: []
       indices: 
       edges: []
@@ -134,8 +159,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Ammo Supply_0: -7317867398811146730
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

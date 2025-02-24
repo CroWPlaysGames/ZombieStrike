@@ -8,19 +8,25 @@ public class AmmoResupply : MonoBehaviour
     [SerializeField][Range(0, 100)] private int supplyPercentage;
     private bool onCooldown = false;
     [SerializeField] private SpriteRenderer interactIcon;
-    [SerializeField] private Text input;
+    [SerializeField] private Text inputText;
     [SerializeField] private Image cooldownSlider;
     [SerializeField] private Image cooldownSliderBackground;
     [SerializeField] private AudioClip resupply;
     [SerializeField][Range(0f, 1f)] private float resupplyVolume;
+    private Input input;
 
+
+    void Start()
+    {
+        input = FindAnyObjectByType<Input>();
+    }
 
     void Update()
     {
-        if(Input.GetButtonDown("Interact"))
+        if(input.interact.WasPressedThisFrame())
         {
-            Weapon equippedWeapon = FindAnyObjectByType<PlayerController>().equippedWeapon;
-            Weapon spareWeapon = FindAnyObjectByType<PlayerController>().spareWeapon;
+            Weapon equippedWeapon = FindAnyObjectByType<PlayerController>().equippedWeapon.GetComponent<Weapon>();
+            Weapon spareWeapon = FindAnyObjectByType<PlayerController>().spareWeapon.GetComponent<Weapon>();
             print(equippedWeapon.ammoSize);
 
             if (!onCooldown && (equippedWeapon.ammoSize < equippedWeapon.maxAmmoCapacity || spareWeapon.ammoSize < spareWeapon.maxAmmoCapacity))
@@ -41,7 +47,7 @@ public class AmmoResupply : MonoBehaviour
             if (!onCooldown)
             {
                 interactIcon.enabled = true;
-                input.enabled = true;
+                inputText.enabled = true;
             }
 
             else
@@ -58,7 +64,7 @@ public class AmmoResupply : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             interactIcon.enabled = false;
-            input.enabled = false;
+            inputText.enabled = false;
             cooldownSlider.enabled = false;
             cooldownSliderBackground.enabled = false;
         }
@@ -66,7 +72,7 @@ public class AmmoResupply : MonoBehaviour
 
     private IEnumerator AmmoReload()
     {
-        input.enabled = false;
+        inputText.enabled = false;
         cooldownSlider.enabled = true;
         cooldownSliderBackground.enabled = true;
 

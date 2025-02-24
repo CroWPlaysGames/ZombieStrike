@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class UI : MonoBehaviour
 {
+    private Input input;
     [Header("Menus")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
@@ -38,7 +39,7 @@ public class UI : MonoBehaviour
     [SerializeField] private Slider effectsVolumeSlider;
     [SerializeField] private Text effectsVolumeText;
     [SerializeField] private Slider ambientVolumeSlider;
-    [SerializeField] private Text ambientVolumeText;
+    [SerializeField] private Text ambientVolumeText;    
 
 
 
@@ -50,6 +51,7 @@ public class UI : MonoBehaviour
         optionsMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         HUD.SetActive(true);
+        input = FindAnyObjectByType<Input>();
 
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
@@ -114,7 +116,7 @@ public class UI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (input.mainMenu.WasPressedThisFrame())
         {
             if (paused && !options)
             {
