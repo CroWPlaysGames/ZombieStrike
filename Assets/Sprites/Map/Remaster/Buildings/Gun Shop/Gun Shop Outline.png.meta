@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: acfa9cd292b7686418911cdc209fd3a6
+guid: fc44c758d09d8f94e9806df8e426be4b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1946451578433678463
-    second: Video Store Outline_0
+      213: 896002427212970340
+    second: Gun Shop Outline_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Video Store Outline_0
+      name: Gun Shop Outline_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1725
-        height: 1050
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f7ca909d56f230b10800000000000000
-      internalID: 1946451578433678463
+      spriteID: 469bae7d57d3f6c00800000000000000
+      internalID: 896002427212970340
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Video Store Outline_0: 1946451578433678463
+      Gun Shop Outline_0: 896002427212970340
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

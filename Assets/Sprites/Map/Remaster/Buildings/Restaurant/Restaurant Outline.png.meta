@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: acfa9cd292b7686418911cdc209fd3a6
+guid: 204a7b9c2c55de043b92c0cd7eba043f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1946451578433678463
-    second: Video Store Outline_0
+      213: -6906305385443076438
+    second: Restaurant Outline_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Video Store Outline_0
+      name: Restaurant Outline_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1725
-        height: 1050
+        height: 900
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f7ca909d56f230b10800000000000000
-      internalID: 1946451578433678463
+      spriteID: aa65c46d7dfd720a0800000000000000
+      internalID: -6906305385443076438
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Video Store Outline_0: 1946451578433678463
+      Restaurant Outline_0: -6906305385443076438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

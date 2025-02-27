@@ -60,58 +60,35 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Users\sille\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\Unity\ZombieStrike\Library\PackageCache\com.unity.transport@c6e877f31661\Analyzers\Unity.Transport.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.35f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.35f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.35f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\AstarProfiler.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\GraphUpdateScene.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NavmeshBase.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Serialization\SimpleZipReplacement.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\ThreadControlQueue.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\TurnBased\BlockManager.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\UnityReferenceHelper.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyRVOControllerEditor.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\SimpleSmoothModifier.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\DoorController.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AI\AILerp.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\AstarMemory.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink2.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AI\AIPath.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\PointGenerator.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\TurnBased\SingleNodeBlocker.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\MovementUtilities.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\GraphUtilities.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\PathInterpolator.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AstarData.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\GraphUpdateProcessor.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\FunnelModifier.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\BBTree.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\TargetMover.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Serialization\JsonConverters.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\PackageTools\EnumFlagAttribute.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\Example12_Procedural\ProceduralWorld.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\PathHandler.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\ListPool.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Pathfinders\ABPath.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NodeClasses\GridNodeBase.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\PackageTools\UniqueComponentAttribute.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\PointKDTree.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\EditorResourceHelper.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\WindowsStoreCompatibility.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\PathPool.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\GraphUpdateShape.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Nodes\GraphNode.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\ArrayPool.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\AstarParallel.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NavMeshGenerator.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\DotNetReplacements.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\GraphEditorBase.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AstarPath.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Base.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Serialization\JsonSerializer.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\NavmeshTile.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\AstarChecksum.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AI\AIBase.cs" />
@@ -120,55 +97,79 @@
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\AstarSmoothFollow2.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Serialization\TinyJson.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\ProfileHelper.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\StartEndModifier.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\GraphGizmoHelper.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\GraphUpdateUtilities.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\RetainedGizmos.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\MiscLegacy.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NodeClasses\GridNode.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\GraphModifier.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AI\TurnBasedAI.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Behaviors\AIDestinationSetter.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\WorkItemProcessor.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\Draw.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\QuadtreeGraph.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Path.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Navmesh\RelevantGraphSurface.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Behaviors\Patrol.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\ObjectPool.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\GridLookup.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink3.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyRichAIEditor.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\LegacyAIPath.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\RaycastModifier.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\PathUtilities.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyEditorHelper.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\EuclideanEmbedding.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\AnimationLink.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AstarMath.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\DynamicGridObstacle.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\GraphUpdateScene.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NavmeshBase.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\ThreadControlQueue.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\SimpleSmoothModifier.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink2.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\PointGenerator.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\TurnBased\SingleNodeBlocker.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\FunnelModifier.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\BBTree.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\TargetMover.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Serialization\JsonConverters.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\PackageTools\EnumFlagAttribute.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\PathHandler.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\EditorResourceHelper.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\PathPool.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Nodes\GraphNode.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\ArrayPool.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\AstarParallel.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NavMeshGenerator.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\DotNetReplacements.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\GraphEditorBase.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AstarPath.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Serialization\JsonSerializer.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\StartEndModifier.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\GraphUpdateUtilities.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\MiscLegacy.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\GraphModifier.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Behaviors\AIDestinationSetter.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\WorkItemProcessor.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\Draw.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Path.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NodeClasses\TriangleMeshNode.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\Example12_Procedural\ProceduralGridMover.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\PathReturnQueue.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\GridGenerator.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AI\NavmeshController.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\MineBotAnimation.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\GridLookup.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\NodeClasses\PointNode.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\PathProcessor.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\MineBotAI.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\Modifiers.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\NodeLink3.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\StackPool.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Navmesh\NavmeshUpdates.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyRichAIEditor.cs" />
+    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\StackPool.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\PackageTools\VersionedMonoBehaviour.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\AstarDebugger.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\LegacyAIPath.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\RaycastModifier.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Modifiers\AlternativePath.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyAIPathEditor.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\PathUtilities.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Legacy\Editor\LegacyEditorHelper.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AI\Seeker.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\EuclideanEmbedding.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\Int3.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\AnimationLink.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\ObjImporter.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Generators\Utilities\NavMeshRenderer.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\BinaryHeap.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\Core\AstarMath.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\Misc\HierarchicalGraph.cs" />
-    <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\DynamicGridObstacle.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\ExampleScenes\ExampleScripts\ObjectPlacer.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Utilities\Funnel.cs" />
     <Compile Include="Assets\Packages\A-Star Pathfinding\Core\astarclasses.cs" />
@@ -659,6 +660,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.35f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Library\PackageCache\com.unity.services.wire@098672f918fa\Plugins\websocket-sharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@56bff8827a7e\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
@@ -681,6 +686,10 @@
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@001b54a8988a\Lib\Editor\log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
