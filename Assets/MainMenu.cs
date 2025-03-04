@@ -5,22 +5,27 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Menus")]
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject singleplayerMenu;
+    [SerializeField] private GameObject multiplayerMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject helpMenu;
     [Header("Audio Management")]
     [SerializeField] private AudioClip buttonPress;
     [SerializeField][Range(0f, 1f)] private float buttonPressVolume;
+    
 
     public void Singleplayer()
     {
         FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
-        SceneManager.LoadScene("Endless Mode");
+        mainMenu.SetActive(false);
+        singleplayerMenu.SetActive(true);
     }
 
     public void Multiplayer()
     {
         FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
-        SceneManager.LoadScene("Game");
+        mainMenu.SetActive(false);
+        multiplayerMenu.SetActive(true);
     }
 
     public void OptionsMenu()
@@ -50,6 +55,8 @@ public class MainMenu : MonoBehaviour
     public void Return()
     {
         FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        singleplayerMenu.SetActive(false);
+        multiplayerMenu.SetActive(false);
         optionsMenu.SetActive(false);
         helpMenu.SetActive(false);
         mainMenu.SetActive(true);

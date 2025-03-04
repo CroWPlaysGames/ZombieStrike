@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: String Table_it
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: it
+  m_SharedData: {fileID: 11400000, guid: c31b491f1c312e64abbd01ccba86026b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 129706991616
+    m_Localized: Lingua
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7249332510720
+    m_Localized: Controlli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7236414054400
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7223168442368
+    m_Localized: Grafica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7184203358208
+    m_Localized: Generale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7173319139328
+    m_Localized: Impostazioni Della Chat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7152783826944
+    m_Localized: Impostazioni Generali
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7015051272192
+    m_Localized: Filtro Chat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6946210160640
+    m_Localized: Sottotitoli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10230157254656
+    m_Localized: "Men\xF9 Opzioni"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11700076257280
+    m_Localized: Ritorno
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12380140707840
+    m_Localized: Monitora le impostazioni
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12411899977728
+    m_Localized: "Modalit\xE0 di visualizzazione"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12430803705856
+    m_Localized: Risoluzione
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12448109404160
+    m_Localized: "\rSincronizzazione verticale"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12465121501184
+    m_Localized: "\rImpostazioni di qualit\xE0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12483568050176
+    m_Localized: "Qualit\xE0 grafica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12666427121664
+    m_Localized: Gestione dell'hardware
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12692603772928
+    m_Localized: Dispositivo di uscita
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12726497943552
+    m_Localized: Volume principale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12762942251008
+    m_Localized: Volume della musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12780226977792
+    m_Localized: Volume degli effetti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12802892996608
+    m_Localized: Volume ambientale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242911907840
+    m_Localized: Impostazioni audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27124591468544
+    m_Localized: Premi per parlare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27123970711552
+    m_Localized: '
+
+      Chiacchierata'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27122750169088
+    m_Localized: Comunicazione
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26925051650048
+    m_Localized: Interagire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26924300869632
+    m_Localized: Lancia la granata
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923692695552
+    m_Localized: Usa l'attrezzatura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923088715776
+    m_Localized: Ricaricare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26922442792960
+    m_Localized: Sparare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26921792675840
+    m_Localized: Combattere
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26917019557888
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26809506963456
+    m_Localized: Est
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26808118648832
+    m_Localized: Ovest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26807493697536
+    m_Localized: Sud
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806810025984
+    m_Localized: Nord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806155714560
+    m_Localized: Orientamento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26793350504448
+    m_Localized: "\rMovimento del giocatore"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34115950977024
+    m_Localized: Esci dal gioco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34114730434560
+    m_Localized: Risultati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34113086267392
+    m_Localized: Carattere
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34111400157184
+    m_Localized: Multigiocatore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34105242918912
+    m_Localized: Giocatore singolo
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: String Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: String Table
+  m_TableCollectionNameGuidString: c31b491f1c312e64abbd01ccba86026b
+  m_Entries:
+  - m_Id: 129706991616
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6946210160640
+    m_Key: Subtitles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7015051272192
+    m_Key: Chat Filter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7152783826944
+    m_Key: General Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7173319139328
+    m_Key: Chat Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7184203358208
+    m_Key: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7223168442368
+    m_Key: Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7236414054400
+    m_Key: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7249332510720
+    m_Key: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10230157254656
+    m_Key: Options Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11700076257280
+    m_Key: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12380140707840
+    m_Key: Monitor Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12411899977728
+    m_Key: Display Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12430803705856
+    m_Key: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12448109404160
+    m_Key: Vertical Sync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12465121501184
+    m_Key: Quality Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12483568050176
+    m_Key: Graphics Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12666427121664
+    m_Key: Hardware Management
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12692603772928
+    m_Key: Output Device
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12726497943552
+    m_Key: Master Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12762942251008
+    m_Key: Music Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12780226977792
+    m_Key: Effects Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12802892996608
+    m_Key: Ambient Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242911907840
+    m_Key: Audio Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26793350504448
+    m_Key: Player Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806155714560
+    m_Key: Orientation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806810025984
+    m_Key: "North\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26807493697536
+    m_Key: South
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26808118648832
+    m_Key: West
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26809506963456
+    m_Key: East
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26917019557888
+    m_Key: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26921792675840
+    m_Key: Combat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26922442792960
+    m_Key: Shoot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923088715776
+    m_Key: Reload
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923692695552
+    m_Key: Use Equipment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26924300869632
+    m_Key: Throw Grenade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26925051650048
+    m_Key: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27122750169088
+    m_Key: Communication
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27123970711552
+    m_Key: Chat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27124591468544
+    m_Key: Push to Talk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34105242918912
+    m_Key: Singleplayer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34111400157184
+    m_Key: Multiplayer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34113086267392
+    m_Key: Character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34114730434560
+    m_Key: Achievements
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34115950977024
+    m_Key: Quit Game
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5003992961965621544
+  references:
+    version: 2
+    RefIds:
+    - rid: 5003992961965621544
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1741068151437

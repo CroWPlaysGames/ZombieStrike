@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: String Table_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: c31b491f1c312e64abbd01ccba86026b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 129706991616
+    m_Localized: Langue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6946210160640
+    m_Localized: Sous-titres
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7015051272192
+    m_Localized: Filtre de discussion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7152783826944
+    m_Localized: "Param\xE8tres g\xE9n\xE9raux"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7173319139328
+    m_Localized: "Param\xE8tres de discussion"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7184203358208
+    m_Localized: "G\xE9n\xE9ral"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7223168442368
+    m_Localized: Graphique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7236414054400
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7249332510720
+    m_Localized: "Contr\xF4les"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10230157254656
+    m_Localized: Menu d'options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11700076257280
+    m_Localized: Retour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12380140707840
+    m_Localized: "Param\xE8tres du moniteur"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12411899977728
+    m_Localized: Mode d'affichage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12430803705856
+    m_Localized: "R\xE9solution"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12448109404160
+    m_Localized: Synchronisation verticale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12465121501184
+    m_Localized: "Param\xE8tres de qualit\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12483568050176
+    m_Localized: "Qualit\xE9 graphique"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12666427121664
+    m_Localized: "Gestion du mat\xE9riel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12692603772928
+    m_Localized: "P\xE9riph\xE9rique de sortie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12726497943552
+    m_Localized: Volume principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12762942251008
+    m_Localized: Volume de la musique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12780226977792
+    m_Localized: Volume des effets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12802892996608
+    m_Localized: Volume ambiant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242911907840
+    m_Localized: "Param\xE8tres audio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26793350504448
+    m_Localized: Mouvement du joueur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806155714560
+    m_Localized: Orientation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806810025984
+    m_Localized: Nord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26807493697536
+    m_Localized: Sud
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26808118648832
+    m_Localized: Ouest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26809506963456
+    m_Localized: "\rEst"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26917019557888
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26921792675840
+    m_Localized: Combat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26922442792960
+    m_Localized: "\rTirer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923088715776
+    m_Localized: Recharger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923692695552
+    m_Localized: "Utiliser l'\xE9quipement"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26924300869632
+    m_Localized: Lancer une grenade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26925051650048
+    m_Localized: Interagir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27122750169088
+    m_Localized: Communication
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27123970711552
+    m_Localized: Chat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27124591468544
+    m_Localized: Pousser pour parler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34111400157184
+    m_Localized: Multijoueur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34105242918912
+    m_Localized: Solo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34113086267392
+    m_Localized: Personnage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34114730434560
+    m_Localized: "R\xE9alisations"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34115950977024
+    m_Localized: Quitter le jeu
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
