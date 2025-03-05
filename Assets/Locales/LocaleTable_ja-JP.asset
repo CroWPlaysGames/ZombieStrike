@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: String Table_ja-JP
+  m_Name: LocaleTable_ja-JP
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: ja-JP
@@ -196,6 +196,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 34105242918912
     m_Localized: "\u30B7\u30F3\u30B0\u30EB\u30D7\u30EC\u30A4\u30E4\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257027522560
+    m_Localized: "\u306E\u4E0A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257535033344
+    m_Localized: "\u30AA\u30D5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347736518139904
+    m_Localized: "\u691C\u95B2\u6E08\u307F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347737046622208
+    m_Localized: "\u7121\u4FEE\u6B63"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411053332865024
+    m_Localized: "\u4F4E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411057023852544
+    m_Localized: "\u4E2D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411060006002688
+    m_Localized: "\u9AD8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411061775998976
+    m_Localized: "\u8D85"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417856221323264
+    m_Localized: "\u82F1\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417885346570240
+    m_Localized: "\u97D3\u56FD\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417881403924480
+    m_Localized: "\u65E5\u672C\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417878493077504
+    m_Localized: "\u4E2D\u56FD\u8A9E\uFF08\u7C21\u4F53\uFF09"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417869081059328
+    m_Localized: "\u30B9\u30DA\u30A4\u30F3\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417865029361664
+    m_Localized: "\u30C9\u30A4\u30C4\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417862814769152
+    m_Localized: "\u30A4\u30BF\u30EA\u30A2\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417861044772864
+    m_Localized: "\u30D5\u30E9\u30F3\u30B9\u8A9E"
     m_Metadata:
       m_Items: []
   references:

@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: a27630a3c7cc0d44b9140ac6b85c9cec
   m_SerializeEntries:
   - m_GUID: 7f9704a6568e2634d9f1fa4ceec96825
-    m_Address: String Table_ko-KR
+    m_Address: LocaleTable_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR

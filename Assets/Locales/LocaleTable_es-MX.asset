@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: String Table_es-MX
+  m_Name: LocaleTable_es-MX
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: es-MX
@@ -196,6 +196,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 34105242918912
     m_Localized: Un jugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257027522560
+    m_Localized: En
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257535033344
+    m_Localized: Apagado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347736518139904
+    m_Localized: Censurado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347737046622208
+    m_Localized: sin censura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411053332865024
+    m_Localized: Bajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411057023852544
+    m_Localized: Medio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411060006002688
+    m_Localized: Alto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411061775998976
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417856221323264
+    m_Localized: "Ingl\xE9s\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417885346570240
+    m_Localized: "\rCoreano"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417881403924480
+    m_Localized: "Japon\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417878493077504
+    m_Localized: Chino (sencillo)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417869081059328
+    m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417865029361664
+    m_Localized: "Alem\xE1n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417862814769152
+    m_Localized: Italiano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417861044772864
+    m_Localized: "Franc\xE9s"
     m_Metadata:
       m_Items: []
   references:

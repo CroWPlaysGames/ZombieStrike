@@ -16,45 +16,45 @@ public class MainMenu : MonoBehaviour
 
     public void Singleplayer()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
         mainMenu.SetActive(false);
         singleplayerMenu.SetActive(true);
     }
 
     public void Multiplayer()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
         mainMenu.SetActive(false);
         multiplayerMenu.SetActive(true);
     }
 
     public void OptionsMenu()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
     }
 
     public void HelpMenu()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
         mainMenu.SetActive(false);
         helpMenu.SetActive(true);
     }
 
     public void Character()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
     }
 
     public void Achievements()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
     }
 
     public void Return()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
         singleplayerMenu.SetActive(false);
         multiplayerMenu.SetActive(false);
         optionsMenu.SetActive(false);
@@ -64,7 +64,12 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
+        ButtonPress();
         Application.Quit();
+    }
+
+    public void ButtonPress()
+    {
+        FindAnyObjectByType<AudioManager>().Play(buttonPress, buttonPressVolume, "effects");
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: String Table_it
+  m_Name: LocaleTable_it
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: it
@@ -198,6 +198,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 34105242918912
     m_Localized: Giocatore singolo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257027522560
+    m_Localized: SU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257535033344
+    m_Localized: Spento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347736518139904
+    m_Localized: Censurato
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347737046622208
+    m_Localized: Senza censure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411061775998976
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411060006002688
+    m_Localized: Alto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411057023852544
+    m_Localized: Medio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411053332865024
+    m_Localized: Basso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417856221323264
+    m_Localized: Inglese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417885346570240
+    m_Localized: Coreano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417881403924480
+    m_Localized: Giapponese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417878493077504
+    m_Localized: Cinese (semplice)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417869081059328
+    m_Localized: Spagnolo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417865029361664
+    m_Localized: Tedesco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417862814769152
+    m_Localized: Italiano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417861044772864
+    m_Localized: Francese
     m_Metadata:
       m_Items: []
   references:
