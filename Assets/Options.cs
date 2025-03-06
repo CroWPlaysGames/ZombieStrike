@@ -9,7 +9,7 @@ using UnityEngine.Localization;
 public class Options : MonoBehaviour
 {
     [Header("General Settings")]
-    public Dropdown language;
+    [SerializeField] private Dropdown language;
     [SerializeField] private Button subtitles;
     [SerializeField] private Button chatFilter;
     [Header("Graphic Settings")]
@@ -38,25 +38,25 @@ public class Options : MonoBehaviour
     [SerializeField] private Button interact;
     [SerializeField] private Button chat;
     [SerializeField] private Button pushToTalk;
-    [Header("Default Settings")]
-    private bool enableSubtitles = false;
-    private bool enableChatFilter = true;
+
     private Resolution[] resolutions;
-    private bool enableVSync = true;
 
 
-    void Start()
+    void Awake()
     {
+        // Retrieves a list of all available resolutions
+        FetchResolutions();
+
         // Retrieve PlayerPref values for all General Settings
-        if (PlayerPrefs.HasKey("Language")) GetLanguage(); else SetLanguage();                          // Testing
+        if (PlayerPrefs.HasKey("Language")) GetLanguage(); else SetLanguage();
         if (PlayerPrefs.HasKey("Subtitles")) GetSubtitles(); else SetSubtitles();
         if (PlayerPrefs.HasKey("ChatFilter")) GetChatFilter(); else SetChatFilter();
 
         // Retrieve PlayerPref values for all Graphics Settings
-        if (PlayerPrefs.HasKey("DisplayMode")) GetDisplayMode(); else SetDisplayMode();                 // Testing
-        if (PlayerPrefs.HasKey("Resolution")) GetResolution(); else SetResolution();                    // Rework
+        if (PlayerPrefs.HasKey("DisplayMode")) GetDisplayMode(); else SetDisplayMode();
+        if (PlayerPrefs.HasKey("Resolution")) GetResolution(); else SetResolution();
         if (PlayerPrefs.HasKey("VSync")) GetVSync(); else SetVSync();
-        if (PlayerPrefs.HasKey("GrahpicsQuality")) GetGameQuality(); else SetGameQuality();             // Testing
+        if (PlayerPrefs.HasKey("GrahpicsQuality")) GetGameQuality(); else SetGameQuality();
 
         // Retrieve PlayerPref values for all Audio Settings
         if (PlayerPrefs.HasKey("MasterVolume")) GetMasterVolume(); else SetMasterVolume();
@@ -73,12 +73,14 @@ public class Options : MonoBehaviour
     
     public void SetLanguage()
     {
-        int index = language.value;
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
-        PlayerPrefs.SetInt("Language", index);
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language.value];
+        PlayerPrefs.SetInt("Language", language.value);
 
         // Refresh dropdown list for the Languages        
         UpdateLanguageDropdown();
+
+        // Refresh dropdown list for the display mode
+        UpdateDisplayModeDropdown();
 
         // Refresh dropdown list for the Quality Settings
         UpdateQualitySettingDropdown(); 
@@ -86,50 +88,44 @@ public class Options : MonoBehaviour
 
     private void GetSubtitles()
     {
-        enableSubtitles = bool.Parse(PlayerPrefs.GetString("SubtitlesEnable"));
-        enableSubtitles = !enableSubtitles;
+        subtitles.GetComponentInChildren<Toggle>().isOn = !bool.Parse(PlayerPrefs.GetString("SubtitlesEnable"));
         SetSubtitles();
     }
 
     public void SetSubtitles()
     {
-        enableSubtitles = !enableSubtitles;
-        PlayerPrefs.SetString("SubtitlesEnable", enableSubtitles.ToString());
+        subtitles.GetComponentInChildren<Toggle>().isOn = !subtitles.GetComponentInChildren<Toggle>().isOn;
+        PlayerPrefs.SetString("SubtitlesEnable", subtitles.GetComponentInChildren<Toggle>().isOn.ToString());
 
-        if (enableSubtitles)
+        if (subtitles.GetComponentInChildren<Toggle>().isOn)
         {
-            verticalSync.transform.GetComponentInChildren<Text>().text = "On";
-            verticalSync.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "On");
+            subtitles.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "On");
         }
 
         else
         {
-            verticalSync.transform.GetComponentInChildren<Text>().text = "Off";
-            verticalSync.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "Off");
+            subtitles.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "Off");
         }
     }
 
     private void GetChatFilter()
     {
-        enableChatFilter = bool.Parse(PlayerPrefs.GetString("ChatFilterEnable"));
-        enableChatFilter = !enableChatFilter;
+        chatFilter.GetComponentInChildren<Toggle>().isOn = !bool.Parse(PlayerPrefs.GetString("ChatFilterEnable"));
         SetChatFilter();
     }
 
     public void SetChatFilter()
     {
-        enableChatFilter = !enableChatFilter;
-        PlayerPrefs.SetString("ChatFilterEnable", enableChatFilter.ToString());
+        chatFilter.GetComponentInChildren<Toggle>().isOn = !chatFilter.GetComponentInChildren<Toggle>().isOn;
+        PlayerPrefs.SetString("ChatFilterEnable", chatFilter.GetComponentInChildren<Toggle>().isOn.ToString());
 
-        if (enableChatFilter)
+        if (chatFilter.GetComponentInChildren<Toggle>().isOn)
         {
-            chatFilter.transform.GetComponentInChildren<Text>().text = "Censored";
             chatFilter.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "Censored");
         }
 
         else
         {
-            chatFilter.transform.GetComponentInChildren<Text>().text = "Uncensored";
             chatFilter.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "Uncensored");
         }
     }
@@ -146,67 +142,47 @@ public class Options : MonoBehaviour
 
         switch (displayMode.value)
         {
+            // Fulscreen
             case 0: Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen; break;
+            // Windowed
             case 1: Screen.fullScreenMode = FullScreenMode.Windowed; break;
+            // Maximised
             case 2: Screen.fullScreenMode = FullScreenMode.FullScreenWindow; break;
         }
     }
 
     private void GetResolution()
     {
-        int resolutionIndex = PlayerPrefs.GetInt("Resolution");
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        resolution.value = PlayerPrefs.GetInt("Resolution");
         SetResolution();
     }
 
     public void SetResolution()
     {
-        resolutions = Screen.resolutions;
-        List<string> resolutionOptions = new();
-        int currentResolutionIndex = 0;
-
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            resolutionOptions.Add(option);
-
-            if (resolutions[i].width.Equals(Screen.currentResolution.width) && resolutions[i].height.Equals(Screen.currentResolution.height))
-            {
-                currentResolutionIndex = i;
-            }
-        }
-
-        resolution.AddOptions(resolutionOptions);
-        resolution.value = currentResolutionIndex;
-        resolution.RefreshShownValue();
-
         PlayerPrefs.SetInt("Resolution", resolution.value);
-    }
-    
+        Resolution selectedResolution = resolutions[PlayerPrefs.GetInt("Resolution")];
+        Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
+    }    
 
     private void GetVSync()
     {
-        enableVSync = bool.Parse(PlayerPrefs.GetString("VSync"));
-        enableVSync = !enableVSync;
+        verticalSync.GetComponentInChildren<Toggle>().isOn = !bool.Parse(PlayerPrefs.GetString("VSync"));
         SetVSync();
     }
 
     public void SetVSync()
     {
-        enableVSync = !enableVSync;
-        PlayerPrefs.SetString("VSync", enableVSync.ToString());
+        verticalSync.GetComponentInChildren<Toggle>().isOn = !verticalSync.GetComponentInChildren<Toggle>().isOn;
+        PlayerPrefs.SetString("VSync", verticalSync.GetComponentInChildren<Toggle>().isOn.ToString());
 
-        if (enableVSync)
+        if (verticalSync.GetComponentInChildren<Toggle>().isOn)
         {
-            verticalSync.transform.GetComponentInChildren<Text>().text = "On";
             verticalSync.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "On");
             QualitySettings.vSyncCount = 1;
         }
 
         else
         {
-            verticalSync.transform.GetComponentInChildren<Text>().text = "Off";
             verticalSync.transform.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("LocaleTable", "Off");
             QualitySettings.vSyncCount = 0;
         }
@@ -288,7 +264,7 @@ public class Options : MonoBehaviour
     {
         int index = language.value;
         Locale selectedLanguage = FetchLanguage();
-        List<string> graphicOptions = new()
+        List<string> languageOptions = new()
         {
             LocalizationSettings.StringDatabase.GetLocalizedString("LocaleTable", "English", selectedLanguage),
             LocalizationSettings.StringDatabase.GetLocalizedString("LocaleTable", "French", selectedLanguage),
@@ -300,9 +276,25 @@ public class Options : MonoBehaviour
             LocalizationSettings.StringDatabase.GetLocalizedString("LocaleTable", "Korean", selectedLanguage)
         };
 
-        graphicsQuality.ClearOptions();
-        graphicsQuality.AddOptions(graphicOptions);
-        graphicsQuality.value = index;
+        language.ClearOptions();
+        language.AddOptions(languageOptions);
+        language.value = index;
+    }
+
+    private void UpdateDisplayModeDropdown()
+    {
+        int index = displayMode.value;
+        Locale selectedLanguage = FetchLanguage();
+        List<string> displayModeOptions = new()
+        {
+            LocalizationSettings.StringDatabase.GetLocalizedString("LocaleTable", "Fullscreen", selectedLanguage),
+            LocalizationSettings.StringDatabase.GetLocalizedString("LocaleTable", "Windowed", selectedLanguage),
+            LocalizationSettings.StringDatabase.GetLocalizedString("LocaleTable", "Maximized", selectedLanguage)
+        };
+
+        displayMode.ClearOptions();
+        displayMode.AddOptions(displayModeOptions);
+        displayMode.value = index;
     }
 
     private void UpdateQualitySettingDropdown()
@@ -330,29 +322,57 @@ public class Options : MonoBehaviour
         {
             // English
             case 0: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("en"); break;
-
             // French
             case 1: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("fr"); break;
-
             // Italian
             case 2: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("it"); break;
-
             // German
             case 3: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("de"); break;
-
             // Spanish
             case 4: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("es-MX"); break;
-
             // Chinese (Simplified)
             case 5: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("zh-CN"); break;
-
             // Japanese
             case 6: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("ja-JP"); break;
-
             // Korean
             case 7: selectedLanguage = LocalizationSettings.AvailableLocales.GetLocale("ko-KR"); break;
         }
 
         return selectedLanguage;
+    }
+
+    private void FetchResolutions()
+    {
+        resolutions = Screen.resolutions;
+        List<string> resolutionOptions = new();
+        int currentResolutionIndex = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            resolutionOptions.Add(option);
+
+            if (resolutions[i].width.Equals(Screen.currentResolution.width) && resolutions[i].height.Equals(Screen.currentResolution.height))
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
+        resolution.ClearOptions();
+        resolution.AddOptions(resolutionOptions);
+        resolution.value = currentResolutionIndex;
+        resolution.RefreshShownValue();
+
+        PlayerPrefs.SetInt("Resolution", resolution.value);
+    }
+
+    public bool SubtitlesEnabled()
+    {
+        return subtitles.GetComponentInChildren<Toggle>().isOn;
+    }
+
+    public bool ChatFilterEnabled()
+    {
+        return chatFilter.GetComponentInChildren<Toggle>().isOn;
     }
 }

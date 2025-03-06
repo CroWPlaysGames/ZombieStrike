@@ -262,6 +262,18 @@ MonoBehaviour:
     m_Localized: "Fran\xE7ais"
     m_Metadata:
       m_Items: []
+  - m_Id: 410937289056256
+    m_Localized: "Plein \xE9cran"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411010085396480
+    m_Localized: "Fen\xEAtre"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411035695816704
+    m_Localized: "Maximis\xE9"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

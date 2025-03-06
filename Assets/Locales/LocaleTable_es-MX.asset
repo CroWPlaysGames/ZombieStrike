@@ -262,6 +262,18 @@ MonoBehaviour:
     m_Localized: "Franc\xE9s"
     m_Metadata:
       m_Items: []
+  - m_Id: 411035695816704
+    m_Localized: Maximizada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411010085396480
+    m_Localized: Ventana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 410937289056256
+    m_Localized: Pantalla completa
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

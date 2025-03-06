@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f49d2fd9e7289b945897a2a511365f34
+guid: b9f78112a424cd845a22bd4734ce4612
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8219135385265720299
-    second: Copyright_0
+      213: -409831574350207595
+    second: Large Pressed_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Copyright_0
+      name: Large Pressed_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 13
-        width: 53
-        height: 52
+        x: 7
+        y: 0
+        width: 487
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 514b468f9e3cfed80800000000000000
-      internalID: -8219135385265720299
+      spriteID: 595ed11ca5cff4af0800000000000000
+      internalID: -409831574350207595
       vertices: []
       indices: 
       edges: []
