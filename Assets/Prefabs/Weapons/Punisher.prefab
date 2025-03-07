@@ -57,7 +57,7 @@ MonoBehaviour:
   usesMagazine: 0
   weaponVisual: {fileID: 21300000, guid: 5db73183f915fa64198e4b75bd60917c, type: 3}
   weaponIcon: {fileID: 21300000, guid: fec115066450ddc4d8357fad4dec8b28, type: 3}
-  weaponPosition: {x: 0.22, y: 0.27}
+  weaponPosition: {x: 0.22, y: 0.27, z: -0.5}
   bulletPrefab: {fileID: 2036779694923274743, guid: 1af8a1c73a8a6e94ea5a1045efdbb93c, type: 3}
   casingPrefab: {fileID: 1803485114355085253, guid: fb17467f2c1b54a4b8ea8ec87b867a3a, type: 3}
   magazinePrefab: {fileID: 0}

@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     [Header("Visual Management")]
     public Sprite weaponVisual;
     public Sprite weaponIcon;
-    public Vector2 weaponPosition;
+    public Vector3 weaponPosition;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject casingPrefab;
     [SerializeField] private GameObject magazinePrefab;

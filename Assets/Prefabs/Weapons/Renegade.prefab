@@ -44,17 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdf87790265b654999802efc673d229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponVisual: {fileID: 0}
-  weaponIcon: {fileID: 0}
-  weaponPosition: {x: 0, y: 0, z: 0}
-  bulletPrefab: {fileID: 0}
-  maxAmmoCapacity: 0
-  maxMagCapacity: 0
-  bulletSpeed: 0
+  damage: 0
   fireRate: 0
+  maxMagCapacity: 0
+  maxAmmoCapacity: 0
+  bulletSpeed: 0
   reloadTime: 0
   reloading: 0
   magSize: 0
   ammoSize: 0
   pellets: 0
   usesMagazine: 0
+  weaponVisual: {fileID: 0}
+  weaponIcon: {fileID: 0}
+  weaponPosition: {x: 0, y: 0, z: -0.5}
+  bulletPrefab: {fileID: 0}
+  casingPrefab: {fileID: 0}
+  magazinePrefab: {fileID: 0}
+  shoot: {fileID: 0}
+  shootVolume: 0
+  reloadAction: []

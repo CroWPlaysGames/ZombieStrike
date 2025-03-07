@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [ExecuteInEditMode]
 public class MainCamera : MonoBehaviour
@@ -8,7 +9,7 @@ public class MainCamera : MonoBehaviour
     [SerializeField] private float lerpSpeed;
     private Vector3 offset;
     private Vector3 targetPosition;
-    [SerializeField] private Material material;
+    [SerializeField] private GameObject crosshair;
 
     void Start()
     {
@@ -22,16 +23,6 @@ public class MainCamera : MonoBehaviour
         targetPosition = player.position + offset;
         targetPosition.z = cameraHeight;
         transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
-    }
-
-    private void OnRenderImage(RenderTexture source, RenderTexture destination)
-    {
-        if (material == null)
-        {
-            Graphics.Blit(source, destination);
-            return;
-        }
-
-        Graphics.Blit(source, destination, material);
+        crosshair.transform.position = transform.GetComponent<Camera>().ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 }
