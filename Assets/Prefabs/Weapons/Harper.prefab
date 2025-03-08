@@ -55,9 +55,9 @@ MonoBehaviour:
   ammoSize: 240
   pellets: 1
   usesMagazine: 1
-  weaponVisual: {fileID: 21300000, guid: 62effecfdeb505644a196084d77b59de, type: 3}
+  weaponVisual: {fileID: -4308897486877695598, guid: 99de270db4719f0448d4d7a8cf5d1d69, type: 3}
   weaponIcon: {fileID: 21300000, guid: 93c3d35bc1c64e84dad5d4465a96b694, type: 3}
-  weaponPosition: {x: 0.25, y: 0.25, z: -0.5}
+  weaponPosition: {x: 0.25, y: 0.25}
   bulletPrefab: {fileID: 2036779694923274743, guid: 1af8a1c73a8a6e94ea5a1045efdbb93c, type: 3}
   casingPrefab: {fileID: 4805989127891143481, guid: ce30c9b4cb887fd42bf95a87af47ae02, type: 3}
   magazinePrefab: {fileID: 2348774298736839881, guid: 5ffcbf5989485d942a252ec7722ff778, type: 3}

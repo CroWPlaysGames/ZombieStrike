@@ -14,6 +14,7 @@ public class Input : MonoBehaviour
     public InputAction interact;
     public InputAction chat;
     public InputAction mainMenu;
+    public InputAction shove;
 
     public bool isMessaging;
 
@@ -31,5 +32,6 @@ public class Input : MonoBehaviour
         interact = InputSystem.actions.FindAction("Interact");
         chat = InputSystem.actions.FindAction("Chat");
         mainMenu = InputSystem.actions.FindAction("Main Menu");
+        shove = InputSystem.actions.FindAction("Shove");
     }
 }

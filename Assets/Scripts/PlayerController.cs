@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Input input;
     [HideInInspector] public float resistance = 0;
     [HideInInspector] public bool stimming = false;
+    [Header("Animations")]
+    private Animator animator;
+    [HideInInspector] public bool isShooting;
 
 
     void Start()
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
         // Setup Controls
         input = FindAnyObjectByType<Input>();
         input.ConfigureKeybinds();
+        animator = GetComponent<Animator>();
 
         // Setup Weapon Visuals
         weaponPosition = GameObject.Find("Equipped Weapon").GetComponent<SpriteRenderer>();
@@ -75,6 +79,11 @@ public class PlayerController : MonoBehaviour
                 equippedWeapon.GetComponent<Weapon>().Shoot();
             }
 
+            if (!input.shoot.IsInProgress())
+            {
+                animator.SetBool("isShooting", false);
+            }
+
             if (input.reload.WasPressedThisFrame())
             {
                 equippedWeapon.GetComponent<Weapon>().Reload();
@@ -88,6 +97,11 @@ public class PlayerController : MonoBehaviour
             if (input.throwGrenade.WasPressedThisFrame())
             {
                 ThrowGrenade();
+            }
+
+            if (input.shove.WasPressedThisFrame())
+            {
+                Shove();
             }
 
             if (input.flashlight.WasPressedThisFrame())
@@ -212,5 +226,20 @@ public class PlayerController : MonoBehaviour
     private void Recover()
     {
         input.sprint.Enable();
+    }
+
+    public void StartShooting()
+    {
+        animator.SetBool("isShooting", true);
+    }
+
+    public void StopShooting()
+    {
+        animator.SetBool("isShooting", false);
+    }
+
+    private void Shove()
+    {
+        animator.SetTrigger("shoveLarge");
     }
 }

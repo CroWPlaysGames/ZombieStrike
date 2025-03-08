@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
+using Unity.Services.Lobbies.Models;
 
 public class Weapon : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Weapon : MonoBehaviour
     [Header("Visual Management")]
     public Sprite weaponVisual;
     public Sprite weaponIcon;
-    public Vector3 weaponPosition;
+    public Vector2 weaponPosition;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject casingPrefab;
     [SerializeField] private GameObject magazinePrefab;
@@ -47,6 +48,11 @@ public class Weapon : MonoBehaviour
                 reloading = false;
                 FireBullet();
             }        
+        }
+
+        else
+        {
+            FindAnyObjectByType<PlayerController>().StopShooting();
         }
     }
 
@@ -124,6 +130,7 @@ public class Weapon : MonoBehaviour
         Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
         fireInterval = (decimal)(Time.time + 1f / fireRate);
         magSize--;
+        FindAnyObjectByType<PlayerController>().StartShooting();
 
         for (int i = 0; i < pellets; i++)
         {
