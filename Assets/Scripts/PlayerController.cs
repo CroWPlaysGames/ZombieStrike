@@ -1,105 +1,276 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public int health;
-    public float moveSpeed;
-    private int current_health;
-    public new Camera camera;
+    [Header("General Stats")]
+    public float health;
+    [HideInInspector] public float currentHealth;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float sprintDuration;
+    [HideInInspector] public float currentStamina;
+    private float currentSpeed;
+    [HideInInspector] public bool exhausted = false;
+    [Header("Equipment Management")]
+    public GameObject equippedWeapon;
+    public GameObject spareWeapon;
+    private SpriteRenderer weaponPosition;
+    [SerializeField] private GameObject equipment;
+    [SerializeField] private GameObject grenade;
+    [SerializeField][Range(0, 3)] private int equipmentAmount;
+    [SerializeField][Range(0, 3)] private int grenadeAmount;
+    [Header("Audio Management")]
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField][Range(0f, 1f)] private float hitVolume;
+    [SerializeField] private AudioClip useEquipmentSound;
+    [SerializeField][Range(0f, 1f)] private float useEquipmentVolume;
+    [SerializeField] private AudioClip throwGrenadeSound;
+    [SerializeField][Range(0f, 1f)] private float throwGrenadeVolume;
     private Vector2 movement;
-    private Vector2 mouseposition;
     private Vector2 direction;
+    private Vector2 mousePosition;
     private HUD hud;
-    public Weapon weaponSlot1;
-    public Weapon weaponSlot2;
-    private Weapon equippedWeapon;
-    private Weapon spareWeapon;
-    public SpriteRenderer weaponPosition;
-    public Transform bulletSource;
+    private UI ui;
+    [SerializeField] private Input input;
+    [HideInInspector] public float resistance = 0;
+    [HideInInspector] public bool stimming = false;
+    [Header("Animations")]
+    private Animator animator;
+    [HideInInspector] public bool isShooting;
+    [Header("Shoving")]
+    [SerializeField] private float shoveDuration;
+    [SerializeField] private float shoveForce;
+    [SerializeField] private AudioClip shoveSound;
+    [SerializeField][Range(0f, 1f)] private float shoveVolume;
+    private bool shoving = false;
+
 
 
     void Start()
     {
-        equippedWeapon = weaponSlot1;
-        spareWeapon = weaponSlot2;
-        weaponPosition.sprite = equippedWeapon.weaponVisual;
-        weaponPosition.transform.localPosition = equippedWeapon.weaponPosition;
+        // Setup Controls
+        input = FindAnyObjectByType<Input>();
+        input.ConfigureKeybinds();
+        animator = GetComponent<Animator>();
+
+        // Setup Weapon Visuals
+        weaponPosition = GameObject.Find("Equipped Weapon").GetComponent<SpriteRenderer>();
+        weaponPosition.sprite = equippedWeapon.GetComponent<Weapon>().weaponVisual;
+        weaponPosition.transform.localPosition = equippedWeapon.GetComponent<Weapon>().weaponPosition;
+
+        // Setup Equipped Items
+        equippedWeapon.GetComponent<Weapon>().magSize = equippedWeapon.GetComponent<Weapon>().maxMagCapacity;
+        equippedWeapon.GetComponent<Weapon>().ammoSize = equippedWeapon.GetComponent<Weapon>().maxAmmoCapacity;
+        spareWeapon.GetComponent<Weapon>().magSize = spareWeapon.GetComponent<Weapon>().maxMagCapacity;
+        spareWeapon.GetComponent<Weapon>().ammoSize = spareWeapon.GetComponent<Weapon>().maxAmmoCapacity;
+
+        // Setup HUD
+        currentHealth = health;
+        currentStamina = sprintDuration;
+        currentSpeed = walkSpeed;
+        ui = FindAnyObjectByType<UI>();
         hud = FindAnyObjectByType<HUD>();
-        hud.UpdateHUD(equippedWeapon, spareWeapon);
-
-        camera.transform.position = new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -10f);
-
-        current_health = health;
-        FindAnyObjectByType<Health_Player>().start_health(health);
-
-        weaponSlot1.magSize = weaponSlot1.maxMagCapacity;
-        weaponSlot1.ammoSize = weaponSlot1.maxAmmoCapacity;
-
-        weaponSlot2.magSize = weaponSlot2.maxMagCapacity;
-        weaponSlot2.ammoSize = weaponSlot2.maxAmmoCapacity;
+        hud.SetMaxValues(health, sprintDuration);
+        hud.UpdateHUD(equippedWeapon, spareWeapon, equipmentAmount, grenadeAmount);
     }
 
     void Update()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        mouseposition = camera.ScreenToWorldPoint(Input.mousePosition);
-        
-        if (Input.GetButton("Fire1") && !hud.pauseMenu.activeSelf && !hud.gameOverMenu.activeSelf)
+    {   
+        if (!ui.paused && !input.isMessaging)
         {
-            equippedWeapon.Shoot(bulletSource);
-        }
+            if (input.shoot.IsInProgress())
+            {
+                equippedWeapon.GetComponent<Weapon>().Shoot();
+            }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            equippedWeapon.Reload();
-        }
+            if (!input.shoot.IsInProgress())
+            {
+                animator.SetBool("isShooting", false);
+            }
 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0 || Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SwitchWeapons();
-        }
+            if (input.reload.WasPressedThisFrame())
+            {
+                equippedWeapon.GetComponent<Weapon>().Reload();
+            }
 
-        hud.UpdateHUD(equippedWeapon, spareWeapon);
+            if (input.useEquipment.WasPressedThisFrame())
+            {
+                UseEquipment();
+            }
+
+            if (input.throwGrenade.WasPressedThisFrame())
+            {
+                ThrowGrenade();
+            }
+
+            if (input.shove.WasPressedThisFrame() && !shoving)
+            {
+                StartCoroutine(Shove());
+            }
+
+            if (input.flashlight.WasPressedThisFrame())
+            {
+                Light2D flashlight = GameObject.Find("Flashlight").GetComponent<Light2D>();
+                if (flashlight.enabled)
+                {
+                    flashlight.enabled = false;
+                }
+
+                else
+                {
+                    flashlight.enabled = true;
+                }
+            }
+
+            // Switch Equipped Weapon with Spare Weapon
+            if (input.switchWeapons.WasPressedThisFrame())
+            {
+                SwitchWeapons(equippedWeapon, spareWeapon);
+            }
+
+            if (input.sprint.IsInProgress())
+            {
+                if (input.sprint.enabled)
+                {
+                    currentSpeed = sprintSpeed;
+                    currentStamina -= Time.deltaTime;
+                }
+
+                if (currentStamina <= 0)
+                {
+                    input.sprint.Disable();
+                    currentSpeed = walkSpeed;
+                    Invoke(nameof(Recover), 2);
+                }
+            }
+
+            if (!input.sprint.IsInProgress() && input.sprint.enabled && currentStamina < sprintDuration)
+            {
+                currentSpeed = walkSpeed;
+                currentStamina += Time.deltaTime * 0.5f;
+            }
+
+            if (stimming)
+            {
+                input.sprint.Enable();
+                currentStamina = sprintDuration;
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        direction = mouseposition - GetComponent<Rigidbody2D>().position;
-
+        // Manage Movement and Direction of Player
+        movement = input.move.ReadValue<Vector2>();
+        mousePosition = FindAnyObjectByType<Camera>().ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + currentSpeed * Time.fixedDeltaTime * movement);
+        direction = mousePosition - GetComponent<Rigidbody2D>().position;
         GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        camera.transform.position = new Vector3(GetComponent<Rigidbody2D>().position.x, GetComponent<Rigidbody2D>().position.y, -10f);
+        // Update HUD Info
+        if (!ui.paused)
+        {
+            hud.UpdateHUD(equippedWeapon, spareWeapon, equipmentAmount, grenadeAmount);
+        }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        current_health -= damage;
-        FindAnyObjectByType<Health_Player>().set_health(current_health);
+        currentHealth -= damage * (1 - resistance / 100);
     }
 
-    private void SwitchWeapons()
+    private void SwitchWeapons(GameObject weapon1, GameObject weapon2)
     {
-        equippedWeapon.reloading = false;
+        CancelReload();
+        weaponPosition.sprite = weapon2.GetComponent<Weapon>().weaponVisual;
+        weaponPosition.transform.localPosition = weapon2.GetComponent<Weapon>().weaponPosition;
+        equippedWeapon = weapon2;
+        spareWeapon = weapon1;
+    }
+
+    private void UseEquipment()
+    {
+        if (equipmentAmount > 0)
+        {
+            CancelReload();
+            equipmentAmount--;
+            switch (equipment.name)
+            {
+                case "Medkit":
+                    equipment.GetComponent<Medkit>().UseMedkit();
+                    break;
+                case "Stim":
+                    equipment.GetComponent<Stim>().UseStim();                    
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void ThrowGrenade()
+    {
+        if (grenadeAmount > 0)
+        {
+            CancelReload();
+            Transform source = GameObject.Find("Gun Source").GetComponent<Transform>();
+            GameObject liveGrenade = Instantiate(grenade, source.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+            liveGrenade.GetComponent<Rigidbody2D>().AddForce(source.up * 5, ForceMode2D.Impulse);
+            grenadeAmount--;
+        }
+    }
+
+    private void CancelReload()
+    {
+        equippedWeapon.GetComponent<Weapon>().reloading = false;
         Destroy(GameObject.Find("Reload Handler"));
         hud.CloseReload();
+    }
 
-        if (equippedWeapon.Equals(weaponSlot1))
-        {
-            weaponPosition.sprite = weaponSlot2.weaponVisual;
-            weaponPosition.transform.localPosition = weaponSlot2.weaponPosition;
-            equippedWeapon = weaponSlot2;
-            spareWeapon = weaponSlot1;
-        }
+    private void Recover()
+    {
+        input.sprint.Enable();
+    }
 
-        else
-        {
-            weaponPosition.sprite = weaponSlot1.weaponVisual;
-            weaponPosition.transform.localPosition = weaponSlot1.weaponPosition;
-            equippedWeapon = weaponSlot1;
-            spareWeapon = weaponSlot2;
-        }
+    public void StartShooting()
+    {
+        animator.SetBool("isShooting", true);
+    }
+
+    public void StopShooting()
+    {
+        animator.SetBool("isShooting", false);
+    }
+
+    private IEnumerator Shove()
+    {
+        shoving = true;
+        animator.SetTrigger("shoveLarge");
+        StartCoroutine(DisableInputs(shoveDuration));
+        yield return new WaitForSeconds(shoveDuration);
+        shoving = false;
+    }
+
+    private IEnumerator DisableInputs(float duration)
+    {
+        input.shoot.Disable();
+        input.reload.Disable();
+        input.switchWeapons.Disable();
+        input.useEquipment.Disable();
+        input.throwGrenade.Disable();
+        input.flashlight.Disable();
+        input.interact.Disable();
+        yield return new WaitForSeconds(duration);
+        input.shoot.Enable();
+        input.reload.Enable();
+        input.switchWeapons.Enable();
+        input.useEquipment.Enable();
+        input.throwGrenade.Enable();
+        input.flashlight.Enable();
+        input.interact.Enable();
     }
 }

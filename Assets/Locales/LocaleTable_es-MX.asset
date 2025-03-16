@@ -1,0 +1,279 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LocaleTable_es-MX
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es-MX
+  m_SharedData: {fileID: 11400000, guid: c31b491f1c312e64abbd01ccba86026b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 129706991616
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7249332510720
+    m_Localized: Controles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7236414054400
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7223168442368
+    m_Localized: "Gr\xE1ficos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7184203358208
+    m_Localized: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7173319139328
+    m_Localized: "Configuraci\xF3n De Chat"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7152783826944
+    m_Localized: Configuraciones Generales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7015051272192
+    m_Localized: Filtro De Chat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6946210160640
+    m_Localized: "Subt\xEDtulos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10230157254656
+    m_Localized: "Men\xFA De Opciones"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11700076257280
+    m_Localized: Devolver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12802892996608
+    m_Localized: Volumen ambiental
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12780226977792
+    m_Localized: Volumen de efectos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12762942251008
+    m_Localized: "Volumen de m\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12726497943552
+    m_Localized: Volumen maestro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12692603772928
+    m_Localized: Dispositivo de salida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12666427121664
+    m_Localized: "Gesti\xF3n de hardware"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12483568050176
+    m_Localized: "Calidad de gr\xE1ficos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12465121501184
+    m_Localized: "Configuraci\xF3n de calidad"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12448109404160
+    m_Localized: "Sincronizaci\xF3n vertical"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12430803705856
+    m_Localized: "Resoluci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12411899977728
+    m_Localized: "Modo de visualizaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12380140707840
+    m_Localized: "Configuraci\xF3n del monitor"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242911907840
+    m_Localized: "Configuraci\xF3n de audio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27124591468544
+    m_Localized: "Empuje para hablar\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27123970711552
+    m_Localized: Charlar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27122750169088
+    m_Localized: "Comunicaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26925051650048
+    m_Localized: Interactuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26924300869632
+    m_Localized: lanzar granada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923692695552
+    m_Localized: "Usar equipo\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923088715776
+    m_Localized: Recargar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26922442792960
+    m_Localized: Disparar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26921792675840
+    m_Localized: Combatir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26917019557888
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26809506963456
+    m_Localized: Este
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26808118648832
+    m_Localized: Oeste
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26807493697536
+    m_Localized: Sur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806810025984
+    m_Localized: Norte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806155714560
+    m_Localized: "Orientaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26793350504448
+    m_Localized: Movimiento del jugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34115950977024
+    m_Localized: Salir del juego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34114730434560
+    m_Localized: Logros
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34113086267392
+    m_Localized: Personaje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34111400157184
+    m_Localized: Multijugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34105242918912
+    m_Localized: Un jugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257027522560
+    m_Localized: En
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257535033344
+    m_Localized: Apagado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347736518139904
+    m_Localized: Censurado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347737046622208
+    m_Localized: sin censura
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411053332865024
+    m_Localized: Bajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411057023852544
+    m_Localized: Medio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411060006002688
+    m_Localized: Alto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411061775998976
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417856221323264
+    m_Localized: "Ingl\xE9s\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417885346570240
+    m_Localized: "\rCoreano"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417881403924480
+    m_Localized: "Japon\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417878493077504
+    m_Localized: Chino (sencillo)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417869081059328
+    m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417865029361664
+    m_Localized: "Alem\xE1n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417862814769152
+    m_Localized: Italiano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417861044772864
+    m_Localized: "Franc\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411035695816704
+    m_Localized: Maximizada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411010085396480
+    m_Localized: Ventana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 410937289056256
+    m_Localized: Pantalla completa
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

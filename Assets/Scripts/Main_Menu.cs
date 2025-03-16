@@ -12,7 +12,7 @@ public class Main_Menu : MonoBehaviour
     {
         button.Play();
 
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Endless Mode");
 
         Time.timeScale = 1f;
     }

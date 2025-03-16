@@ -2,6 +2,9 @@
 
 public class Bullet : MonoBehaviour
 {
+    [HideInInspector] public float damage;
+
+
     void Start()
     {     
         Destroy(gameObject, 2f);
@@ -11,36 +14,30 @@ public class Bullet : MonoBehaviour
     {
         GameObject entity = collision.gameObject;
 
-        GameObject bullet = GameObject.FindGameObjectWithTag("Bullet");
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (entity.tag == "Enemy")
+        switch(entity.tag)
         {
-            entity.GetComponent<Enemy>().TakeDamage(30);
-
-            Destroy(gameObject);
+            case "Player":
+                Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GameObject.Find("Player").GetComponentInChildren<BoxCollider2D>());
+                break;
+            case "Enemy":
+                entity.GetComponentInParent<Enemy>().TakeDamage(damage);
+                Destroy(gameObject);
+                break;
+            case "Enemy Ranged":
+                entity.GetComponentInParent<EnemyRanged>().TakeDamage(damage);
+                Destroy(gameObject);
+                break;
+            case "Bullet":
+                Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>());
+                break;
+            default:
+                Destroy(gameObject);
+                break;
         }
+    }
 
-        else if (entity.tag == "Player")
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), player.GetComponent<BoxCollider2D>());
-        }
-
-        else if (entity.tag == "Enemy Ranged")
-        {
-            entity.GetComponent<Enemy_Ranged>().TakeDamage(30);
-
-            Destroy(gameObject);
-        }
-
-        else if (collision.gameObject.tag == "Bullet")
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), bullet.GetComponent<BoxCollider2D>());
-        }
-
-        else
-        {
-            Destroy(gameObject);
-        }
+    public void SetDamage(float value)
+    {
+        damage = value;
     }
 }

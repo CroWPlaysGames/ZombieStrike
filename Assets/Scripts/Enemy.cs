@@ -1,69 +1,78 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health;
-    private int current_health;
-    public int score;
-    public Health_Zombie healthbar;
-    public Slider slider;
-    private float interval = 0f;
-    public float attack_rate;
-    public int meleeDamage;
-    [HideInInspector]
-    public int spawn_location;
-    public AudioSource hit;
+    [Header("General Stats")]
+    [SerializeField] private float health;
+    [HideInInspector] public int spawnLocation;
+    private float currentHealth;
+    [SerializeField] private float attackDamage;
+    [SerializeField] private float attackSpeed;
+    private float attackInterval = 0f;
+    [Header("Visual Management")]
+    [SerializeField] private Sprite[] zombieVariants;
+    [Header("Audio Management")]
+    [SerializeField] private AudioClip hit;
+    [SerializeField][Range(0f,1f)] private float hitVolume;
+    private bool isHurt = false;
 
-    
+
     void Start()
-    {        
-        current_health = health;
-        healthbar.start_health(health);
-    }
-
-    public void TakeDamage(int damage)
     {
-        hit.Play();
-
-        current_health -= damage;
-
-        healthbar.set_health(current_health);
-    }
+        currentHealth = health;
+        GetComponentInChildren<SpriteRenderer>().sprite = zombieVariants[Random.Range(0, zombieVariants.Length)];
+    }    
 
     public void Update()
     {
-        if (current_health <= 0)
+        if (currentHealth <= 0)
         {
-            FindAnyObjectByType<HUD>().AddScore(score);
-            GameObject.Find($"Spawner {spawn_location}").GetComponent<Spawner>().enemy_count += 1;
+            GameObject.Find($"Spawner {spawnLocation}").GetComponent<Spawner>().currentEnemyCount--;
             Destroy(gameObject);
         }
 
-        if (Time.time >= interval)
+        if (Time.time >= attackInterval)
         {
-            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>(), false);
+            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<CircleCollider2D>(), GetComponent<BoxCollider2D>(), false);
         }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        GameObject entity = collision.gameObject;
+
+        switch(entity.tag)
         {
-            GameObject.Find("Player").GetComponent<PlayerController>().TakeDamage(meleeDamage);
-            Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), gameObject.GetComponent<BoxCollider2D>());
-            interval = Time.time + 10f / attack_rate;
+            case "Player":
+                FindAnyObjectByType<PlayerController>().TakeDamage(attackDamage);
+                Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<CircleCollider2D>(), GetComponent<BoxCollider2D>());
+                attackInterval = Time.time + 10f / attackSpeed;
+                break;
+            case "Explosion":
+                CircleCollider2D explosion = GameObject.FindGameObjectWithTag("Explosion").GetComponent<CircleCollider2D>();
+                Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), explosion);
+                TakeDamage(120);
+                break;
+            default:
+                break;
         }
+    }
 
-        if (collision.gameObject.tag == "Explosion")
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth > 0 && !isHurt)
         {
-            hit.Play();
-
-            GameObject boom = GameObject.FindGameObjectWithTag("Explosion");
-
-            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), boom.GetComponent<CircleCollider2D>());
-
-            TakeDamage(60);            
+            StartCoroutine(HurtCooldown());
+            FindAnyObjectByType<AudioManager>().Play(hit, hitVolume, "effects");
         }
+    }
+
+    private IEnumerator HurtCooldown()
+    {
+        isHurt = true;
+        yield return new WaitForSeconds(0.1f);
+        isHurt = false;
     }
 }

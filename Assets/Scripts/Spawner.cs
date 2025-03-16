@@ -2,39 +2,33 @@
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject enemy_normal;
-    public GameObject enemy_heavy;
-    public GameObject enemy_range;
-    public int random;
-    public int enemy_count;
-    public Vector2 centre;
-    public Vector2 size;
-    public float interval;
-    public int spawn_number;
+    [Header("Zombie Prefabs")]
+    [SerializeField] private GameObject[] zombies;
+    [Header("Spawn Percentages")]
+    [SerializeField][Range(0f, 1f)] private float normalZombieChance;
+    [SerializeField][Range(0f, 1f)] private float rangedZombieChance;
+    [SerializeField][Range(0f, 1f)] private float heavyZombieChance;
+    [Header("Spawn Management")]
+    [SerializeField] private int totalEnemyCount;
+    [SerializeField] private float spawnInterval;
+    [SerializeField] private int spawnNumber;
+    [HideInInspector] public int currentEnemyCount = 0;
+    [SerializeField] private Vector2 centre;
+    [SerializeField] private Vector2 size;
+    private float timer = 0;
 
-
-    void Start()
-    {
-        Spawn(Random.Range(1, 21));
-        enemy_count -= 1;
-    }
 
     void Update()
     {
-        if (enemy_count > 0)
+        if (currentEnemyCount != totalEnemyCount)
         {
-            if (interval > 0)
+            if (timer <= 0)
             {
-                interval -= Time.deltaTime;
+                Spawn(Random.Range(0f,1f));
+                timer += spawnInterval;
             }
 
-            else
-            {
-                Spawn(Random.Range(1, 21));
-
-                interval = 4;
-                enemy_count -= 1;
-            }
+            timer -= Time.deltaTime;
         }
     }
 
@@ -44,30 +38,27 @@ public class Spawner : MonoBehaviour
         Gizmos.DrawCube(centre, size);
     }
 
-    private void Spawn(int number)
+    private void Spawn(float number)
     {
-        Vector2 position = centre + new Vector2(Random.Range(-size.x / 2, size.x / 2),
-            Random.Range(-size.y / 2, size.y / 2));
+        Vector2 position = centre + new Vector2(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2));
+        currentEnemyCount++;
 
-        if(number <= 16)
+        if (number <= normalZombieChance)
         {
-            enemy_normal.GetComponent<Enemy>().spawn_location = spawn_number;
-
-            Instantiate(enemy_normal, position, Quaternion.identity);            
+            zombies[0].GetComponent<Enemy>().spawnLocation = spawnNumber;
+            Instantiate(zombies[0], position, Quaternion.identity);
         }
 
-        else if (number == 17 || number == 18)
+        else if (number <= normalZombieChance + rangedZombieChance)
         {
-            enemy_heavy.GetComponent<Enemy>().spawn_location = spawn_number;
-
-            Instantiate(enemy_heavy, position, Quaternion.identity);
+            zombies[1].GetComponent<EnemyRanged>().spawnLocation = spawnNumber;
+            Instantiate(zombies[1], position, Quaternion.identity);
         }
 
-        else
+        else if (number <= normalZombieChance + rangedZombieChance + heavyZombieChance)
         {
-            enemy_range.GetComponent<Enemy_Ranged>().spawn_location = spawn_number;
-
-            Instantiate(enemy_range, position, Quaternion.identity);
+            zombies[2].GetComponent<Enemy>().spawnLocation = spawnNumber;
+            Instantiate(zombies[2], position, Quaternion.identity);
         }
     }    
 }

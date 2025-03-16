@@ -1,0 +1,279 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LocaleTable_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: c31b491f1c312e64abbd01ccba86026b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 129706991616
+    m_Localized: Sprache
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6946210160640
+    m_Localized: "\rUntertitel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7015051272192
+    m_Localized: Chat-Filter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7173319139328
+    m_Localized: Chat-Einstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7152783826944
+    m_Localized: Allgemeine Einstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7184203358208
+    m_Localized: Allgemein
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7223168442368
+    m_Localized: "\rGrafik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7236414054400
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7249332510720
+    m_Localized: "\rKontrollen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10230157254656
+    m_Localized: "Optionsmen\xFC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11700076257280
+    m_Localized: "Zur\xFCckkehren"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12380140707840
+    m_Localized: Monitoreinstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12411899977728
+    m_Localized: Anzeigemodus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12430803705856
+    m_Localized: "Aufl\xF6sung"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12448109404160
+    m_Localized: Vertikale Synchronisierung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12465121501184
+    m_Localized: "\rQualit\xE4tseinstellungen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12483568050176
+    m_Localized: "Grafikqualit\xE4t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12666427121664
+    m_Localized: Hardware-Management
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12692603772928
+    m_Localized: "\rAusgabeger\xE4t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12726497943552
+    m_Localized: Master-Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12762942251008
+    m_Localized: "Musiklautst\xE4rke"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12780226977792
+    m_Localized: "Effektlautst\xE4rke"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12802892996608
+    m_Localized: "Umgebungslautst\xE4rke"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17242911907840
+    m_Localized: "\rAudioeinstellungen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26793350504448
+    m_Localized: "\rSpielerbewegung"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806155714560
+    m_Localized: "\rOrientierung"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26806810025984
+    m_Localized: "\rNorden"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26807493697536
+    m_Localized: "S\xFCden"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26808118648832
+    m_Localized: Westen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26809506963456
+    m_Localized: "\rOst"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26917019557888
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26921792675840
+    m_Localized: Kampf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26922442792960
+    m_Localized: "Schie\xDFen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923088715776
+    m_Localized: Neu laden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26923692695552
+    m_Localized: "Verwenden Sie Ausr\xFCstung"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26924300869632
+    m_Localized: Granate werfen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26925051650048
+    m_Localized: Interagieren
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27122750169088
+    m_Localized: Kommunikation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27123970711552
+    m_Localized: Chatten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27124591468544
+    m_Localized: Push-to-Talk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34105242918912
+    m_Localized: Einzelspieler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34111400157184
+    m_Localized: Mehrspieler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34113086267392
+    m_Localized: Charakter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34114730434560
+    m_Localized: Erfolge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34115950977024
+    m_Localized: "Spiel beenden\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257027522560
+    m_Localized: An
+    m_Metadata:
+      m_Items: []
+  - m_Id: 334257535033344
+    m_Localized: Aus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347736518139904
+    m_Localized: Zensiert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 347737046622208
+    m_Localized: Unzensiert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411053332865024
+    m_Localized: Niedrig
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411057023852544
+    m_Localized: Mittel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411060006002688
+    m_Localized: Hoch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411061775998976
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417856221323264
+    m_Localized: Englisch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417885346570240
+    m_Localized: Koreanisch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417881403924480
+    m_Localized: Japanisch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417878493077504
+    m_Localized: Chinesisch (vereinfacht)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417869081059328
+    m_Localized: Spanisch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417865029361664
+    m_Localized: Deutsch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417862814769152
+    m_Localized: Italienisch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417861044772864
+    m_Localized: "Franz\xF6sisch"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 410937289056256
+    m_Localized: Vollbild
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411010085396480
+    m_Localized: Fenster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411035695816704
+    m_Localized: Maximiert
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
