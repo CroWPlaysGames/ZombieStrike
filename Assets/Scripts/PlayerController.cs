@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +41,13 @@ public class PlayerController : MonoBehaviour
     [Header("Animations")]
     private Animator animator;
     [HideInInspector] public bool isShooting;
+    [Header("Shoving")]
+    [SerializeField] private float shoveDuration;
+    [SerializeField] private float shoveForce;
+    [SerializeField] private AudioClip shoveSound;
+    [SerializeField][Range(0f, 1f)] private float shoveVolume;
+    private bool shoving = false;
+
 
 
     void Start()
@@ -99,9 +107,9 @@ public class PlayerController : MonoBehaviour
                 ThrowGrenade();
             }
 
-            if (input.shove.WasPressedThisFrame())
+            if (input.shove.WasPressedThisFrame() && !shoving)
             {
-                Shove();
+                StartCoroutine(Shove());
             }
 
             if (input.flashlight.WasPressedThisFrame())
@@ -238,8 +246,31 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isShooting", false);
     }
 
-    private void Shove()
+    private IEnumerator Shove()
     {
+        shoving = true;
         animator.SetTrigger("shoveLarge");
+        StartCoroutine(DisableInputs(shoveDuration));
+        yield return new WaitForSeconds(shoveDuration);
+        shoving = false;
+    }
+
+    private IEnumerator DisableInputs(float duration)
+    {
+        input.shoot.Disable();
+        input.reload.Disable();
+        input.switchWeapons.Disable();
+        input.useEquipment.Disable();
+        input.throwGrenade.Disable();
+        input.flashlight.Disable();
+        input.interact.Disable();
+        yield return new WaitForSeconds(duration);
+        input.shoot.Enable();
+        input.reload.Enable();
+        input.switchWeapons.Enable();
+        input.useEquipment.Enable();
+        input.throwGrenade.Enable();
+        input.flashlight.Enable();
+        input.interact.Enable();
     }
 }
