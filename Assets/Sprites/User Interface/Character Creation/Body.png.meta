@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 326b28c1d00a1ba42a161a72b3c2cf48
+guid: 762a6561a7f143347a59c42d8cf492dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9044727033686985548
-    second: Tent Transparent_0
+      213: -6199720543617963891
+    second: Body_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tent Transparent_0
+      name: Body_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 398
-        height: 800
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c4b094de053558d70800000000000000
-      internalID: 9044727033686985548
+      spriteID: d88a5fa530b26f9a0800000000000000
+      internalID: -6199720543617963891
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3084d5bc12ad7df48ba9ca04e0d2d057
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tent Transparent_0: 9044727033686985548
+      Body_0: -6199720543617963891
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -77,7 +77,9 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Chat.cs" />
+    <Compile Include="Assets\Collection.cs" />
     <Compile Include="Assets\Scripts\Input.cs" />
+    <Compile Include="Assets\Character.cs" />
     <Compile Include="Assets\Scripts\Casing.cs" />
     <Compile Include="Assets\Scripts\MainCamera.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\Equipment.cs" />
+    <Compile Include="Assets\Outfit.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\Medkit.cs" />
     <Compile Include="Assets\Scripts\LightingManager.cs" />

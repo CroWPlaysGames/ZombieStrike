@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 326b28c1d00a1ba42a161a72b3c2cf48
+guid: 3f451994035c63b45be2479f211505a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9044727033686985548
-    second: Tent Transparent_0
+      213: -8212262323694136383
+    second: Filter_0
+  - first:
+      213: 2473100533800857199
+    second: Filter_1
+  - first:
+      213: -5828480385147568531
+    second: Filter_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,23 +106,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tent Transparent_0
+      name: Filter_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 398
-        height: 800
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c4b094de053558d70800000000000000
-      internalID: 9044727033686985548
+      spriteID: 1c313e15dee280e80800000000000000
+      internalID: -8212262323694136383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Filter_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 48
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6e670b15d7325220800000000000000
+      internalID: 2473100533800857199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Filter_2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 0
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e72f668f31d1fa0800000000000000
+      internalID: -5828480385147568531
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4449ca395e01dae46b8ccfb6ba48d82b
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tent Transparent_0: 9044727033686985548
+      Filter_0: -8212262323694136383
+      Filter_1: 2473100533800857199
+      Filter_2: -5828480385147568531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
