@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject singleplayerMenu;
     [SerializeField] private GameObject multiplayerMenu;
+    [SerializeField] private GameObject inventoryMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject helpMenu;
     [Header("Audio Management")]
@@ -26,6 +27,13 @@ public class MainMenu : MonoBehaviour
         ButtonPress();
         mainMenu.SetActive(false);
         multiplayerMenu.SetActive(true);
+    }
+
+    public void Inventory()
+    {
+        ButtonPress();
+        mainMenu.SetActive(false);
+        inventoryMenu.SetActive(true);
     }
 
     public void OptionsMenu()
@@ -57,6 +65,7 @@ public class MainMenu : MonoBehaviour
         ButtonPress();
         singleplayerMenu.SetActive(false);
         multiplayerMenu.SetActive(false);
+        inventoryMenu.SetActive(false);
         optionsMenu.SetActive(false);
         helpMenu.SetActive(false);
         mainMenu.SetActive(true);

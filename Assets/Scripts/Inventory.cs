@@ -1,12 +1,12 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Character : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     private GameObject selectedItem;
     [Header("UI Management")]
     [SerializeField] private Text collectionTitle;
+    [SerializeField] private Transform grid;
     [SerializeField] private Button color1;
     [SerializeField] private Button color2;
     [SerializeField] private Button color3;
@@ -26,18 +26,67 @@ public class Character : MonoBehaviour
     [SerializeField] private CollectionItem[] backpacks;
     [SerializeField] private CollectionItem[] pants;
     [SerializeField] private CollectionItem[] shoes;
-    [SerializeField] private CollectionItem[] weapons;
+    [SerializeField] private CollectionItem[] starterWeapons;
+    [SerializeField] private CollectionItem[] recoveredWeapons;
 
-    public void HairCollection()
+    public void OpenCollection(string set)
     {
-        collectionTitle.text = "Hair Slot";
-        List<GameObject> items = new();
-        foreach (CollectionItem collectionItem in hair)
+        CollectionItem[] collectionSet = null;
+
+        foreach (Transform child in grid)
         {
-            GameObject newItem = Instantiate(collectionPrefab);
-            AssignData(newItem, collectionItem);
-            items.Add(newItem);
+            Destroy(child.gameObject);
         }
+                
+        switch(set)
+        {
+            case "hair":
+                collectionSet = hair; 
+                collectionTitle.text = "Hair Slot";                
+                break;
+            case "face":
+                collectionSet = face;
+                collectionTitle.text = "Face Slot";
+                break;
+            case "shirt":
+                collectionSet = shirts;
+                collectionTitle.text = "Shirt Slot";
+                break;
+            case "jacket":
+                collectionSet = jackets;
+                collectionTitle.text = "Jacket Slot";
+                break;
+            case "backpack":
+                collectionSet = backpacks;
+                collectionTitle.text = "Backpack Slot";
+                break;
+            case "pants":
+                collectionSet = pants;
+                collectionTitle.text = "Pants Slot";
+                break;
+            case "shoes":
+                collectionSet = shoes;
+                collectionTitle.text = "Shoes Slot";
+                break;
+            case "starterweapon":
+                collectionSet = starterWeapons;
+                collectionTitle.text = "Starter Weapon Slot";
+                break;
+            case "recoveredweapon":
+                collectionSet = recoveredWeapons;
+                collectionTitle.text = "Recovered Weapon Slot";
+                break;
+        }
+
+        foreach (CollectionItem collectionItem in collectionSet)
+        {
+            GameObject item = Instantiate(collectionPrefab);            
+            AssignData(item, collectionItem);
+            item.transform.SetParent(grid);
+            item.transform.localScale = Vector3.one;
+        }
+
+        grid.GetComponent<GridManager>().SortCollection();
     }
 
     public void CollectionItemSelect()
@@ -79,17 +128,37 @@ public class Character : MonoBehaviour
 
     private void AssignData(GameObject item, CollectionItem data)
     {
+        item.name = data.GetName();
+        item.GetComponentInChildren<Text>().text = data.GetName();
         item.GetComponent<Collection>().name = data.GetName();
         item.GetComponent<Collection>().model = data.GetModel();
         item.GetComponent<Collection>().materials = data.GetMaterials();
         switch(data.GetRarity().ToString())
         {
-            case "standard": item.GetComponent<Collection>().rarity = standard; break;
-            case "common": item.GetComponent<Collection>().rarity = common; break;
-            case "uncommon": item.GetComponent<Collection>().rarity = uncommon; break;
-            case "rare": item.GetComponent<Collection>().rarity = rare; break;
-            case "scarce": item.GetComponent<Collection>().rarity = scarce; break;
-            case "collectible": item.GetComponent<Collection>().rarity = collectible; break;
+            case "standard": 
+                item.GetComponent<Collection>().rarity = standard;
+                item.transform.Find("Rarity").GetComponent<Image>().color = standard; 
+                break;
+            case "common": 
+                item.GetComponent<Collection>().rarity = common;
+                item.transform.Find("Rarity").GetComponent<Image>().color = common;
+                break;
+            case "uncommon": 
+                item.GetComponent<Collection>().rarity = uncommon;
+                item.transform.Find("Rarity").GetComponent<Image>().color = uncommon;
+                break;
+            case "rare": 
+                item.GetComponent<Collection>().rarity = rare;
+                item.transform.Find("Rarity").GetComponent<Image>().color = rare;
+                break;
+            case "scarce": 
+                item.GetComponent<Collection>().rarity = scarce;
+                item.transform.Find("Rarity").GetComponent<Image>().color = scarce;
+                break;
+            case "collectible": 
+                item.GetComponent<Collection>().rarity = collectible;
+                item.transform.Find("Rarity").GetComponent<Image>().color = collectible;
+                break;
         }
     }
 }
