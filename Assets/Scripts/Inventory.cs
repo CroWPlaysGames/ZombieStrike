@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    private GameObject selectedItem;
     [Header("UI Management")]
     [SerializeField] private Text collectionTitle;
     [SerializeField] private Transform grid;
-    [SerializeField] private Button color1;
-    [SerializeField] private Button color2;
-    [SerializeField] private Button color3;
+    [SerializeField] private GameObject color1;
+    [SerializeField] private GameObject color2;
+    [SerializeField] private GameObject color3;
+    private string category;
     [Header("Rarity Management")]
     [SerializeField] private Color standard;
     [SerializeField] private Color common;
@@ -31,6 +31,8 @@ public class Inventory : MonoBehaviour
 
     public void OpenCollection(string set)
     {
+        category = set;
+        collectionTitle.text = category + " Slot";
         CollectionItem[] collectionSet = null;
 
         foreach (Transform child in grid)
@@ -38,44 +40,17 @@ public class Inventory : MonoBehaviour
             Destroy(child.gameObject);
         }
                 
-        switch(set)
+        switch(category)
         {
-            case "hair":
-                collectionSet = hair; 
-                collectionTitle.text = "Hair Slot";                
-                break;
-            case "face":
-                collectionSet = face;
-                collectionTitle.text = "Face Slot";
-                break;
-            case "shirt":
-                collectionSet = shirts;
-                collectionTitle.text = "Shirt Slot";
-                break;
-            case "jacket":
-                collectionSet = jackets;
-                collectionTitle.text = "Jacket Slot";
-                break;
-            case "backpack":
-                collectionSet = backpacks;
-                collectionTitle.text = "Backpack Slot";
-                break;
-            case "pants":
-                collectionSet = pants;
-                collectionTitle.text = "Pants Slot";
-                break;
-            case "shoes":
-                collectionSet = shoes;
-                collectionTitle.text = "Shoes Slot";
-                break;
-            case "starterweapon":
-                collectionSet = starterWeapons;
-                collectionTitle.text = "Starter Weapon Slot";
-                break;
-            case "recoveredweapon":
-                collectionSet = recoveredWeapons;
-                collectionTitle.text = "Recovered Weapon Slot";
-                break;
+            case "Hair": collectionSet = hair; break;
+            case "Face": collectionSet = face; break;
+            case "Shirt": collectionSet = shirts; break;
+            case "Jacket": collectionSet = jackets; break;
+            case "Backpack": collectionSet = backpacks; break;
+            case "Pants": collectionSet = pants; break;
+            case "Shoes": collectionSet = shoes; break;
+            case "Starter Weapon": collectionSet = starterWeapons; break;
+            case "Recovered Weapon": collectionSet = recoveredWeapons; break;
         }
 
         foreach (CollectionItem collectionItem in collectionSet)
@@ -84,82 +59,81 @@ public class Inventory : MonoBehaviour
             AssignData(item, collectionItem);
             item.transform.SetParent(grid);
             item.transform.localScale = Vector3.one;
+            item.GetComponent<Button>().onClick.AddListener(delegate {SelectItem(item);});
         }
 
         grid.GetComponent<GridManager>().SortCollection();
     }
 
-    public void CollectionItemSelect()
+    public void SelectItem(GameObject selectedItem)
     {
-        color1.enabled = false;
-        color2.enabled = false;
-        color3.enabled = false;
+        color1.SetActive(false);
+        color2.SetActive(false);
+        color3.SetActive(false);
 
         switch (selectedItem.GetComponent<Collection>().materials.Length)
         {
             case 0:
                 break;
             case 1:
-                color1.enabled = true;
-                color1.transform.position = Vector3.zero;
-                color1.transform.Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[0].color;
+                color1.SetActive(true);
+                color1.transform.localPosition = Vector3.zero;
+                color1.transform.Find("Color").Find("Value").GetComponentInChildren<Image>().color = selectedItem.GetComponent<Collection>().materials[0].color;
                 break;
             case 2:
-                color1.enabled = true;
-                color2.enabled = true;
-                color1.transform.position = new Vector3(-75, 0, 0);
-                color2.transform.position = new Vector3(75, 0, 0);
-                color1.transform.Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[0].color;
-                color2.transform.Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[1].color;
+                color1.SetActive(true);
+                color2.SetActive(true);
+                color1.transform.localPosition = new Vector3(-75, 0, 0);
+                color2.transform.localPosition = new Vector3(75, 0, 0);
+                color1.transform.Find("Color").Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[0].color;
+                color2.transform.Find("Color").Find("Value").GetComponentInChildren<Image>().color = selectedItem.GetComponent<Collection>().materials[1].color;
                 break;
             case 3:
-                color1.enabled = true;
-                color2.enabled = true;
-                color3.enabled = true;
-                color1.transform.position = new Vector3(-150, 0, 0);
-                color2.transform.position = Vector3.zero;
-                color3.transform.position = new Vector3(150, 0, 0);
-                color1.transform.Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[0].color;
-                color2.transform.Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[1].color;
-                color3.transform.Find("Value").GetComponent<Image>().color = selectedItem.GetComponent<Collection>().materials[2].color;
+                color1.SetActive(true);
+                color2.SetActive(true);
+                color3.SetActive(true);
+                color1.transform.localPosition = new Vector3(-150, 0, 0);
+                color2.transform.localPosition = Vector3.zero;
+                color3.transform.localPosition = new Vector3(150, 0, 0);
+                color1.transform.Find("Color").Find("Value").GetComponentInChildren<Image>().color = selectedItem.GetComponent<Collection>().materials[0].color;
+                color2.transform.Find("Color").Find("Value").GetComponentInChildren<Image>().color = selectedItem.GetComponent<Collection>().materials[1].color;
+                color3.transform.Find("Color").Find("Value").GetComponentInChildren<Image>().color = selectedItem.GetComponent<Collection>().materials[2].color;
                 break;
         }
+
+        GameObject playerDisplay = GameObject.FindWithTag("Player").transform.Find(category).gameObject;
+        playerDisplay.GetComponent<MeshFilter>().mesh = selectedItem.GetComponent<Collection>().model;
+        playerDisplay.GetComponent<MeshRenderer>().materials = selectedItem.GetComponent<Collection>().materials;
     }
 
     private void AssignData(GameObject item, CollectionItem data)
     {
+        Image rarity = item.transform.Find("Rarity").GetComponent<Image>();
+        Text text = item.transform.Find("Name").gameObject.GetComponent<Text>();
+        GameObject model = item.transform.Find("Model").gameObject;
+
         item.name = data.GetName();
-        item.GetComponentInChildren<Text>().text = data.GetName();
+        text.text = data.GetName();
+        model.GetComponent<Transform>().SetLocalPositionAndRotation(data.GetPosition(), data.GetRotation());
+        model.GetComponent<Transform>().localScale = data.GetScale() * 1000;
+        model.GetComponent<MeshFilter>().mesh = data.GetModel();
+        model.GetComponent<MeshRenderer>().materials = data.GetMaterials();
+        
+
+        switch (data.GetRarity().ToString())
+        {
+            case "standard": rarity.color = standard;  break;
+            case "common": rarity.color = common; break;
+            case "uncommon": rarity.color = uncommon; break;
+            case "rare": rarity.color = rare; break;
+            case "scarce": rarity.color = scarce; break;
+            case "collectible": rarity.color = collectible; break;
+        }
+
         item.GetComponent<Collection>().name = data.GetName();
         item.GetComponent<Collection>().model = data.GetModel();
         item.GetComponent<Collection>().materials = data.GetMaterials();
-        switch(data.GetRarity().ToString())
-        {
-            case "standard": 
-                item.GetComponent<Collection>().rarity = standard;
-                item.transform.Find("Rarity").GetComponent<Image>().color = standard; 
-                break;
-            case "common": 
-                item.GetComponent<Collection>().rarity = common;
-                item.transform.Find("Rarity").GetComponent<Image>().color = common;
-                break;
-            case "uncommon": 
-                item.GetComponent<Collection>().rarity = uncommon;
-                item.transform.Find("Rarity").GetComponent<Image>().color = uncommon;
-                break;
-            case "rare": 
-                item.GetComponent<Collection>().rarity = rare;
-                item.transform.Find("Rarity").GetComponent<Image>().color = rare;
-                break;
-            case "scarce": 
-                item.GetComponent<Collection>().rarity = scarce;
-                item.transform.Find("Rarity").GetComponent<Image>().color = scarce;
-                break;
-            case "collectible": 
-                item.GetComponent<Collection>().rarity = collectible;
-                item.transform.Find("Rarity").GetComponent<Image>().color = collectible;
-                break;
-        }
+        item.GetComponent<Collection>().rarity = rarity.color;
     }
 }
 
@@ -169,6 +143,9 @@ public class CollectionItem
     [Header("General Info")]
     [SerializeField] private string name;
     [SerializeField] private Mesh model;
+    [SerializeField] private Vector3 modelPosition;
+    [SerializeField] private Vector3 modelRotation;
+    [SerializeField] private float modelScale;
     [SerializeField] private Rarity rarity;
     public enum Rarity { standard, common, uncommon, rare, scarce, collectible }
     [Header("Materials")]
@@ -183,6 +160,21 @@ public class CollectionItem
     public Mesh GetModel()
     {
         return model;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return modelPosition;
+    }
+
+    public Quaternion GetRotation()
+    {
+        return Quaternion.Euler(modelRotation);
+    }
+
+    public Vector3 GetScale()
+    {
+        return new Vector3(modelScale, modelScale, modelScale);
     }
 
     public Rarity GetRarity()

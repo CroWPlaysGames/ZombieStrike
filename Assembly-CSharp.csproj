@@ -70,8 +70,8 @@
     <Compile Include="Assets\Scripts\EnemyRanged.cs" />
     <Compile Include="Assets\Scripts\CoroutineHandler.cs" />
     <Compile Include="Assets\Scripts\Stim.cs" />
-    <Compile Include="Assets\Scripts\Spit.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Spit.cs" />
     <Compile Include="Assets\Scripts\Options.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\AmmoResupply.cs" />
     <Compile Include="Assets\Scripts\Main_Menu.cs" />
+    <Compile Include="Assets\InfoHover.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\LightSource.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />

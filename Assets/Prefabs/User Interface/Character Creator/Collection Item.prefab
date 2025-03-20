@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5647341789416094269}
   - component: {fileID: 6028077022163910748}
   - component: {fileID: 5612696276132420890}
-  - component: {fileID: -2558104154558600144}
+  - component: {fileID: 2623941232113127149}
   m_Layer: 5
   m_Name: Collection Item
   m_TagString: Untagged
@@ -123,8 +123,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6028077022163910748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &-2558104154558600144
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2623941232113127149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +258,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3597809838004483624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -254,7 +266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4024653846924790140
@@ -272,7 +284,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3597809838004483624}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 3900480760133451625, guid: f6603ca6a58425d449a723dcff98c87c, type: 3}
 --- !u!23 &3637061124364775859
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -295,8 +307,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
