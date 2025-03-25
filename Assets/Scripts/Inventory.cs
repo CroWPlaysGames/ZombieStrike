@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [Header("UI Management")]
-    [SerializeField] private Text collectionTitle;
     [SerializeField] private Transform grid;
+    [SerializeField] private Dropdown sort;
+    [SerializeField] private GameObject collectionPrefab;
     [SerializeField] private GameObject color1;
     [SerializeField] private GameObject color2;
     [SerializeField] private GameObject color3;
-    private string category;
     [Header("Rarity Management")]
     [SerializeField] private Color standard;
     [SerializeField] private Color common;
@@ -18,51 +18,41 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Color scarce;
     [SerializeField] private Color collectible;
     [Header("Collection Management")]
-    [SerializeField] private GameObject collectionPrefab;
-    [SerializeField] private CollectionItem[] hair;
+    [SerializeField] private CollectionItem[] hats;
     [SerializeField] private CollectionItem[] face;
     [SerializeField] private CollectionItem[] shirts;
     [SerializeField] private CollectionItem[] jackets;
+    [SerializeField] private CollectionItem[] gloves;
     [SerializeField] private CollectionItem[] backpacks;
     [SerializeField] private CollectionItem[] pants;
     [SerializeField] private CollectionItem[] shoes;
     [SerializeField] private CollectionItem[] starterWeapons;
     [SerializeField] private CollectionItem[] recoveredWeapons;
+    [SerializeField] private CollectionItem[] meleeWeapons;
 
-    public void OpenCollection(string set)
+
+    public void OpenCollection(string category)
     {
-        category = set;
-        collectionTitle.text = category + " Slot";
-        CollectionItem[] collectionSet = null;
+        ClearGrid();
+        CollectionItem[][] allClothes = { hats, face, shirts, jackets, gloves, backpacks, pants, shoes };
+        CollectionItem[][] allWeapons = { starterWeapons, recoveredWeapons, meleeWeapons };
 
-        foreach (Transform child in grid)
+        switch (category)
         {
-            Destroy(child.gameObject);
+            case "Hats": AddToGrid(hats); break;
+            case "Face": AddToGrid(face); break;
+            case "Shirt": AddToGrid(shirts); break;
+            case "Jacket": AddToGrid(jackets); break;
+            case "Gloves": AddToGrid(gloves); break;
+            case "Backpack": AddToGrid(backpacks); break;
+            case "Pants": AddToGrid(pants); break;
+            case "Shoes": AddToGrid(shoes); break;
+            case "Starter Weapon": AddToGrid(starterWeapons); break;
+            case "Recovered Weapon": AddToGrid(recoveredWeapons); break;
+            case "Melee Weapon": AddToGrid(meleeWeapons); break;
+            case "All Clothing": foreach (CollectionItem[] collections in allClothes) { AddToGrid(collections);  } break;
+            case "All Weapons": foreach (CollectionItem[] collections in allWeapons) { AddToGrid(collections); } break;
         }
-                
-        switch(category)
-        {
-            case "Hair": collectionSet = hair; break;
-            case "Face": collectionSet = face; break;
-            case "Shirt": collectionSet = shirts; break;
-            case "Jacket": collectionSet = jackets; break;
-            case "Backpack": collectionSet = backpacks; break;
-            case "Pants": collectionSet = pants; break;
-            case "Shoes": collectionSet = shoes; break;
-            case "Starter Weapon": collectionSet = starterWeapons; break;
-            case "Recovered Weapon": collectionSet = recoveredWeapons; break;
-        }
-
-        foreach (CollectionItem collectionItem in collectionSet)
-        {
-            GameObject item = Instantiate(collectionPrefab);            
-            AssignData(item, collectionItem);
-            item.transform.SetParent(grid);
-            item.transform.localScale = Vector3.one;
-            item.GetComponent<Button>().onClick.AddListener(delegate {SelectItem(item);});
-        }
-
-        grid.GetComponent<GridManager>().SortCollection();
     }
 
     public void SelectItem(GameObject selectedItem)
@@ -101,9 +91,9 @@ public class Inventory : MonoBehaviour
                 break;
         }
 
-        GameObject playerDisplay = GameObject.FindWithTag("Player").transform.Find(category).gameObject;
-        playerDisplay.GetComponent<MeshFilter>().mesh = selectedItem.GetComponent<Collection>().model;
-        playerDisplay.GetComponent<MeshRenderer>().materials = selectedItem.GetComponent<Collection>().materials;
+        //GameObject playerDisplay = GameObject.FindWithTag("Player").transform.Find(category).gameObject;
+        //playerDisplay.GetComponent<MeshFilter>().mesh = selectedItem.GetComponent<Collection>().model;
+        //playerDisplay.GetComponent<MeshRenderer>().materials = selectedItem.GetComponent<Collection>().materials;
     }
 
     private void AssignData(GameObject item, CollectionItem data)
@@ -133,7 +123,30 @@ public class Inventory : MonoBehaviour
         item.GetComponent<Collection>().name = data.GetName();
         item.GetComponent<Collection>().model = data.GetModel();
         item.GetComponent<Collection>().materials = data.GetMaterials();
-        item.GetComponent<Collection>().rarity = rarity.color;
+        item.GetComponent<Collection>().rarity = (Collection.Rarity)data.GetRarity();
+        item.GetComponent<Collection>().color = rarity.color;
+    }
+
+    private void AddToGrid(CollectionItem[] collection)
+    {
+        foreach (CollectionItem collectionItem in collection)
+        {
+            GameObject item = Instantiate(collectionPrefab);
+            AssignData(item, collectionItem);
+            item.transform.SetParent(grid);
+            item.transform.localScale = Vector3.one;
+            item.GetComponent<Button>().onClick.AddListener(delegate { SelectItem(item); });
+        }
+
+        grid.GetComponent<GridManager>().SortCollection();
+    }
+
+    private void ClearGrid()
+    {
+        foreach (Transform child in grid)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }
 

@@ -11,6 +11,8 @@ TagManager:
   - Enemy Ranged
   - Spit
   - Door
+  - Sort
+  - Collection
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject singleplayerMenu;
     [SerializeField] private GameObject multiplayerMenu;
     [SerializeField] private GameObject inventoryMenu;
+    [SerializeField] private GameObject achievementsMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject helpMenu;
     [Header("Audio Management")]
@@ -58,6 +59,8 @@ public class MainMenu : MonoBehaviour
     public void Achievements()
     {
         ButtonPress();
+        mainMenu.SetActive(false);
+        achievementsMenu.SetActive(true);
     }
 
     public void Return()
@@ -66,6 +69,7 @@ public class MainMenu : MonoBehaviour
         singleplayerMenu.SetActive(false);
         multiplayerMenu.SetActive(false);
         inventoryMenu.SetActive(false);
+        achievementsMenu.SetActive(false);
         optionsMenu.SetActive(false);
         helpMenu.SetActive(false);
         mainMenu.SetActive(true);
